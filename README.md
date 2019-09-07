@@ -46,6 +46,10 @@ The users of Scope will be college students who are working on projects for thei
 #### Functionality and Features
 Scope will contain a homepage where the targeted user can search for their university by school name or code. Scope also has a login/sign up page where the user can specify if they are an instructor or a student and sign in with university credentials (ID and password) or create an account if they are new. For student users, Scope will include self assessments which students can complete themselves for their courses and class projects. They can also complete peer performance reviews for students they have worked with. Additionally, they’ll have access to receive feedback from completed performance reviews from previous teammates they have worked with. The performance reviews would have an option of being anonymous for privacy reasons. For instructors, they have access to view their students’ performance reviews to better understand the work habits of those that make up the class. Instructors can search within classes for the list of students in the class and their performance. Instructors will have the ability to create performance reviews for their students based off of their projects in their course and rate if expectations were met.
 
+### Inputs and Outputs
+The inputs for Scope would include the entered student and instructor data such as name, login information, and reviews. The projected outputs would be the ability to view and collect performance reviews for the users from the database and display on the user interface.
+
+
 ### Non Functional requirements
 
 Non-functional requirements include many aspects such as performance, scalability, accessibility, security, etc. Within the time of CS157A course, our team aims to build a three-tier architecture application that provides student’s performance review based on their projects within the range of single University.  
