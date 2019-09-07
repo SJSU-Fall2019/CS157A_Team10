@@ -26,7 +26,7 @@ Scope will usher a newer, easier, faster and dynamic way to deliver students and
 
 ### System Requirement
 
-![three_tier Diagram](../master/Project_Proposal/diagram.jpg)
+![three_tier Diagram](../master/Project_Proposal/3Tier_Layers.png)
 
 #### Presentation Tier:
 In Scope, the user interface will be a web application that handles the interaction with the user and display information. Our team will build this web application with the framework “React” and programming language javascript.  
