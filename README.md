@@ -1,12 +1,14 @@
 # Scope
-Student's  Project
+Student's  Project  
 Performance Management Tool
 
-Team #10
-Cindy Carrillo
-Abraham Tesfay
-Yulong Ran
-San Jose State University	Fall 2019 		 CS157A
+Team #10  
+Cindy Carrillo  
+Abraham Tesfay  
+Yulong Ran  
+San Jose State University  
+Fall 2019  
+CS157A  
 
 ### Project Overview
 
@@ -25,9 +27,11 @@ Scope will usher a newer, easier, faster and dynamic way to deliver students and
 ### System Requirement
 
 #### Presentation Tier:
-In Scope, the user interface will be a web application that handles the interaction with the user and display information. Our team will build this web application with the framework “React” and programming language javascript.
+In Scope, the user interface will be a web application that handles the interaction with the user and display information. Our team will build this web application with the framework “React” and programming language javascript.  
+
 #### Logic Tier:
 Scope will use Node.JS as a backend server for handling user requests and communicate with the database.
+
 #### Data Tier:
 Our project will use MySQL as our RDBMS(Relational Database Manage System) to manage and provide access to the data.
 
@@ -42,8 +46,8 @@ Scope will contain a homepage where the targeted user can search for their unive
 
 ### Non Functional requirements
 
-Non-functional requirements include many aspects such as performance, scalability, accessibility, security, etc. Within the time of CS157A course, our team aims to build a three-tier architecture application that provides student’s performance review based on their projects within the range of single University.
-In terms of scalability, students’ performance review will follow them from course to course and school to school. Student’s from different Universities will be able to review each others project performance history.
-For accessibility, Scope aims to bring high-performance websites for our users. Users can be able to access our site either on the PC or mobile platform. The navigation system for users will be simple, intuitive, and provide enough information that matches User's needs.
-For security, we plan to have two different levels of users: Instructor and Student. The instructor has access to create a project requirement, milestone, and evaluation form. Students will have access to evaluate their team members performance after the project.
+Non-functional requirements include many aspects such as performance, scalability, accessibility, security, etc. Within the time of CS157A course, our team aims to build a three-tier architecture application that provides student’s performance review based on their projects within the range of single University.  
+In terms of scalability, students’ performance review will follow them from course to course and school to school. Student’s from different Universities will be able to review each others project performance history.  
+For accessibility, Scope aims to bring high-performance websites for our users. Users can be able to access our site either on the PC or mobile platform. The navigation system for users will be simple, intuitive, and provide enough information that matches User's needs.  
+For security, we plan to have two different levels of users: Instructor and Student. The instructor has access to create a project requirement, milestone, and evaluation form. Students will have access to evaluate their team members performance after the project.  
 For GUI mockup and prototype designing, we will be using Adobe’s Photoshop and Sketch design and prototyping tools.
