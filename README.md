@@ -10,7 +10,7 @@
 ## Fall 2019  
 ## CS157A  
 
-#Project Overview
+# Project Overview
 
 The main purpose of our project is to develop a web application platform that can be used by schools to provide student’s performance review based on sets of project requirements the school or instructor’s set.  Our web application platform called “Scope” will ashier a new opportunity for transparency, improvement, and growth among students and instructors.
 
@@ -81,7 +81,7 @@ For GUI mockup and prototype designing, we will be using Adobe’s Photoshop and
 * Users shall be able to find relevant projects, students and instructors by searching through via the Scope platform.
 * Loading the database to the system should take no more than a few seconds per page given the user’s machine required the minimal device requirements.
 
-##Supportability
+## Supportability
 
 * The system should allow to fix bugs for any competent.
 * The system should allow to add additional functions to adapt changes.
