@@ -49,8 +49,56 @@ Scope will contain a homepage where the targeted user can search for their unive
 ### Inputs and Outputs
 The inputs for Scope would include the entered student and instructor data such as name, login information, and reviews. The projected outputs would be the ability to view and collect performance reviews for the users from the database and display on the user interface.
 
+##### User : Instructor
+###### Display course:
+* When a user clicks the Dashboard menu on the navigation bar, a dashboard contains a list of courses will appear on the right side of the web application.
+* The system shall retrieve course data from database and display a list of courses under the instructor’s profile.
 
-# Non Functional requirements
+###### Add course:
+* An instructor user shall be able to add a new course by clicking the plus button. After clicking the plus button, the user shall be able to fill in the name, course Id and course period on the pop-up form.
+* The system shall update the database with the new course associated with the instructor and update the user interface with new courses.
+
+###### Edit / Delete course:
+* An instructor user shall be able to delete or edit a course by clicking the menu option on the top right of each displayed course.
+* The system shall display a form for the user to edit course information and a warning when user trying to delete a course. The system shall update the database based on the user action.
+
+##### Display Project details:
+* When an instructor user clicks the course in the Dashboard, the Dashboard shall refresh its content and display a list of the projects in the course with its name and time period.
+* The system shall retrieve the project name and time period in the database for each project and display on the dashboard as an individual component.
+
+##### Add Project:
+* An instructor user shall have the ability to create a project by clicking the plus button on the top of the dashboard. After clicking the add button, the web will have a pop-up form that asks for the name and time period of the project.
+* The system shall update the database with a new project under the course.
+
+##### Add Performance Review:
+* An instructor user shall be able to create an evaluation form by clicking the option under the menu for each project component. After clicking the “creating evaluation form” button, a new form will pop-up, and instructor user can be able to add a list of millstone, requirements, and feedback followed by a set of checkpoints.
+* Example:
+1. Team members are respectful to each other.  [ Strongly agree, agree, disagree]
+2. Project milestone 2 [On-time, Late]
+
+##### Edit / Delete project:
+* An instructor user shall be able to delete or edit a project by clicking the menu option on the top right of each displayed project.
+* The system shall display a form for the user to edit project information and a warning when user trying to delete a project. The system shall update the database based on the user action.
+
+##### Display Team Information:
+* When an instructor user clicks a project component in the Dashboard, the Dashboard shall display a list of teams who participated in the project with their team names and number of members.
+* The system shall retrieve a list of teams and their basic team information within the course from the database. The user interface shall refresh the dashboard to display updated information
+
+##### Add / Edit Team:
+* An instructor user shall be able to delete or edit a team by clicking the menu option on the top right of each displayed team
+* The system shall display a form for the user to edit team information and a warning when user trying to delete a project. The system shall update the database based on the user action.
+
+##### Display Team members:
+* When an instructor user clicks the team component in the Dashboard, the Dashboard shall refresh its content and display a list of the students in the team with its name and id.
+* The system shall retrieve the student name and id in the database for each student and display on the dashboard as an individual component.
+
+##### Display Student History:
+* An instructor user shall be able to click on the Student component and review student’s history project.
+* The system shall retrieve the student history projects in the database and display on the dashboard as an individual component.
+
+
+
+### Non Functional requirements
 
 Non-functional requirements include many aspects such as performance, scalability, accessibility, security, etc. Within the time of CS157A course, our team aims to build a three-tier architecture application that provides student’s performance review based on their projects within the range of single University.  
 In terms of scalability, students’ performance review will follow them from course to course and school to school. Student’s from different Universities will be able to review each others project performance history.  
