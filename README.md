@@ -2,13 +2,13 @@
 # Student's  Project  
 # Performance Management Tool
 
-## Team #10  
-## Cindy Carrillo  
-## Abraham Tesfay  
-## Yulong Ran  
-## San Jose State University  
-## Fall 2019  
-## CS157A  
+### Team #10  
+### Cindy Carrillo  
+### Abraham Tesfay  
+### Yulong Ran  
+### San Jose State University  
+### Fall 2019  
+### CS157A  
 
 # Project Overview
 
