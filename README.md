@@ -97,6 +97,37 @@ The inputs for Scope would include the entered student and instructor data such 
 * The system shall retrieve the student history projects in the database and display on the dashboard as an individual component.
 
 
+##### User : Student
+##### Display course:
+* Similarly as the instructor’s view, when the student clicks the Dashboard menu on the navigation bar, a dashboard containing a list of their current courses will appear on the right side of the web application.
+* The system shall retrieve course data from the database and display a list of courses under the student’s profile. 
+* Previous terms and the courses taken those semesters will also be available to view.
+
+##### Display Project Details:
+* When a student user clicks the course in the Dashboard, the Dashboard shall refresh its content and display a list of the projects in the course with its name, time period, and additional details.
+* The system shall retrieve the project name and time period in the database for each project and display on the dashboard as an individual component.
+
+##### Add Performance Review:
+* A student user shall be able to create an evaluation form by clicking the option under the menu for each project component. The student user will navigate to the dashboard, click teams, then select which team (if more than one is open for the user) and specify which team member to evaluate. After clicking the “creating evaluation form” button, a new form will pop-up, and the student user can fill out the set of questions the instructor set and add additional feedback for peers.
+* Example:
+    Team members are respectful to each other.  [Strongly agree, agree, disagree] Project milestone 2 [On-time, Late]
+
+##### Display Team Information:
+* When a student user clicks a project component in the Dashboard, the Dashboard shall display a list of teams who participated in the project with their team names and number of members. This allows the student to view other students / teams performance.
+
+##### Display Team Members:
+* When a student user clicks the team component in the Dashboard, the Dashboard shall refresh its content and display a list of the students in the team with their name and id.
+* The system shall retrieve the team members information in the database and display on the dashboard.
+
+##### Display Student History:
+* Student users shall be able to click on other student profiles if they share the course and review student’s project history and their previous peer performance reviews. 
+* The system shall retrieve the student history projects in the database and display on the dashboard as an individual component.
+
+##### Self Assessment:
+* Student user shall be able to add a self assessment for themselves for each project they are assigned by the instructor. Navigating to the dashboard and choosing the self assessment button, the student user will be prompted open projects they are in and can complete a self assessment for each team project.
+* The system shall retrieve the student self assessment in the database and display only for the student user to see and reflect.
+
+
 
 ### Non Functional requirements
 
