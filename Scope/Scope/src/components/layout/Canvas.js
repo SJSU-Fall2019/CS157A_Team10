@@ -32,7 +32,7 @@ export class Canvas extends Component
         <h1>Users</h1>
         <ul>
           {this.state.users.map(user =>
-            <li key={user.id}> {user.id}</li>
+            <li key={user.id}> {user.id} {user.name} {user.age}</li>
           )}
         </ul>
       </div>
