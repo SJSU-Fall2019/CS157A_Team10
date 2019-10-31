@@ -7,7 +7,10 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
+<<<<<<< HEAD
     "cors": "^2.8.5",
+=======
+>>>>>>> origin/YulongBranch
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
