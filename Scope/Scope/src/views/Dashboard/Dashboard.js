@@ -4,7 +4,7 @@ import { Grid, Box } from '@material-ui/core';
 // Remove react-window, ScrollMenu, HorizontalScroll library later
 
 import {
-  Budget,
+  Project,
   TotalUsers,
   TasksProgress,
   TotalProfit,
@@ -12,8 +12,8 @@ import {
   UsersByDevice,
   LatestProducts,
   LatestOrders,
+  TeamList,
 } from './components';
-import FlatList from 'flatlist-react';
 
 class Dashboard extends Component {
 
@@ -63,7 +63,7 @@ class Dashboard extends Component {
     let table = []
     this.state.project.forEach((p) => {
       console.log(this.state.project)
-      table.push(<Budget style={{ margin: 15 }} key={p} 
+      table.push(<Project style={{ margin: 15 }} key={p} 
                 project_id={p.project_id} 
                 project_title={p.project_title} 
                 project_institution={p.project_institution}
@@ -80,8 +80,11 @@ class Dashboard extends Component {
           {this.createProject()}
         </Box>
         <div className="display_board"></div>
-      </div>
-    );
+        <div className="team_list">
+          <TeamList/>
+          </div>
+        </div>
+    )
   }
 }
 

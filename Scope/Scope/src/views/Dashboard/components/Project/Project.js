@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Budget = props => {
+const Project = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -50,6 +50,7 @@ const Budget = props => {
     <Card
       {...rest}
       className={clsx(classes.root, className)}
+      style={{ width: 250, height: 200, margin: 15 }}
     >
       <CardContent>
         <Grid
@@ -65,14 +66,14 @@ const Budget = props => {
             >
               <label>{props.project_institution}</label>
             </Typography>
-            <Typography variant="h3">
+            <Typography variant="h2">
               <label>{props.project_title}</label>
             </Typography>
           </Grid>
           <Grid item>
           </Grid>
         </Grid>
-        <div className={classes.difference}>
+        <div className={classes.difference} style={{ marginTop: 40 }}>
           <EventAvailableIcon className={classes.differenceIcon} />
           <Typography
             className={classes.caption}
@@ -95,8 +96,8 @@ const Budget = props => {
   );
 };
 
-Budget.propTypes = {
+Project.propTypes = {
   className: PropTypes.string
 };
 
-export default Budget;
+export default Project;
