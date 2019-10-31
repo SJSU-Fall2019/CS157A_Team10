@@ -339,7 +339,7 @@ const SignIn = props => {
                   type="submit"
                   variant="contained"
                 >
-                  Sign in now
+                  Sign in
                 </Button>
                 <Typography
                   color="textSecondary"

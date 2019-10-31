@@ -36,10 +36,9 @@ router.post('/user_info', function (req, res) {
   }
 
   //var sql = 'SELECT student_email, student_firstname, student_lastname FROM Student WHERE student_id= ?';
-  var sql = "SELECT student_firstname FROM Student WHERE student_id =  ?"
+  var sql = "SELECT student_firstname, student_lastname FROM Student WHERE student_id =  ?"
   connection.query(sql, student_id, function (err, result) {
     if (err) throw err
-    console.log(result)
     res.send(result)
   })
 });
@@ -75,6 +74,18 @@ router.post('/login', function (req, res) {
   })
 });
 
+/**
+ * Handles User sign up
+ */
+
+router.post('/signup', function (req, res) {
+
+})
+
+
+/**
+ * Fetch Project By user id
+ */
 router.post('/project', function (req, res) {
   var token = req.headers.auth_token;
   if (!token) {
@@ -104,5 +115,7 @@ router.post('/project', function (req, res) {
   })
 
 });
+
+
 
 module.exports = router;
