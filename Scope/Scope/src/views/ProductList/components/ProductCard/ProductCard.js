@@ -23,8 +23,6 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '5px',
     overflow: 'hidden',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   image: {
     width: '100%'
@@ -48,8 +46,17 @@ const ProductCard = props => {
     <Card
       {...rest}
       className={clsx(classes.root, className)}
+      style={{ height: 270, width: 300 }}
     >
       <CardContent>
+        <Typography
+          align="left"
+          gutterBottom
+          variant="h4"
+        >
+          {product.project_title}
+        </Typography>
+
         <div className={classes.imageContainer}>
           <img
             alt="Product"
@@ -58,17 +65,10 @@ const ProductCard = props => {
           />
         </div>
         <Typography
-          align="center"
-          gutterBottom
-          variant="h4"
-        >
-          {product.title}
-        </Typography>
-        <Typography
-          align="center"
+          align="left"
           variant="body1"
         >
-          {product.description}
+          {product.project_description}
         </Typography>
       </CardContent>
       <Divider />
@@ -77,30 +77,30 @@ const ProductCard = props => {
           container
           justify="space-between"
         >
-          <Grid
-            className={classes.statsItem}
-            item
-          >
-            <AccessTimeIcon className={classes.statsIcon} />
-            <Typography
-              display="inline"
-              variant="body2"
+            <Grid
+              className={classes.statsItem}
+              item
             >
-              Updated 2hr ago
+              <AccessTimeIcon className={classes.statsIcon} />
+              <Typography
+                display="inline"
+                variant="body2"
+              >
+                Updated 2hr ago
             </Typography>
-          </Grid>
-          <Grid
-            className={classes.statsItem}
-            item
-          >
-            <GetAppIcon className={classes.statsIcon} />
-            <Typography
-              display="inline"
-              variant="body2"
+            </Grid>
+            <Grid
+              className={classes.statsItem}
+              item
             >
-              {product.totalDownloads} Downloads
-            </Typography>
-          </Grid>
+              <GetAppIcon className={classes.statsIcon} />
+              <Typography
+                display="inline"
+                variant="body2"
+              >
+                Number in Party: {product.member_size}
+              </Typography>
+            </Grid>
         </Grid>
       </CardActions>
     </Card>

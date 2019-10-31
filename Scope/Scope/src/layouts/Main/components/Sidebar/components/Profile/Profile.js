@@ -51,7 +51,7 @@ const Profile = props => {
             console.log(responseJson)
             setUserState(userState => ({
               ...userState,
-              name: responseJson[0].student_firstname,
+              name: responseJson[0].student_firstname+ " " +responseJson[0].student_lastname
               
             }));
 

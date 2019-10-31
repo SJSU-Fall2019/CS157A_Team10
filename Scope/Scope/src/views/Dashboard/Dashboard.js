@@ -45,7 +45,7 @@ class Dashboard extends Component {
             )
             this.setState(
               {
-                project: this.state.project.splice(0,4)
+                project: this.state.project.splice(0, 4)
               }
             )
           })
@@ -62,15 +62,18 @@ class Dashboard extends Component {
   createProject = () => {
     let table = []
     this.state.project.forEach((p) => {
-      console.log(this.state.project)
-      table.push(<Project style={{ margin: 15 }} key={p} 
-                project_id={p.project_id} 
-                project_title={p.project_title} 
-                project_institution={p.project_institution}
-                project_startDate = {p.project_startDate}
-                project_endDate ={p.project_endDate}/>)
+      table.push(<Project style={{ margin: 15 }} key={p}
+        project_id={p.project_id}
+        project_title={p.project_title}
+        project_institution={p.project_institution}
+        project_startDate={p.project_startDate}
+        project_endDate={p.project_endDate} />)
     })
     return table
+  }
+
+  TeamList() {
+
   }
 
   render() {
@@ -81,9 +84,15 @@ class Dashboard extends Component {
         </Box>
         <div className="display_board"></div>
         <div className="team_list">
-          <TeamList/>
-          </div>
+          {
+            sessionStorage.getItem('auth_token') ? (
+              <TeamList />
+            ) : (
+                <div></div>
+              )
+          }
         </div>
+      </div>
     )
   }
 }
