@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect, useLayoutEffect, Component } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Avatar, Typography } from '@material-ui/core';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,11 +27,45 @@ const Profile = props => {
 
   const classes = useStyles();
 
-  const user = {
-    name: 'Shen Zhi',
-    avatar: '/images/avatars/avatar_11.png',
-    bio: 'Brain Director'
+  const [userState, setUserState] = useState(
+    {
+      name: 'Log In',
+      bio: '',
+      avatar: '/images/avatars/avatar_11.png',
+    }
+  )
+
+  const fetchUserInfo = (auth_token) => {
+    fetch('http://localhost:8001/user/user_info',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          auth_token: auth_token,
+        },
+
+      }).then((response) => {
+        response.json()
+          .then((responseJson) => {
+            console.log(responseJson)
+            setUserState(userState => ({
+              ...userState,
+              name: responseJson[0].student_firstname,
+              
+            }));
+
+          })
+      })
+      .catch((error) => {
+        throw error
+      });
   };
+  useEffect(() => {
+    // let unmounted = false
+    var auth_token = sessionStorage.getItem('auth_token')
+    fetchUserInfo(auth_token)
+  }, [])
 
   return (
     <div
@@ -41,16 +76,16 @@ const Profile = props => {
         alt="Person"
         className={classes.avatar}
         component={RouterLink}
-        src={user.avatar}
+        src={userState.avatar}
         to="/settings"
       />
       <Typography
         className={classes.name}
         variant="h4"
       >
-        {user.name}
+        {userState.name}
       </Typography>
-      <Typography variant="body2">{user.bio}</Typography>
+      <Typography variant="body2">{userState.bio}</Typography>
     </div>
   );
 };
