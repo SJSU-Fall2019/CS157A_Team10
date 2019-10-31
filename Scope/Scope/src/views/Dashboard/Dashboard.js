@@ -21,13 +21,7 @@ class Dashboard extends Component {
     super(props)
   }
   state = {
-    project: [{
-
-
-    },
-    {
-
-    },
+    project: [
     ]
   }
 
