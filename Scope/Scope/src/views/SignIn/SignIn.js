@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
@@ -14,7 +14,6 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 // import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
-
 const schema = {
   email: {
     presence: { allowEmpty: false, message: 'is required' },
@@ -170,9 +169,33 @@ const SignIn = props => {
     }));
   };
 
-  const handleSignIn = event => {
+  const handleSignIn = async event => {
     event.preventDefault();
     history.push('/');
+    await fetch('http://localhost:8001/user/login',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            username: formState.values.email,
+            password: formState.values.password,
+          }
+        ),
+
+      }).then((response) => {
+        response.json()
+          .then((responseJson) => {
+            window.sessionStorage.setItem("auth_token", responseJson.auth_token)
+          })
+      })
+      .catch((error) => {
+        throw error
+      });
+
   };
 
   const hasError = field =>

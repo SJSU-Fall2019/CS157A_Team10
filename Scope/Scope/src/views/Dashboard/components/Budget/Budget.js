@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
+import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -62,29 +63,31 @@ const Budget = props => {
               gutterBottom
               variant="body2"
             >
-              BUDGET
+              <label>{props.project_institution}</label>
             </Typography>
-            <Typography variant="h3">$24,000</Typography>
+            <Typography variant="h3">
+              <label>{props.project_title}</label>
+            </Typography>
           </Grid>
           <Grid item>
-            <Avatar className={classes.avatar}>
-              <MoneyIcon className={classes.icon} />
-            </Avatar>
           </Grid>
         </Grid>
         <div className={classes.difference}>
-          <ArrowDownwardIcon className={classes.differenceIcon} />
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
-            12%
-          </Typography>
+          <EventAvailableIcon className={classes.differenceIcon} />
           <Typography
             className={classes.caption}
             variant="caption"
           >
-            Since last month
+            <label>Start Date: {props.project_startDate}</label>
+          </Typography>
+        </div>
+        <div className={classes.difference}>
+          <EventAvailableIcon className={classes.differenceIcon} />
+          <Typography
+            className={classes.caption}
+            variant="caption"
+          >
+            <label>End Date: {props.project_endDate}</label>
           </Typography>
         </div>
       </CardContent>
