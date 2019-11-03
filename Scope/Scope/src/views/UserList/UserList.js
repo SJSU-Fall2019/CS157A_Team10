@@ -4,28 +4,61 @@ import { makeStyles } from '@material-ui/styles';
 import { UsersToolbar, UsersTable } from './components';
 import mockData from './data';
 
-const useStyles = makeStyles(theme => ({
+const styles = {
   root: {
-    padding: theme.spacing(3)
+    padding: 10
   },
   content: {
-    marginTop: theme.spacing(2)
+    marginTop: 20
   }
-}));
+}
 
-const UserList = () => {
-  const classes = useStyles();
 
-  const [users] = useState(mockData);
+class UserList extends React.Component {
+  state = {
+    userList: mockData
+  }
 
-  return (
-    <div className={classes.root}>
-      <UsersToolbar />
-      <div className={classes.content}>
-        <UsersTable users={users} />
+  fetchUserInfo() {
+    fetch('http://localhost:8001/user/all',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          auth_token: sessionStorage.getItem('auth_token')
+        },
+
+      }).then((response) => {
+        response.json()
+          .then((responseJson) => {
+            this.setState(
+              {
+                userList: responseJson
+              }
+            )
+          })
+      })
+      .catch((error) => {
+        throw error
+      });
+  }
+
+  componentDidMount()
+  {
+    this.fetchUserInfo()
+  }
+
+  render() {
+    return (
+      <div style={styles.root}>
+        <UsersToolbar />
+        <div style={styles.content}>
+          <UsersTable users={this.state.userList} />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default UserList;

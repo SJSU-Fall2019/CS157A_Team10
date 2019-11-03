@@ -41,6 +41,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const profile_pic =["/images/avatars/avatar_1.png", "/images/avatars/avatar_2.png", "/images/avatars/avatar_3.png", "/images/avatars/avatar_4.png", "/images/avatars/avatar_5.png",
+"/images/avatars/avatar_6.png", "/images/avatars/avatar_7.png", "/images/avatars/avatar_8.png", "/images/avatars/avatar_9.png" ]
+
 const UsersTable = props => {
   const { className, users, ...rest } = props;
 
@@ -116,9 +119,9 @@ const UsersTable = props => {
                   </TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell>Email</TableCell>
-                  <TableCell>Location</TableCell>
-                  <TableCell>Phone</TableCell>
-                  <TableCell>Registration date</TableCell>
+                  <TableCell>Insitution</TableCell>
+                  {/* <TableCell>Phone</TableCell>
+                  <TableCell>Registration date</TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -141,22 +144,24 @@ const UsersTable = props => {
                       <div className={classes.nameContainer}>
                         <Avatar
                           className={classes.avatar}
-                          src={user.avatarUrl}
+                          src={profile_pic[Math.floor(Math.random() * profile_pic.length)]}
                         >
-                          {getInitials(user.name)}
+                          {getInitials(user.student_firstname)}
+                          {/**  {/** Pick random from array from https://stackoverflow.com/questions/4550505/getting-a-random-value-from-a-javascript-array */} */}
                         </Avatar>
-                        <Typography variant="body1">{user.name}</Typography>
+                        <Typography variant="body1">{user.student_firstname} {user.student_lastname}</Typography>
                       </div>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.student_email}</TableCell>
                     <TableCell>
-                      {user.address.city}, {user.address.state},{' '}
-                      {user.address.country}
+                      {/* {user.address.city}, {user.address.state},{' '}
+                      {user.address.country} */}
+                      {user.student_institution}
                     </TableCell>
-                    <TableCell>{user.phone}</TableCell>
+                    {/* <TableCell>{user.phone}</TableCell>
                     <TableCell>
                       {moment(user.createdAt).format('DD/MM/YYYY')}
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>

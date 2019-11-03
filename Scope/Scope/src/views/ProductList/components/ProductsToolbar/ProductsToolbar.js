@@ -6,61 +6,62 @@ import { Button } from '@material-ui/core';
 
 import { SearchInput } from '../../../../components';
 
-const useStyles = makeStyles(theme => ({
+const styles = {
   root: {},
   row: {
     height: '42px',
     display: 'flex',
     alignItems: 'center',
-    marginTop: theme.spacing(1)
+    marginTop: 8,
   },
   spacer: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   importButton: {
-    marginRight: theme.spacing(1)
+    marginRight: 15,
   },
   exportButton: {
-    marginRight: theme.spacing(1)
+    marginRight: 15,
   },
   searchInput: {
-    marginRight: theme.spacing(1)
+    marginRight: 15,
   }
-}));
+}
 
-const ProductsToolbar = props => {
-  const { className, ...rest } = props;
+class ProductsToolbar extends React.Component {
+  state = {
+    searchValue: '',
+  }
 
-  const classes = useStyles();
-
-  return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <div className={classes.row}>
-        <span className={classes.spacer} />
-        <Button className={classes.importButton}>Import</Button>
-        <Button className={classes.exportButton}>Export</Button>
-        <Button
-          color="primary"
-          variant="contained"
-        >
-          Add product
-        </Button>
-      </div>
-      <div className={classes.row}>
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Search product"
-        />
-      </div>
-    </div>
-  );
-};
-
-ProductsToolbar.propTypes = {
-  className: PropTypes.string
-};
+  render() {
+    return (
+      <div style ={styles.root}>
+        <div style= {styles.row}>
+          <span style={styles.spacer}/>
+          <Button style={styles.importButton}>Import</Button>
+          <Button style={styles.exportButton}>Export</Button>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={()=>
+            {
+               alert('You will be direct to project creation screen')
+               // Handles add project event
+               // Navigate to add project screen
+            }}
+          >
+            Add Project
+          </Button>
+        </div>
+        <div style={styles.row}>
+          <SearchInput
+            style={styles.searchInput}
+            placeholder="Search project"
+            
+          />
+        </div>
+      </div >
+    )}
+}
 
 export default ProductsToolbar;
