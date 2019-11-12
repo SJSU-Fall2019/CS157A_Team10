@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import { UsersToolbar, UsersTable } from './components';
 import mockData from './data';
+import { SearchInput } from '../../components';;
 
 const styles = {
   root: {
@@ -16,7 +17,8 @@ const styles = {
 
 class UserList extends React.Component {
   state = {
-    userList: mockData
+    userList: mockData,
+    search: '',
   }
 
   fetchUserInfo() {
@@ -44,15 +46,31 @@ class UserList extends React.Component {
       });
   }
 
-  componentDidMount()
-  {
+  componentDidMount() {
     this.fetchUserInfo()
   }
 
   render() {
     return (
       <div style={styles.root}>
-        <UsersToolbar />
+        {/* <UsersToolbar /> */}
+        <SearchInput
+          placeholder="Search user"
+          onChange={(event) => {
+            const text = event.target.value;
+            const filter = this.state.userList.filter(item =>
+              item.student_firstname.includes(text)
+            );
+            this.setState({
+              userList: filter,
+              search: text
+            });
+            if (text.length == 0) {
+              this.fetchUserInfo()
+            }
+          }}
+          value={this.state.search}
+        />
         <div style={styles.content}>
           <UsersTable users={this.state.userList} />
         </div>
