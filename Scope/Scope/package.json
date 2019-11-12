@@ -20,8 +20,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "client": "npm start",
-    "server": "cd API && Node App.js",
-    "dev": “concurrently \"npm run server\" \"npm run client\""
+    "server": "cd server && Node App.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
 
   },
   "eslintConfig": {

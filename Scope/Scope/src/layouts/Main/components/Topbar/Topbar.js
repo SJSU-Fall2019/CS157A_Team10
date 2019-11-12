@@ -28,6 +28,11 @@ const Topbar = props => {
 
   const [notifications] = useState([]);
 
+  const SignOut = () => {
+    window.sessionStorage.removeItem("auth_token");
+    window.location.reload();
+  }
+
   return (
     <AppBar
       {...rest}
@@ -54,7 +59,7 @@ const Topbar = props => {
           <IconButton
             className={classes.signOutButton}
             color="inherit"
-            // onClick={SignOut} Call SignOut here
+            onClick={SignOut}
           >
             <InputIcon />
           </IconButton>
