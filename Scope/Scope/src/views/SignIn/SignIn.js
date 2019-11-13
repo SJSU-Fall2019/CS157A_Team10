@@ -203,6 +203,7 @@ const SignIn = props => {
 
   return (
     <div className={classes.root}>
+      {window.sessionStorage.getItem('auth_token') ? history.push("/dashboard"): <div></div>}
       <Grid
         className={classes.grid}
         container

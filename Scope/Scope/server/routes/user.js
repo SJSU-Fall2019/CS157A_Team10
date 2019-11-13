@@ -14,6 +14,24 @@ var connection = mysql.createConnection(
   }
 )
 
+function verify(req, res)
+{
+  var token = req.headers.auth_token;
+  if (!token) {
+    return res.status(401).send("Access Denied")
+  }
+  try {
+    var user_id = jwt.decode(req.headers.auth_token, key.key)._id
+  }
+  catch (err) {
+    throw err
+  }
+  // No Token or Token is not valid
+  if (!user_id) {
+    return res.status(404).send('User not verified or do not have access')
+  }
+}
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('You are on users route');
@@ -54,7 +72,6 @@ router.post('/login', function (req, res) {
   if (!username) {
     res.status(401).send("Access Denied")
   }
-
   connection.query(sql, username, function (err, result) {
     if (err) throw err
     // Check if user exists in our database
@@ -116,6 +133,20 @@ router.post('/project', function (req, res) {
 
 });
 
+
+/**
+ * Fetch User List
+ */
+
+router.post('/all', function (req, res) {
+  verify(req, res)
+  // Query all User info 
+  var sql = 'SELECT student_firstname, student_lastname, student_email FROM Student'
+  connection.query(sql, function (err, result) {
+    if (err) throw err
+    res.send(result);
+  })
+})
 
 
 module.exports = router;

@@ -7,45 +7,27 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@material-ui/core": "^4.5.2",
-    "@material-ui/icons": "^4.5.1",
-    "chart.js": "^2.9.1",
-    "clsx": "^1.0.4",
     "express": "^4.17.1",
-    "flatlist-react": "^1.2.0",
-    "history": "^4.9.0",
-    "moment": "^2.24.0",
-    "node-sass": "^4.13.0",
-    "perfect-scrollbar": "^1.4.0",
-    "prop-types": "^15.7.2",
     "react": "^16.9.0",
-    "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.9.0",
-    "react-horizontal-scrolling-menu": "^0.7.3",
-    "react-perfect-scrollbar": "^1.5.3",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
-    "react-scroll-horizontal": "^1.6.2",
-    "react-scrollable-list": "^1.2.0",
-    "react-window": "^1.8.5",
-    "recompose": "^0.30.0",
-    "underscore": "^1.9.1",
-    "uuid": "^3.3.3",
-    "validate.js": "^0.13.1"
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "cd server && nodemon app.js",
     "client": "npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "server": "cd API && Node App.js",
+    "dev": “concurrently \"npm run server\" \"npm run client\""
+
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://localhost:8011",
+  "proxy": "http://localhost:8010",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -57,14 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^5.0.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "prettier": "^1.17.1",
-    "prettier-eslint": "^8.8.2",
-    "prettier-eslint-cli": "^4.7.1",
-    "typescript": "^3.5.1"
   }
 }
