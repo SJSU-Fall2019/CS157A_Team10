@@ -6,6 +6,7 @@ import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import CropRotate from '@material-ui/icons/CropRotate';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -49,14 +50,19 @@ const Sidebar = props => {
       icon: <DashboardIcon />
     },
     {
-      title: 'Users',
+      title: 'Students',
       href: '/users',
       icon: <PeopleIcon />
     },
+    // {
+    //   title: 'Products',
+    //   href: '/products',
+    //   icon: <ShoppingBasketIcon />
+    // },
     {
-      title: 'Project',
-      href: '/products',
-      icon: <ShoppingBasketIcon />
+      title: 'Projects',
+      href: '/projects',
+      icon: <CropRotate />
     },
     {
       title: 'Authentication',
