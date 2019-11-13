@@ -55,6 +55,7 @@ class Dashboard extends Component {
       }).then((response) => {
         response.json()
           .then((responseJson) => {
+            console.log(responseJson)
             this.setState(
               {
                 project: responseJson
@@ -76,10 +77,7 @@ class Dashboard extends Component {
     this.state.project.forEach((p) => {
       table.push(<Project style={styles.projectStyle} key={p}
         project_id={p.project_id}
-        project_title={p.project_title}
-        project_institution={p.project_institution}
-        project_startDate={p.project_startDate}
-        project_endDate={p.project_endDate} />)
+        project_title={p.project_name} />)
     })
     return table
   }
@@ -96,10 +94,7 @@ class Dashboard extends Component {
             this.state.project.map((p) => {
               return <Project style={{ margin: 15, minWidth:400 }} key={p}
                 project_id={p.project_id}
-                project_title={p.project_title}
-                project_institution={p.project_institution}
-                project_startDate={p.project_startDate}
-                project_endDate={p.project_endDate} />
+                project_title={p.project_name}/>
             })
           }
         </div>

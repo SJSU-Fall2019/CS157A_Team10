@@ -124,10 +124,10 @@ router.post('/project', function (req, res) {
     if (err) throw err
 
     // Parse Date to "yyyy/mm/dd" format
-    result.forEach(element => {
-      element.project_startDate = element.project_startDate.toISOString().slice(0, 10)
-      element.project_endDate = element.project_endDate.toISOString().slice(0, 10)
-    });
+    // result.forEach(element => {
+    //   element.project_startDate = element.project_startDate.toISOString().slice(0, 10)
+    //   element.project_endDate = element.project_endDate.toISOString().slice(0, 10)
+    // });
     res.send(result);
   })
 
