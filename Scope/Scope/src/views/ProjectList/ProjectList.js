@@ -43,6 +43,7 @@ const styles = {
 * Represent a Project List component
 */
 class ProjectList extends React.Component {
+
     state = {
         project: [],
     }
