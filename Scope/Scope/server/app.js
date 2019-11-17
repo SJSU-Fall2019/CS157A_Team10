@@ -10,6 +10,7 @@ var projectRouter = require('./routes/project')
 var milestoneRouter = require('./routes/milestone')
 var teamRouter = require('./routes/team')
 var reviewRouter = require('./routes/review')
+var courseRouter = require('./routes/course')
 var cors = require('cors')
 var app = express();
 
@@ -36,6 +37,7 @@ app.use('/project', projectRouter);
 app.use('/milestone', milestoneRouter);
 app.use('/team', teamRouter);
 app.use('/review', reviewRouter);
+app.use('/course', courseRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

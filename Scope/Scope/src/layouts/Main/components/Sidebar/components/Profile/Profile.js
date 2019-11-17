@@ -36,7 +36,7 @@ const Profile = props => {
   )
 
   const fetchUserInfo = (auth_token) => {
-    fetch('http://localhost:8001/user/user_info',
+    fetch('http://localhost:8001/user/student_info',
       {
         method: 'POST',
         headers: {

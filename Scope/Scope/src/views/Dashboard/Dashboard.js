@@ -2,6 +2,7 @@ import React, { useState, Component, } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Box } from '@material-ui/core';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
+import CourseRequest from '../../API/Course/index';
 // Remove react-window, ScrollMenu, HorizontalScroll library later
 
 import {
@@ -34,80 +35,30 @@ class Dashboard extends Component {
 
   constructor(props) {
     super(props)
-
+    this.state = {
+      course_list: [],
+      selected_course: null,
+      project_list: [],
+      selected_project: null,
+      team_list: [],
+    }
   }
 
-  state = {
-    project: [],
-  }
-
-
-  async fetchProject() {
-    await fetch('http://localhost:8001/user/project',
+  async componentDidMount() {
+    let result = await CourseRequest.fetchStudentCourseList()
+    this.setState(
       {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          auth_token: sessionStorage.getItem('auth_token')
-        },
-
-      }).then((response) => {
-        response.json()
-          .then((responseJson) => {
-            console.log(responseJson)
-            this.setState(
-              {
-                project: responseJson
-              }
-            )
-          })
+        course_list: result
       })
-      .catch((error) => {
-        throw error
-      });
   }
 
-  componentDidMount() {
-    this.fetchProject()
-  }
-
-  createProject = () => {
-    let table = []
-    this.state.project.forEach((p) => {
-      table.push(<Project style={styles.projectStyle} key={p}
-        project_id={p.project_id}
-        project_title={p.project_name} />)
-    })
-    return table
-  }
-
-  TeamList() {
-
-  }
 
   render() {
     return (
       <div className="Dashboard">
-        <div className="project_list" style={styles.projectListStyle}>
-          {
-            this.state.project.map((p) => {
-              return <Project style={{ margin: 15, minWidth:400 }} key={p}
-                project_id={p.project_id}
-                project_title={p.project_name}/>
-            })
-          }
-        </div>
-        <div className="display_board"></div>
-        {/* <div className="team_list">
-          {
-            sessionStorage.getItem('auth_token') ? (
-              <TeamList />
-            ) : (
-                <div></div>
-              )
-          }
-        </div> */}
+        {this.state.course_list.map((item) =>
+          <li>{item.course_name}</li>
+        )}
       </div>
     )
   }
