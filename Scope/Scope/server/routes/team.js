@@ -10,33 +10,20 @@ var connection = mysql.createConnection(
   }
 )
 
-/* GET Team listing by Project ID */
-router.post('/', function (req, res, next) {
-  const project_id = req.body.project_id
 
-  // If Project_id is undefined
+/**
+ * GET Team list and number of members in the project
+ * Dashboard
+ */
+router.post('/project-team', function (req, res) {
+  var project_id = req.headers.project_id;
   if (!project_id) {
-    res.status(401).send("Invalid Project ID")
+    res.status(401).send("Missing Project ID")
   }
-
-  // Query team data based on the project_id
-  var sql = 'SELECT * FROM  Team WHERE project_id = ?'
+  var sql = "SELECT team_name , COUNT(student_id) AS Team_Member FROM TEAM JOIN StudentHasTeams USING (project_id, team_number) JOIN Project USING (project_id) GROUP BY project_id, team_number, project_name HAVING project_id = ?"
   connection.query(sql, project_id, function (err, result) {
     if (err) throw err
-    res.send(result);
-  })
-});
-
-/** GET Team member listing by Project ID and Team ID */
-router.post('/team_member', function (req, res) {
-  const project_id = req.body.project_id
-  const team_number = req.body.team_number
-  // Query team members info
-  var sql = 'SELECT student_id, student_username, student_firstname, student_lastname, student_email FROM Student JOIN StudentHasTeams USING (student_id) WHERE project_id =? AND team_number = ?;'
-  var variable = [project_id, team_number]
-  connection.query(sql, variable, function (err, result) {
-    if (err) throw err
-    res.send(result);
+    res.send(result)
   })
 })
 

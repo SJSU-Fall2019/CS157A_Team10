@@ -45,43 +45,11 @@ router.post('/signup', function (req, res) {
 
 })
 
-
-/**
- * Fetch Project By user id
- */
-router.post('/project', function (req, res) {
-  var token = req.headers.auth_token;
-  if (!token) {
-    res.status(401).send("Access Denied")
-  }
-  try {
-    var user_id = jwt.decode(req.headers.auth_token, key.key)._id
-  }
-  catch (err) {
-    throw err
-  }
-  // No Token or Token is not valid
-  if (!user_id) {
-    res.status(404).send('User not verified or do not have access')
-  }
-  // Query Project data based on the user_id
-  var sql = 'SELECT * FROM Project WHERE project_id IN (SELECT project_id from StudentHasProjects WHERE student_id =?)'
-  connection.query(sql, user_id, function (err, result) {
-    if (err) throw err
-
-    // Parse Date to "yyyy/mm/dd" format
-    // result.forEach(element => {
-    //   element.project_startDate = element.project_startDate.toISOString().slice(0, 10)
-    //   element.project_endDate = element.project_endDate.toISOString().slice(0, 10)
-    // });
-    res.send(result);
-  })
-
-});
-
+//************************************ General *********************************************/
 
 /**
  * Fetch Student List
+ * Student Page
  */
 
 router.post('/all', function (req, res) {
@@ -99,6 +67,7 @@ router.post('/all', function (req, res) {
 
 /**
  * GET Student name by auth_token
+ * Profile page
  */
 router.post('/student_info', function (req, res) {
   var token = req.headers.auth_token;
@@ -120,6 +89,7 @@ router.post('/student_info', function (req, res) {
 
 /**
  * Handles Student Login request
+ * Log in page
  */
 router.post('/student_login', function (req, res) {
   var sql = 'SELECT student_password, student_id FROM Student WHERE student_email= ?';
@@ -151,6 +121,7 @@ router.post('/student_login', function (req, res) {
 
 /**
  * Handles Instructor Login request
+ * Log in page
  */
 router.post('/instructor_login', function (req, res) {
   var sql = 'SELECT inst_password, instructor_id FROM Instructor WHERE inst_email= ?';
@@ -173,6 +144,27 @@ router.post('/instructor_login', function (req, res) {
     else (
       res.status(401).send("Access Denied")
     )
+  })
+});
+
+/**
+ * GET Instructor name by auth_token
+ * Profile page
+ */
+router.post('/instructor_info', function (req, res) {
+  var token = req.headers.auth_token;
+  if (!token) {
+    res.status(401).send("Access Denied")
+  }
+  try {
+    var instructor_id = jwt.decode(req.headers.auth_token, key)._id
+  } catch (err) {
+    throw err
+  }
+  var sql = "SELECT inst_first_name, inst_last_name FROM Instructor WHERE instructor_id =  ?"
+  connection.query(sql, instructor_id, function (err, result) {
+    if (err) throw err
+    res.send(result)
   })
 });
 

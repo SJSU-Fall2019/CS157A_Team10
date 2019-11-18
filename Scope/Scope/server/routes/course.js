@@ -28,7 +28,7 @@ router.post('/instructor', function (req, res) {
         throw err
     }
     // Query a list of course teach by instructor
-    var sql = 'SELECT course_name FROM Instructor JOIN InstructorTeachCourses USING (instructor_id) JOIN Course USING (course_id) WHERE instructor_id = ?'
+    var sql = 'SELECT course_id, course_name FROM Instructor JOIN InstructorTeachCourses USING (instructor_id) JOIN Course USING (course_id) WHERE instructor_id = ?'
     connection.query(sql, instructor_id, function (err, result) {
         if (err) throw err
         res.send(result);
@@ -52,7 +52,7 @@ router.post('/student', function (req, res) {
         throw err
     }
     // Query a list of course teach by instructor
-    var sql = 'SELECT course_name FROM Student JOIN StudentHasCourses USING (student_id) JOIN Course USING (course_id) WHERE student_id = ? '
+    var sql = 'SELECT course_id, course_name FROM Student JOIN StudentHasCourses USING (student_id) JOIN Course USING (course_id) WHERE student_id = ? '
     connection.query(sql, student_id, function (err, result) {
         if (err) throw err
         res.send(result);
