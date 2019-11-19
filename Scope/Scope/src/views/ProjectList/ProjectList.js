@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import CourseRequest from '../../API/Course/index';
+import ProjectRequest from '../../API/Project/index';
 
 // import { ProductsToolbar, ProductCard } from './components';
 import { ProjectToolbar, ProjectCard } from './components';
@@ -43,50 +45,47 @@ const styles = {
 * Represent a Project List component
 */
 class ProjectList extends React.Component {
-
-    state = {
-        project: [],
+    constructor(props) {
+        super(props)
+        this.state = {
+            course_list: [],
+            selected_course: null,
+            project_list: [],
+        }
     }
 
-    async fetchProject() {
-        await fetch('http://localhost:8001/user/project',
+    async componentDidMount() {
+        let course_result = await CourseRequest.fetchStudentCourseList()
+        this.setState(
             {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    auth_token: sessionStorage.getItem('auth_token')
-                },
-
-            }).then((response) => {
-                response.json()
-                    .then((responseJson) => {
-                        this.setState(
-                            {
-                                project: responseJson
-                            }
-                        )
-                    })
+                course_list: course_result,
+                // Default selected course is the first course in the array
+                selected_course: course_result[0].course_id
             })
-            .catch((error) => {
-                throw error
-            });
-    }
-
-    componentDidMount() {
-        this.fetchProject()
+        let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
+        this.setState(
+            {
+                project_list: project_result,
+            })
     }
 
     render() {
         return (
             <div style={styles.root}>
+                {/**Example Course data div*/}
+                <div className="Course_data">
+                    <a>Course List Data</a>
+                    {this.state.course_list.map((item) =>
+                        <li>{item.course_name}</li>
+                    )}
+                </div>
                 <ProjectToolbar />
                 <div style={styles.content}>
                     <Grid
                         container
                         spacing={3}
                     >
-                        {this.state.project.map(p => (
+                        {this.state.project_list.map(p => (
                             <Grid
                                 item
                                 key={p.project_id}
