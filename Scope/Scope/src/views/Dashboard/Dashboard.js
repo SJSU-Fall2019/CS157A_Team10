@@ -68,9 +68,7 @@ class Dashboard extends Component {
       {
         team_list: team_result
       })
-
   }
-
 
   render() {
     return (
