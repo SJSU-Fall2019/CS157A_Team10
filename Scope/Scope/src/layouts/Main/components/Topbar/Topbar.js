@@ -10,9 +10,6 @@ import InputIcon from '@material-ui/icons/Input';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography  from '@material-ui/core/Typography';
-import {
-  Link
-}from '@material-ui/core';
 
 
 const useStyles = makeStyles(theme => ({
@@ -44,10 +41,6 @@ const Topbar = props => {
     window.sessionStorage.removeItem("auth_token");
   }
 
-  const SignOut = () => {
-    window.sessionStorage.removeItem("auth_token");
-    window.location.reload();
-  }
 
   return (
     
