@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import { Button, Tabs, Tab } from '@material-ui/core';
+import { Button} from '@material-ui/core';
 import { SearchInput } from '../../../../components';
 
 const useStyles = makeStyles(theme => ({
