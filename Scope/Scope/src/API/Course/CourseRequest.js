@@ -7,7 +7,7 @@ class CourseRequest {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    auth_token: sessionStorage.getItem('auth_token')
+                    auth_token: window.sessionStorage.getItem('auth_token')
                 },
             })
         let responseJson = await response.json();

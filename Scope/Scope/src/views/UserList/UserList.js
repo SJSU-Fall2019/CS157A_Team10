@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import Avatar from '@material-ui/core/Avatar';
 
 import { UsersToolbar, UsersTable } from './components';
-import mockData from './data';
 import { SearchInput } from '../../components';;
 
 const styles = {
@@ -11,13 +17,14 @@ const styles = {
   },
   content: {
     marginTop: 20
-  }
-}
+  }}
 
 
+
+/** A User Table contains list of user and their information */
 class UserList extends React.Component {
   state = {
-    userList: mockData,
+    userList: [],
     search: '',
   }
 
@@ -52,8 +59,7 @@ class UserList extends React.Component {
 
   render() {
     return (
-      <div style={styles.root}>
-        {/* <UsersToolbar /> */}
+      <div className="container" style={styles.root}>
         <SearchInput
           placeholder="Search user"
           onChange={(event) => {
@@ -71,12 +77,11 @@ class UserList extends React.Component {
           }}
           value={this.state.search}
         />
-        <div style={styles.content}>
-          <UsersTable users={this.state.userList} />
+        <div clasName="user_table" style={styles.content}>
+          <UsersTable userList={this.state.userList} />
         </div>
       </div>
     );
   }
 }
-
 export default UserList;

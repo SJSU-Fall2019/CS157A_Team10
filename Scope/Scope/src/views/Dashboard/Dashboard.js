@@ -1,24 +1,9 @@
 import React, { useState, Component, } from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { Grid, Box } from '@material-ui/core';
-import ScrollMenu from 'react-horizontal-scrolling-menu';
 import CourseRequest from '../../API/Course/index';
 import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
 // Remove react-window, ScrollMenu, HorizontalScroll library later
 
-import {
-  Project,
-  TotalUsers,
-  TasksProgress,
-  TotalProfit,
-  LatestSales,
-  UsersByDevice,
-  LatestProducts,
-  LatestOrders,
-  TeamList,
-
-} from './components';
 
 const styles = {
   projectListStyle:

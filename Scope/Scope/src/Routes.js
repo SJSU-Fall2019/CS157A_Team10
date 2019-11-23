@@ -1,22 +1,18 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
-
 import { RouteWithLayout } from './components';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
 import {
   Dashboard as DashboardView,
-  // ProductListView as ProductListView,
   ProjectList as ProjectListView,
   UserList as UserListView,
-  Typography as TypographyView,
-  Icons as IconsView,
-  Account as AccountView,
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
   NotFound as NotFoundView,
   ProjectCreation as ProjectCreationView,
+  Milestone as MilestoneView,
 } from './views';
 
 const Routes = () => {
@@ -39,35 +35,11 @@ const Routes = () => {
         layout={MainLayout}
         path="/users"
       />
-      {/* <RouteWithLayout
-        component={ProductListView}
-        exact
-        layout={MainLayout}
-        path="/products"
-      /> */}
       <RouteWithLayout
         component={ProjectListView}
         exact
         layout={MainLayout}
         path="/projects"
-      />
-      <RouteWithLayout
-        component={TypographyView}
-        exact
-        layout={MainLayout}
-        path="/typography"
-      />
-      <RouteWithLayout
-        component={IconsView}
-        exact
-        layout={MainLayout}
-        path="/icons"
-      />
-      <RouteWithLayout
-        component={AccountView}
-        exact
-        layout={MainLayout}
-        path="/account"
       />
       <RouteWithLayout
         component={SettingsView}
@@ -92,6 +64,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/create-project"
+      />
+            <RouteWithLayout
+        component={MilestoneView}
+        exact
+        layout={MainLayout}
+        path="/milestone"
       />
       <RouteWithLayout
         component={NotFoundView}

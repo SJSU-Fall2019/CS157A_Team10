@@ -31,6 +31,7 @@ const Topbar = props => {
   const { className, onSidebarOpen, ...rest } = props;
 
   const classes = useStyles();
+  const { history } = props;
 
   const [notifications] = useState([]);
   const [value, setValue] = React.useState(0);
@@ -41,7 +42,6 @@ const Topbar = props => {
 
   const SignOut = () => {
     window.sessionStorage.removeItem("auth_token");
-    window.location.reload();
   }
 
   return (
