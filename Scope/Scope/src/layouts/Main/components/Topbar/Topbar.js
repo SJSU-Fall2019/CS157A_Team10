@@ -10,7 +10,9 @@ import InputIcon from '@material-ui/icons/Input';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography  from '@material-ui/core/Typography';
-
+import {
+  Link
+}from '@material-ui/core';
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,6 +40,9 @@ const Topbar = props => {
     setValue(newValue);
   };
 
+  const SignOut = () =>{
+    window.sessionStorage.removeItem("auth_token");
+  }
 
   return (
     
@@ -81,13 +86,17 @@ const Topbar = props => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton
+          {/* <Link to={{
+            pathname: '/sign-in'
+          }}> */}
+          <IconButton href= "/sign-in"
             className={classes.signOutButton}
             color="inherit"
-            // onClick={SignOut} Call SignOut here
+            onClick={SignOut}
           >
             <InputIcon />
           </IconButton>
+          {/* </Link> */}
         </Hidden>
         <Hidden lgUp>
           <IconButton
