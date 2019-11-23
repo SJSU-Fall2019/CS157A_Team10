@@ -7,24 +7,24 @@ import CourseRequest from '../../API/Course/index';
 import ProjectRequest from '../../API/Project/index';
 
 // import { ProductsToolbar, ProductCard } from './components';
-import { ProjectToolbar, ProjectCard } from './components';
+import { ProjectToolbar, ProjectCard, CourseTab} from './components';
 import mockData from './data';
 
 
-// const useStyles = makeStyles(theme => ({
-//     root: {
-//         padding: theme.spacing(3)
-//     },
-//     content: {
-//         marginTop: theme.spacing(2)
-//     },
-//     pagination: {
-//         marginTop: theme.spacing(3),
-//         display: 'flex',
-//         alignItems: 'center',
-//         justifyContent: 'flex-end'
-//     }
-// }));
+const useStyles = makeStyles(theme => ({
+    root: {
+        padding: theme.spacing(3)
+    },
+    content: {
+        marginTop: theme.spacing(2)
+    },
+    pagination: {
+        marginTop: theme.spacing(3),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    }
+}));
 
 const styles = {
     root: {
@@ -73,13 +73,15 @@ class ProjectList extends React.Component {
         return (
             <div style={styles.root}>
                 {/**Example Course data div*/}
-                <div className="Course_data">
+                {/* <div className="Course_data">
                     <a>Course List Data</a>
                     {this.state.course_list.map((item) =>
                         <li>{item.course_name}</li>
                     )}
-                </div>
+                </div> */}
+                <CourseTab course_list ={this.state.course_list}/>
                 <ProjectToolbar />
+
                 <div style={styles.content}>
                     <Grid
                         container
@@ -98,15 +100,6 @@ class ProjectList extends React.Component {
                         ))}
                     </Grid>
                 </div>
-                {/* <div style={styles.pagination}>
-           <Typography variant="caption">1-6 of 20</Typography>
-           <IconButton>
-             <ChevronLeftIcon />
-           </IconButton>
-           <IconButton>
-             <ChevronRightIcon />
-           </IconButton>
-         </div> */}
             </div>
 
         )
