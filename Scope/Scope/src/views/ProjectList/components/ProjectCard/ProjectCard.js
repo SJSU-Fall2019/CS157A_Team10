@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 });
 
 
-const ProjectCard = () => {
+const ProjectCard = (props) => {
     const classes = useStyles();
 
     return (
@@ -36,11 +36,10 @@ const ProjectCard = () => {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Title
+                        {props.project.project_name}
           </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam . . .
+                       {props.project.project_description}
           </Typography>
                 </CardContent>
             </CardActionArea>

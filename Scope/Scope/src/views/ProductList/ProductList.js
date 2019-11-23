@@ -75,7 +75,7 @@ class ProductList extends React.Component {
                 md={6}
                 xs={12}
               >
-                <ProductCard product={product} props ={this.props}/>
+                <ProductCard product={product} props={this.props} />
               </Grid>
             ))}
           </Grid>

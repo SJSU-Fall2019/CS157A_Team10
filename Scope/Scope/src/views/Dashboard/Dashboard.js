@@ -2,6 +2,9 @@ import React, { useState, Component, } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Box } from '@material-ui/core';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
+import CourseRequest from '../../API/Course/index';
+import ProjectRequest from '../../API/Project/index';
+import TeamRequest from '../../API/Team/index';
 // Remove react-window, ScrollMenu, HorizontalScroll library later
 
 import {
@@ -34,85 +37,62 @@ class Dashboard extends Component {
 
   constructor(props) {
     super(props)
-
+    this.state = {
+      course_list: [],
+      // Selected_course stores the selected course_id
+      selected_course: null,
+      project_list: [],
+      // Selected_project stores the selected project_id
+      selected_project: null,
+      team_list: [],
+    }
   }
 
-  state = {
-    project: [],
-  }
-
-
-  async fetchProject() {
-    await fetch('http://localhost:8001/user/project',
+  async componentDidMount() {
+    let course_result = await CourseRequest.fetchStudentCourseList()
+    this.setState(
       {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          auth_token: sessionStorage.getItem('auth_token')
-        },
-
-      }).then((response) => {
-        response.json()
-          .then((responseJson) => {
-            this.setState(
-              {
-                project: responseJson
-              }
-            )
-          })
+        course_list: course_result,
+        // Default selected course is the first course in the array
+        selected_course: course_result[0].course_id
       })
-      .catch((error) => {
-        throw error
-      });
-  }
-
-  componentDidMount() {
-    this.fetchProject()
-  }
-
-  createProject = () => {
-    let table = []
-    this.state.project.forEach((p) => {
-      table.push(<Project style={styles.projectStyle} key={p}
-        project_id={p.project_id}
-        project_title={p.project_title}
-        project_institution={p.project_institution}
-        project_startDate={p.project_startDate}
-        project_endDate={p.project_endDate} />)
-    })
-    return table
-  }
-
-  TeamList() {
-
+    let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
+    this.setState(
+      {
+        project_list: project_result,
+        // Default selected project is the first project in the array
+        selected_project: project_result[0].project_id
+      })
+    let team_result = await TeamRequest.fetchTeam(this.state.selected_project)
+    this.setState(
+      {
+        team_list: team_result
+      })
   }
 
   render() {
     return (
       <div className="Dashboard">
-        <div className="project_list" style={styles.projectListStyle}>
-          {
-            this.state.project.map((p) => {
-              return <Project style={{ margin: 15, minWidth:400 }} key={p}
-                project_id={p.project_id}
-                project_title={p.project_title}
-                project_institution={p.project_institution}
-                project_startDate={p.project_startDate}
-                project_endDate={p.project_endDate} />
-            })
-          }
+        <div style={{ flexDirection: 'row', display: 'flex' }}>
+          <div className="Course_data">
+            <a>Course List Data</a>
+            {this.state.course_list.map((item) =>
+              <li>{item.course_name}</li>
+            )}
+          </div>
+          <div className='Project_data'>
+            <a>Project List data</a>
+            {this.state.project_list.map((item) =>
+              <li>{item.project_name}</li>
+            )}
+          </div>
+          <div className='Team_data'>
+            <a>Team List data</a>
+            {this.state.team_list.map((item) =>
+              <li>{item.team_name} Number of Members: {item.Team_Member}</li>
+            )}
+          </div>
         </div>
-        <div className="display_board"></div>
-        {/* <div className="team_list">
-          {
-            sessionStorage.getItem('auth_token') ? (
-              <TeamList />
-            ) : (
-                <div></div>
-              )
-          }
-        </div> */}
       </div>
     )
   }

@@ -49,6 +49,11 @@ class Project extends React.Component {
   constructor(props) {
     super(props)
   }
+
+  componentDidMount()
+  {
+     console.log(this.props)
+  }
   render() {
     return (
       <Card
@@ -79,7 +84,7 @@ class Project extends React.Component {
             <Grid item>
             </Grid>
           </Grid>
-          <div className={"DateSection"} style={{marginTop: 60}}>
+          {/* <div className={"DateSection"} style={{marginTop: 60}}>
             <div style={styles.difference}>
               <EventAvailableIcon style={styles.differenceIcon} />
               <Typography
@@ -98,7 +103,7 @@ class Project extends React.Component {
                 <label>End Date: {this.props.project_endDate}</label>
               </Typography>
             </div>
-          </div>
+          </div> */}
         </CardContent>
       </Card>
     );

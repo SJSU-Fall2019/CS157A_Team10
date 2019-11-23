@@ -170,9 +170,7 @@ const SignIn = props => {
   };
 
   const handleSignIn = async event => {
-    event.preventDefault();
-    history.push('/');
-    await fetch('http://localhost:8001/user/login',
+    await fetch('http://localhost:8001/user/student_login',
       {
         method: 'POST',
         headers: {
@@ -195,7 +193,6 @@ const SignIn = props => {
       .catch((error) => {
         throw error
       });
-
   };
 
   const hasError = field =>
@@ -203,7 +200,7 @@ const SignIn = props => {
 
   return (
     <div className={classes.root}>
-      {window.sessionStorage.getItem('auth_token') ? history.push("/dashboard"): <div></div>}
+      {window.sessionStorage.getItem('auth_token') ? history.push("/dashboard") : <div></div>}
       <Grid
         className={classes.grid}
         container
@@ -331,25 +328,35 @@ const SignIn = props => {
                   value={formState.values.password || ''}
                   variant="outlined"
                 />
-                <Button
-                  className={classes.signInButton}
-                  color="primary"
-                  disabled={!formState.isValid}
-                  fullWidth
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                >
-                  Sign in
+                <Link to={{
+                  pathname: '/dashboard',
+                  state: [{ isAuth: true }]
+                }} >
+                  <Button
+                    className={classes.signInButton}
+                    color="primary"
+                    disabled={!formState.isValid}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                  >
+                    Sign in
                 </Button>
+                </Link>
                 <Typography
                   color="textSecondary"
                   variant="body1"
                 >
                   Don't have an account?{' '}
                   <Link
-                    component={RouterLink}
-                    to="/sign-up"
+                    // component={RouterLink}
+                    to={{
+                      pathname: "/sign-up",
+                      state: {
+                        isAuth: true
+                      },
+                    }}
                     variant="h6"
                   >
                     Sign up
