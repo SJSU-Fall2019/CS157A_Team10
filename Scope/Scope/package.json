@@ -7,7 +7,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@material-ui/core": "^4.6.1",
+    "@material-ui/core": "^4.7.0",
     "@material-ui/icons": "^4.5.1",
     "chart.js": "^2.9.2",
     "concurrently": "^5.0.0",
@@ -22,6 +22,7 @@
     "react-perfect-scrollbar": "^1.5.3",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "tabs": "^0.2.0",
     "uuid": "^3.3.3",
     "validate-js": "^2.0.1",
     "validate.js": "^0.13.1"
