@@ -45,10 +45,10 @@ const ProjectCard = (props) => {
             </CardActionArea>
             <CardActions>
                 <Button size="small" color="primary">
-                    Share
+                    More
         </Button>
-                <Button size="small" color="primary">
-                    Learn More
+                <Button size="small" color="primary" variant="contained">
+                    Delete
         </Button>
             </CardActions>
         </Card>

@@ -164,7 +164,7 @@ router.post('/instructor_info', function (req, res) {
   var sql = "SELECT inst_first_name, inst_last_name FROM Instructor WHERE instructor_id =  ?"
   connection.query(sql, instructor_id, function (err, result) {
     if (err) throw err
-    res.send(result)
+    res.send(result);
   })
 });
 
