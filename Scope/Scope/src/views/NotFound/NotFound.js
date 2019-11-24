@@ -1,56 +1,39 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { Grid, Typography } from '@material-ui/core';
+import React, { Component } from 'react';
+import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: theme.spacing(4)
-  },
+class NotFound extends Component {
+  render() {
+    return (
+      <div className='wrapper' style={styles.content}>
+        <Typography variant="h1">
+          404: Opps, The page you are looking for isn’t here
+      </Typography>
+        <Typography variant="subtitle2">
+          Try use navigation to navigate between page
+      </Typography>
+        {/** Image source from the template */}
+        <img
+          alt="Under development"
+          src="/images/undraw_page_not_found_su7k.svg"
+          style={styles.image}
+        />
+      </div>
+    )
+  }
+}
+
+const styles = {
   content: {
     paddingTop: 150,
-    textAlign: 'center'
+    textAlign: 'center',
   },
-  image: {
+  image:
+  {
     marginTop: 50,
     display: 'inline-block',
     maxWidth: '100%',
     width: 560
   }
-}));
-
-const NotFound = () => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.root}>
-      <Grid
-        container
-        justify="center"
-        spacing={4}
-      >
-        <Grid
-          item
-          lg={6}
-          xs={12}
-        >
-          <div className={classes.content}>
-            <Typography variant="h1">
-              404: The page you are looking for isn’t here
-            </Typography>
-            <Typography variant="subtitle2">
-              You either tried some shady route or you came here by mistake.
-              Whichever it is, try using the navigation
-            </Typography>
-            <img
-              alt="Under development"
-              className={classes.image}
-              src="/images/undraw_page_not_found_su7k.svg"
-            />
-          </div>
-        </Grid>
-      </Grid>
-    </div>
-  );
-};
+}
 
 export default NotFound;
