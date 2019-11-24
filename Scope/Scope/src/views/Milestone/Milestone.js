@@ -28,11 +28,15 @@ class Milestone extends React.Component {
     render() {
         return (
             <div>
-                <label>Hello World</label>
-                {this.state.milestones.map((milestone=>
-                    {
-                        return <label>{Milestone.project_name}</label>
-                    }))}
+                {this.state.milestones.map((milestone => {
+                    return <div className ="database_data">
+                        <div>Project Title : {milestone.project_name}</div>
+                        <div>Course Name : {milestone.course_name}</div>
+                        <div>Milestone Number : {milestone.milestone_number}</div>
+                        <div>Milestone Title: {milestone.milestone_title}</div>
+                        <div>Milestone Description : {milestone.milestone_description}</div>
+                    </div>
+                }))}
             </div>
         );
     }

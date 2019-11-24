@@ -25,7 +25,7 @@ router.get('/info', function (req, res) {
 
 })
 
-/** GET List of Projects base on course name */
+/** POST Request Get List of Projects base on course name */
 /** Dashboard Page */
 router.post('/course-project', function (req, res) {
   var course_id = req.headers.course_id;
@@ -39,4 +39,14 @@ router.post('/course-project', function (req, res) {
   })
 })
 
+/** POST Request Delete Project */
+/** ProjectList Page */
+router.post('/delete', function (req, res) {
+  var project_id = req.body.project_id;
+  if (!project_id) {
+    res.status(401).send("Missing project_id")
+  }
+  var sql = ""
+
+})
 module.exports = router;

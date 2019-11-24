@@ -48,11 +48,11 @@ class Dashboard extends Component {
         // Default selected project is the first project in the array
         selected_project: project_result[0].project_id
       })
-    // let team_result = await TeamRequest.fetchTeam(this.state.selected_project)
-    // this.setState(
-    //   {
-    //     team_list: team_result
-    //   })
+    let team_result = await TeamRequest.fetchTeam(this.state.selected_project)
+    this.setState(
+      {
+        team_list: team_result
+      })
   }
 
   render() {
