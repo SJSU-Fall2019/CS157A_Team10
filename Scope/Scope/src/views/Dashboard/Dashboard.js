@@ -2,7 +2,17 @@ import React, { useState, Component, } from 'react';
 import CourseRequest from '../../API/Course/index';
 import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
+import { CourseScrollTab, TeamScrollTab} from './components'
 // Remove react-window, ScrollMenu, HorizontalScroll library later
+
+// Core Matrial UI
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 
 const styles = {
@@ -57,13 +67,16 @@ class Dashboard extends Component {
 
   render() {
     return (
+     
       <div className="Dashboard">
+        <div>  <CourseScrollTab /></div>
+        <div>  <TeamScrollTab /></div>
         <div style={{ flexDirection: 'row', display: 'flex' }}>
           <div className="Course_data">
             <a>Course List Data</a>
             {this.state.course_list.map((item) =>
               <li>{item.course_name}</li>
-            )}
+            )}s
           </div>
           <div className='Project_data'>
             <a>Project List data</a>
@@ -78,8 +91,10 @@ class Dashboard extends Component {
             )}
           </div>
         </div>
-      </div>
-    )
+      </div>//
+      
+      
+    );// end return
   }
 }
 
