@@ -68,6 +68,7 @@ const ScrollableTabsButtonAuto = (props) => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
+        // newValue is a index number for the TabPanel
         props.onChangeCourse(props.course_list[newValue].course_id)
         setValue(newValue);
     };
@@ -88,11 +89,13 @@ const ScrollableTabsButtonAuto = (props) => {
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
+                    {/** Construct list of course Tab */}
                     {props.course_list.map((course, index) => {
                         return <Tab label={course.course_name} value={index} {...a11yProps(index)} />
                     })}
                 </Tabs>
             </AppBar>
+            {/** Construct list of project TabPanel */}
             {props.course_list.map((course, index) => {
                 return <TabPanel value={value} index={index}>
                     <div style={styles.content}>
@@ -108,7 +111,7 @@ const ScrollableTabsButtonAuto = (props) => {
                                     md={6}
                                     xs={12}
                                 >
-                                    <ProjectCard project={p} />
+                                    <ProjectCard project={p} onChangeProject={props.onChangeProject} />
                                 </Grid>
                             ))}
                         </Grid>

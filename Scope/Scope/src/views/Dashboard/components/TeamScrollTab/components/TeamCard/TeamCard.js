@@ -46,15 +46,15 @@ const TeamCard = (props) => {
                 <CardContent>
                     <Typography className={classes.subTitle} align="right" gutterBottom variant="h5" component="h2">
                         {/* {props.project.project_name} */}
-                        Team #
+                        Team # {props.team.team_number}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
                         {/* {props.project.project_name} */}
-                        Project Name
+                        Project Name {props.team.teamProject_name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {/* {props.project.project_description} */}
-                        Project Description : Lizards are a widespread group of squamate reptiles, with over 6,000 species
+                        Project Description : {props.team.teamProject_description}
                     </Typography>
                 </CardContent>
             </CardActionArea>

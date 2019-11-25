@@ -31,7 +31,9 @@ const ProjectCard = (props) => {
     const classes = useStyles();
 
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} onClick={()=>{
+            props.onChangeProject(props.project.project_id)
+        }}>
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
@@ -42,9 +44,9 @@ const ProjectCard = (props) => {
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.project.project_name}
                     </Typography>
-                    {/* <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="body2" color="textSecondary" component="p">
                        {props.project.project_description}
-                    </Typography> */}
+                    </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
