@@ -52,7 +52,7 @@ class UsersTable extends React.Component {
 
   render() {
     return (
-      <div clasName="user_table" style={styles.content}>
+      <div className="user_table" style={styles.content}>
         {/* <UsersTable users={this.props.userList} /> */}
         <Paper>
           <Table aria-label="customized user table">
