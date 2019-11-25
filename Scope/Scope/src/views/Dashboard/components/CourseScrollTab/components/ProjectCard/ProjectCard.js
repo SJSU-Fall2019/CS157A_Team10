@@ -31,7 +31,9 @@ const ProjectCard = (props) => {
     const classes = useStyles();
 
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} onClick={()=>{
+            props.onChangeProject(props.project.project_id)
+        }}>
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
@@ -40,12 +42,10 @@ const ProjectCard = (props) => {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {/* {props.project.project_name} */}
-                        Project Name
+                        {props.project.project_name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                       {/* {props.project.project_description} */}
-                       Lizards are a widespread group of squamate reptiles, with over 6,000 species
+                       {props.project.project_description}
                     </Typography>
                 </CardContent>
             </CardActionArea>

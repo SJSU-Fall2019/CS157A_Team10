@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
 
 /**GET List of Milestone, project name, course name from the given project id */
 router.post('/', function (req, res) {
-  const project_id =1
+  const project_id = req.body.project_id
   if (!project_id) {
     res.status(401).send("Missing Project ID")
   }

@@ -25,18 +25,28 @@ router.get('/info', function (req, res) {
 
 })
 
-/** GET List of Projects base on course name */
+/** POST Request Get List of Projects base on course id */
 /** Dashboard Page */
 router.post('/course-project', function (req, res) {
   var course_id = req.headers.course_id;
   if (!course_id) {
     res.status(401).send("Missing course_name")
   }
-  var sql = "SELECT project_id , project_name FROM CourseHasProjects JOIN Course USING (course_id) JOIN Project USING (project_id) WHERE course_id = ? "
+  var sql = "SELECT project_id , project_description, project_name FROM CourseHasProjects JOIN Course USING (course_id) JOIN Project USING (project_id) WHERE course_id = ? "
   connection.query(sql, course_id, function (err, result) {
     if (err) throw err
     res.send(result)
   })
 })
 
+/** POST Request Delete Project */
+/** ProjectList Page */
+router.post('/delete', function (req, res) {
+  var project_id = req.body.project_id;
+  if (!project_id) {
+    res.status(401).send("Missing project_id")
+  }
+  var sql = ""
+
+})
 module.exports = router;

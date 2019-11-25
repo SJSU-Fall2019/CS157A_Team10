@@ -350,12 +350,9 @@ const SignIn = props => {
                 >
                   Don't have an account?{' '}
                   <Link
-                    // component={RouterLink}
+                    component={RouterLink}
                     to={{
                       pathname: "/sign-up",
-                      state: {
-                        isAuth: true
-                      },
                     }}
                     variant="h6"
                   >

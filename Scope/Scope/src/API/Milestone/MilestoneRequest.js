@@ -9,9 +9,9 @@ class MileStoneRequest {
                     'Content-Type': 'application/json',
                     auth_token: sessionStorage.getItem('auth_token'),
                 },
-                body: {
+                body: JSON.stringify({
                     project_id: project_id
-                }
+                })
             })
         let responseJson = await response.json();
         return responseJson

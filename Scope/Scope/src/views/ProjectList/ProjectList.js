@@ -5,9 +5,10 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import CourseRequest from '../../API/Course/index';
 import ProjectRequest from '../../API/Project/index';
+import { SearchInput } from '../../components';
 
 // import { ProductsToolbar, ProductCard } from './components';
-import { ProjectToolbar, ProjectCard, CourseTab} from './components';
+import { ProjectToolbar, ProjectCard, CourseTab } from './components';
 import mockData from './data';
 
 
@@ -49,6 +50,7 @@ class ProjectList extends React.Component {
         super(props)
         this.state = {
             course_list: [],
+            // Selected_course stores project_id
             selected_course: null,
             project_list: [],
         }
@@ -69,6 +71,42 @@ class ProjectList extends React.Component {
             })
     }
 
+    onChangeSelectedCourse = async (selected_course) => {
+        await this.setState(
+            {
+                selected_course: selected_course
+            })
+        let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
+        this.setState(
+            {
+                project_list: project_result,
+            })
+    }
+
+    async reFetchProject() {
+        let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
+        this.setState(
+            {
+                project_list: project_result,
+            })
+    }
+
+    /** Search Project */
+    onChangeSearch = (event) => {
+        const text = event.target.value;
+        const filter = this.state.project_list.filter(item =>
+            item.project_name.includes(text)
+        );
+        this.setState({
+            project_list: filter,
+            search: text
+        });
+        if (text.length == 0) {
+            this.reFetchProject()
+        }
+    }
+
+
     render() {
         return (
             <div style={styles.root}>
@@ -79,9 +117,12 @@ class ProjectList extends React.Component {
                         <li>{item.course_name}</li>
                     )}
                 </div> */}
-                <CourseTab course_list ={this.state.course_list}/>
-                <ProjectToolbar />
-
+                <CourseTab course_list={this.state.course_list} onChangeCourse={this.onChangeSelectedCourse} />
+                <SearchInput
+                    placeholder="Search Project"
+                    onChange={this.onChangeSearch}
+                    value={this.state.search}
+                />
                 <div style={styles.content}>
                     <Grid
                         container

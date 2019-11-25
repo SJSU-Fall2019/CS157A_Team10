@@ -20,7 +20,9 @@ router.post('/project-team', function (req, res) {
   if (!project_id) {
     res.status(401).send("Missing Project ID")
   }
-  var sql = "SELECT team_name , COUNT(student_id) AS Team_Member FROM TEAM JOIN StudentHasTeams USING (project_id, team_number) JOIN Project USING (project_id) GROUP BY project_id, team_number, project_name HAVING project_id = ?"
+
+  // Update the SQL Table 
+  var sql = "SELECT team_name , team_number, teamProject_name, teamProject_description, COUNT(student_id) AS Team_Member FROM TEAM JOIN StudentHasTeams USING (project_id, team_number) JOIN Project USING (project_id) GROUP BY project_id, team_number, project_name HAVING project_id = ?"
   connection.query(sql, project_id, function (err, result) {
     if (err) throw err
     res.send(result)

@@ -98,7 +98,7 @@ router.post('/student_login', function (req, res) {
     if (err) throw err
     // Check if user exists in our database
     if (result[0].student_password = undefined) {
-      res.status(401).send("User does not exist")
+      return res.status(401).send("User does not exist")
     }
     // User password matching
     if (result.student_password = req.body.password) {
@@ -113,6 +113,28 @@ router.post('/student_login', function (req, res) {
       res.status(401).send("Access Denied")
     )
   })
+});
+
+/**
+ * Handles Student Sign Up request
+ * Sign Up page
+ */
+router.post('/student_signup', function (req, res) {
+  var username = req.body.username
+  var first_name = req.body.first_name
+  var last_name = req.body.last_name
+  var password = req.body.password
+  var user_id = Math.floor(Math.random() * 1000000000);
+  if (!username || !first_name || !last_name || !password) {
+    return res.status(401).send("Missing Sign Up information")
+  }
+  console.log(username, first_name, last_name, user_id)
+  var sql = 'INSERT INTO Student VALUES (?, ?, ?, ? , ? ,? )';
+  var variables = [user_id, username, password, first_name, last_name, username];
+  connection.query(sql, variables, function (err, result) {
+    if (err) throw err
+    res.status(500).send("Register Success")
+  });
 });
 
 
@@ -166,6 +188,29 @@ router.post('/instructor_info', function (req, res) {
     if (err) throw err
     res.send(result);
   })
+});
+
+
+/**
+ * Handles Instructor Sign Up request
+ * Sign Up page
+ */
+router.post('/instructor_signup', function (req, res) {
+  var username = req.body.username
+  var first_name = req.body.first_name
+  var last_name = req.body.last_name
+  var password = req.body.password
+  var user_id = Math.floor(Math.random() * 1000000000);
+  if (!username || !first_name || !last_name || !password) {
+    return res.status(401).send("Missing Sign Up information")
+  }
+
+  var sql = 'INSERT INTO Instructor VALUES (?, ?, ?, ? , ? ,? )';
+  var variables = [user_id, username, password, first_name, last_name, username];
+  connection.query(sql, variables, function (err, result) {
+    if (err) throw err
+    res.send("Register Success")
+  });
 });
 
 
