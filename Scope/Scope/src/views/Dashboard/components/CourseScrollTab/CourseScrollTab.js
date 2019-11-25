@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {Grid,Typography} from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import {ProjectCard, TeamCard } from './components';
+import { ProjectCard, TeamCard } from './components';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -64,25 +64,14 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const ScrollableTabsButtonAuto = props => {
+const ScrollableTabsButtonAuto = (props) => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-
     const handleChange = (event, newValue) => {
+        props.onChangeCourse(props.course_list[newValue].course_id)
         setValue(newValue);
     };
 
-    const ProjectData = [
-        {
-            project_title: "Title 1"
-        },
-        { 
-            project_title: "Title 2" 
-        },
-        { 
-            project_title: "Title 3" 
-        }
-    ]
 
     return (
         <div className={classes.root}>
@@ -99,56 +88,33 @@ const ScrollableTabsButtonAuto = props => {
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
-                    <Tab label="Item One" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
-                    <Tab label="Item Four" {...a11yProps(3)} />
-                    <Tab label="Item Five" {...a11yProps(4)} />
-                    <Tab label="Item Six" {...a11yProps(5)} />
-                    <Tab label="Item Seven" {...a11yProps(6)} />
+                    {props.course_list.map((course, index) => {
+                        return <Tab label={course.course_name} value={index} {...a11yProps(index)} />
+                    })}
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
-                <div style={styles.content}>
-                    <Grid
-                        container
-                        spacing={3}
-                    >
-                        {ProjectData.map(p => (
-                            <Grid
-                                item
-                                key={p.project_title}
-                                lg={4}
-                                md={6}
-                                xs={12}
-                            >
-                                <ProjectCard project={p}/>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </div>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-                Item Four
-            </TabPanel>
-            <TabPanel value={value} index={4}>
-                Item Five
-            </TabPanel>
-            <TabPanel value={value} index={5}>
-                Item Six
-            </TabPanel>
-            <TabPanel value={value} index={6}>
-                Item Seven
-            </TabPanel>
-            {/* <Typography variant="h2" component="h2">
-                Teams
-            </Typography> */}
+            {props.course_list.map((course, index) => {
+                return <TabPanel value={value} index={index}>
+                    <div style={styles.content}>
+                        <Grid
+                            container
+                            spacing={3}
+                        >
+                            {props.project_list.map(p => (
+                                <Grid
+                                    item
+                                    key={p.project_title}
+                                    lg={4}
+                                    md={6}
+                                    xs={12}
+                                >
+                                    <ProjectCard project={p} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div>
+                </TabPanel>
+            })}
         </div>
     );
 }

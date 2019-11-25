@@ -128,12 +128,12 @@ router.post('/student_signup', function (req, res) {
   if (!username || !first_name || !last_name || !password) {
     return res.status(401).send("Missing Sign Up information")
   }
-
+  console.log(username, first_name, last_name, user_id)
   var sql = 'INSERT INTO Student VALUES (?, ?, ?, ? , ? ,? )';
   var variables = [user_id, username, password, first_name, last_name, username];
   connection.query(sql, variables, function (err, result) {
     if (err) throw err
-    res.send("Register Success")
+    res.status(500).send("Register Success")
   });
 });
 

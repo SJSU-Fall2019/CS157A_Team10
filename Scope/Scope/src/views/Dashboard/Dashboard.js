@@ -2,7 +2,7 @@ import React, { useState, Component, } from 'react';
 import CourseRequest from '../../API/Course/index';
 import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
-import { CourseScrollTab, TeamScrollTab} from './components'
+import { CourseScrollTab, TeamScrollTab } from './components'
 // Remove react-window, ScrollMenu, HorizontalScroll library later
 
 // Core Matrial UI
@@ -65,11 +65,25 @@ class Dashboard extends Component {
       })
   }
 
+  onChangeSelectedCourse = async (selected_course) => {
+    await this.setState(
+      {
+        selected_course: selected_course
+      })
+    let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
+    this.setState(
+      {
+        project_list: project_result,
+      })
+  }
+
   render() {
     return (
-     
+
       <div className="Dashboard">
-        <div>  <CourseScrollTab /></div>
+        <div>  <CourseScrollTab course_list={this.state.course_list}
+          project_list={this.state.project_list}
+          onChangeCourse={this.onChangeSelectedCourse} /></div>
         <div>  <TeamScrollTab /></div>
         <div style={{ flexDirection: 'row', display: 'flex' }}>
           <div className="Course_data">
@@ -92,8 +106,8 @@ class Dashboard extends Component {
           </div>
         </div>
       </div>//
-      
-      
+
+
     );// end return
   }
 }
