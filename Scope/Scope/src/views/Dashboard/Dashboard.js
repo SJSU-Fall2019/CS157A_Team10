@@ -45,24 +45,30 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     let course_result = await CourseRequest.fetchStudentCourseList()
-    this.setState(
-      {
-        course_list: course_result,
-        // Default selected course is the first course in the array
-        selected_course: course_result[0].course_id
-      })
+    if (course_result.length!=0) {
+      this.setState(
+        {
+          course_list: course_result,
+          // Default selected course is the first course in the array
+          selected_course: course_result[0].course_id
+        })
+    }
     let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
-    this.setState(
-      {
-        project_list: project_result,
-        // Default selected project is the first project in the array
-        selected_project: project_result[0].project_id
-      })
+    if (project_result.length!=0) {
+      this.setState(
+        {
+          project_list: project_result,
+          // Default selected project is the first project in the array
+          selected_project: project_result[0].project_id || null
+        })
+    }
     let team_result = await TeamRequest.fetchTeam(this.state.selected_project)
-    this.setState(
-      {
-        team_list: team_result
-      })
+    if (team_result.length!=0) {
+      this.setState(
+        {
+          team_list: team_result || null
+        })
+    }
   }
 
   /** CallBack function pass down to the component CourseScrollTab */
@@ -97,7 +103,7 @@ class Dashboard extends Component {
       <div className="Dashboard">
         <div>  <CourseScrollTab course_list={this.state.course_list}
           project_list={this.state.project_list}
-          onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject}/></div>
+          onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject} /></div>
         <div>  <TeamScrollTab team_list={this.state.team_list} /></div>
         <div style={{ flexDirection: 'row', display: 'flex' }}>
           <div className="Course_data">
