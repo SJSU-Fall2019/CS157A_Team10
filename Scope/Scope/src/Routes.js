@@ -13,6 +13,7 @@ import {
   NotFound as NotFoundView,
   ProjectCreation as ProjectCreationView,
   Milestone as MilestoneView,
+  Review as ReviewView,
 } from './views';
 
 const Routes = () => {
@@ -65,11 +66,17 @@ const Routes = () => {
         layout={MainLayout}
         path="/create-project"
       />
-            <RouteWithLayout
+      <RouteWithLayout
         component={MilestoneView}
         exact
         layout={MainLayout}
         path="/milestone"
+      />
+      <RouteWithLayout
+        component={ReviewView}
+        exact
+        layout={MainLayout}
+        path="/review"
       />
       <RouteWithLayout
         component={NotFoundView}
