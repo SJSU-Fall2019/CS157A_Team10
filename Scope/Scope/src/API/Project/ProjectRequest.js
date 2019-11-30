@@ -14,6 +14,20 @@ class ProjectRequest {
         let responseJson = await response.json();
         return responseJson
     }
+
+    static async deleteProject(project_id) {
+        let response = await fetch('http://localhost:8001/project/delete',
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    project_id: project_id
+                },
+            })
+        let responseJson = await response.json();
+        return responseJson
+    }
 }
 
 export default ProjectRequest

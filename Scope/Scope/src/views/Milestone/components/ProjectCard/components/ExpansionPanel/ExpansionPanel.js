@@ -34,7 +34,7 @@ export default function ControlledExpansionPanels(props) {
             <div className = "expansionPanel">
             {props.milestones.map((milestone, index) => {
                 const panelName = "panel" + index + 1
-                return <ExpansionPanel expanded={expanded === panelName} onChange={handleChange(panelName)}>
+                return <ExpansionPanel expanded={expanded === panelName} key = {index} onChange={handleChange(panelName)}>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"

@@ -79,7 +79,7 @@ router.post('/student_info', function (req, res) {
   } catch (err) {
     throw err
   }
-  var sql = "SELECT student_firstname, student_lastname FROM Student WHERE student_id =  ?"
+  var sql = "SELECT student_id , student_firstname, student_lastname FROM Student WHERE student_id =  ?"
   connection.query(sql, student_id, function (err, result) {
     if (err) throw err
     res.send(result)

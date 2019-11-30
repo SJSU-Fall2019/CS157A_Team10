@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql')
+var jwt = require('jsonwebtoken')
+const key = require('../key');
 var connection = mysql.createConnection(
   {
     host: 'localhost',
@@ -24,6 +26,39 @@ router.post('/', function (req, res, next) {
     res.send(result)
   })
 });
+
+/**GET Review listing based on Project ID and Team number */
+router.post('/myReview', function (req, res, next) {
+  const project_id = req.body.project_id
+  const team_number = req.body.team_number
+  const reviewee = jwt.decode(req.headers.auth_token, key)._id
+  if (!project_id || !team_number) {
+    return res.status(401).send("Project ID or Team Number is invalid")
+  }
+  var sql = 'SELECT * FROM Reviews JOIN TeamHasReviews USING (review_id) WHERE project_id =? AND team_number = ? AND reviewee = ?;'
+  var variable = [project_id, team_number, reviewee]
+  connection.query(sql, variable, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+});
+
+/**GET Review listing based on Project ID and Team number */
+router.post('/otherReview', function (req, res, next) {
+  const project_id = req.body.project_id
+  const team_number = req.body.team_number
+  const reviewee = jwt.decode(req.headers.auth_token, key)._id
+  if (!project_id || !team_number) {
+    return res.status(401).send("Project ID or Team Number is invalid")
+  }
+  var sql = 'SELECT * FROM Reviews JOIN TeamHasReviews USING (review_id) WHERE project_id =? AND team_number = ? AND reviewee <> ?;'
+  var variable = [project_id, team_number, reviewee]
+  connection.query(sql, variable, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+});
+
 
 /** Add a Review */
 router.post('/add_review', function (req, res) {

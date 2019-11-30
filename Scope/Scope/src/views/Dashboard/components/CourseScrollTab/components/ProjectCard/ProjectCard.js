@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import ProjectRequest from '../../../../../../API/Project/index';
 
 
 // import { ProductsToolbar, ProductCard } from './components';
@@ -38,6 +39,10 @@ const ProjectCard = (props) => {
         })
     }
 
+    const deleteProject = () => {
+        ProjectRequest.deleteProject(props.project.project_id)
+        props.onDeleteProject()
+    }
     return (
         <Card className={classes.card} onClick={() => {
             props.onChangeProject(props.project.project_id)
@@ -61,7 +66,7 @@ const ProjectCard = (props) => {
                 <Button size="small" color="primary" onClick={directDetail}>
                     More
         </Button>
-                <Button size="small" color="primary" variant="contained">
+                <Button size="small" color="primary" variant="contained" onClick={deleteProject}>
                     Delete
         </Button>
             </CardActions>

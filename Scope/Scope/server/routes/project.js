@@ -39,14 +39,19 @@ router.post('/course-project', function (req, res) {
   })
 })
 
+
 /** POST Request Delete Project */
 /** ProjectList Page */
 router.post('/delete', function (req, res) {
-  var project_id = req.body.project_id;
+  var project_id = req.headers.project_id;
   if (!project_id) {
     res.status(401).send("Missing project_id")
   }
-  var sql = ""
+  var sql = "DELETE FROM Project WHERE project_id = ?;"
+  connection.query(sql, project_id, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
 
 })
 module.exports = router;

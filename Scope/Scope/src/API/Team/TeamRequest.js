@@ -31,6 +31,23 @@ class TeamRequest {
         let responseJson = await response.json();
         return responseJson
     }
+
+    static async fetchMyProject(course_id) {
+        let response = await fetch('http://localhost:8001/team/myProject',
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    auth_token: window.sessionStorage.getItem('auth_token')
+                },
+                body: JSON.stringify({
+                    course_id: course_id,
+                })
+            })
+        let responseJson = await response.json();
+        return responseJson
+    }
 }
 
 export default TeamRequest
