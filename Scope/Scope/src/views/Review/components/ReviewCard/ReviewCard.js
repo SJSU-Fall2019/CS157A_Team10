@@ -18,6 +18,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MilestoneRequest from '../../../../API/Milestone/index'
 import { fontSize } from '@material-ui/system';
 import { ExpansionPanel } from './components'
+import { ReviewFitTabs } from './components'
 import Button from '@material-ui/core/Button';
 
 
@@ -146,20 +147,20 @@ export default function ReviewCard(props) {
                 </ListItem>
                 <Divider variant="inset" component="li" />
             </List>
-
-
-            <CardHeader
+            {/* <CardHeader
                 title= 'Rivew '
                 subheader="Subheader"
-            />
+            /> */}
             {/* <Button variant="contained" style={{ marginLeft: 1000, marginTop: -80 }} onClick={() => {
                 directReview()
             }}>REVIEW</Button> */}
-            <CardContent>
+            {/* <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
                     Course Name
                 </Typography>
-            </CardContent>
+            </CardContent> */}
+
+            <ReviewFitTabs />
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
