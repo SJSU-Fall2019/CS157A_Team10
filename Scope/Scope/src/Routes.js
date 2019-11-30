@@ -86,7 +86,7 @@ const Routes = () => {
         layout={MainLayout}
         path="/testing"
       />
-      <RouteWithLayout>
+      <RouteWithLayout
         component={ReviewView}
         exact
         layout={MainLayout}
