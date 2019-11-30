@@ -91,27 +91,27 @@ const ScrollableTabsButtonAuto = (props) => {
                 >
                     {/** Construct list of course Tab */}
                     {props.course_list.map((course, index) => {
-                        return <Tab label={course.course_name} value={index} {...a11yProps(index)} />
+                        return <Tab label={course.course_name} value={index} key ={index} {...a11yProps(index)} />
                     })}
                 </Tabs>
             </AppBar>
             {/** Construct list of project TabPanel */}
             {props.course_list.map((course, index) => {
-                return <TabPanel value={value} index={index}>
+                return <TabPanel value={value} index={index} key={index} >
                     <div style={styles.content}>
                         <Grid
                             container
                             spacing={3}
                         >
-                            {props.project_list.map(p => (
+                            {props.project_list.map((p,index) => (
                                 <Grid
                                     item
-                                    key={p.project_title}
+                                    key={index}
                                     lg={4}
                                     md={6}
                                     xs={12}
                                 >
-                                    <ProjectCard project={p} onChangeProject={props.onChangeProject} />
+                                    <ProjectCard project={p}onChangeProject={props.onChangeProject}  history={props.history}/>
                                 </Grid>
                             ))}
                         </Grid>

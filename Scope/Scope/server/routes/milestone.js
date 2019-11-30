@@ -25,7 +25,7 @@ router.post('/', function (req, res) {
   if (!project_id) {
     res.status(401).send("Missing Project ID")
   }
-  const sql = "SELECT project_name, course_name, milestone_number, milestone_title, milestone_description FROM Milestones JOIN ProjectHasMilestones USING (milestone_number) JOIN project USING (project_id) JOIN CourseHasProjects USING(project_id) JOIN Course USING(course_id) WHERE project_id = ?"
+  const sql = "SELECT project_name, project_description,course_name, milestone_number, milestone_title, milestone_description FROM Milestones JOIN ProjectHasMilestones USING (milestone_number) JOIN project USING (project_id) JOIN CourseHasProjects USING(project_id) JOIN Course USING(course_id) WHERE project_id = ?"
   connection.query(sql, project_id, function (err, result) {
     if (err) throw err
     res.send(result)

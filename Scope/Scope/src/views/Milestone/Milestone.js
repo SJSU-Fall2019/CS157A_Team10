@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import MilestoneRequest from '../../API/Milestone/index';
+import { ProjectCard} from './components/index'
 
 const styles = {
-
+    cardStyle:
+    {
+        margin: 20,
+    }
 }
 
 /**
@@ -16,27 +19,12 @@ class Milestone extends React.Component {
             milestones: [],
         }
     }
-    async componentDidMount() {
-        // Change state.project_id to props.project_id or navigation param
-        const result = await MilestoneRequest.fetchMilestone(1)
-        this.setState(
-            {
-                milestones: result,
-            })
-    }
-
     render() {
         return (
-            <div>
-                {this.state.milestones.map((milestone => {
-                    return <div className ="database_data">
-                        <div>Project Title : {milestone.project_name}</div>
-                        <div>Course Name : {milestone.course_name}</div>
-                        <div>Milestone Number : {milestone.milestone_number}</div>
-                        <div>Milestone Title: {milestone.milestone_title}</div>
-                        <div>Milestone Description : {milestone.milestone_description}</div>
-                    </div>
-                }))}
+            <div className="container">
+                <div className="project_display" style={styles.cardStyle}>
+                    <ProjectCard project_id={this.props.location.state.project_id} history={this.props.history} team_number={this.props.location.state.team_number} />
+                </div>
             </div>
         );
     }

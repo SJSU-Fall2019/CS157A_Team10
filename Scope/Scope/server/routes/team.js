@@ -29,4 +29,23 @@ router.post('/project-team', function (req, res) {
   })
 })
 
+
+/**
+ * GET Team Members info
+ * Review
+ */
+router.post('/member', function (req, res) {
+  var project_id = req.body.project_id;
+  var team_number = req.body.team_number;
+  if (!project_id || !team_number) {
+    res.status(401).send("Missing Information")
+  } 
+  var sql = "SELECT student_id, project_id, team_number, student_username, student_firstname, student_lastname, student_email FROM StudentHasTeams JOIN Student USING(student_id) WHERE project_Id=? AND team_number=? ; "
+  var varibale = [project_id, team_number]
+  connection.query(sql, varibale, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
+
 module.exports = router;

@@ -58,17 +58,21 @@ class ProjectList extends React.Component {
 
     async componentDidMount() {
         let course_result = await CourseRequest.fetchStudentCourseList()
-        this.setState(
-            {
-                course_list: course_result,
-                // Default selected course is the first course in the array
-                selected_course: course_result[0].course_id
-            })
+        if (course_result.length!=0) {
+            this.setState(
+                {
+                    course_list: course_result,
+                    // Default selected course is the first course in the array
+                    selected_course: course_result[0].course_id
+                })
+        }
         let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
-        this.setState(
-            {
-                project_list: project_result,
-            })
+        if (project_result.length!=0) {
+            this.setState(
+                {
+                    project_list: project_result,
+                })
+        }
     }
 
     onChangeSelectedCourse = async (selected_course) => {

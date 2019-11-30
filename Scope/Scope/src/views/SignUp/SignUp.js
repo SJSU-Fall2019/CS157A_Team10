@@ -186,6 +186,7 @@ const SignUp = props => {
   };
 
   const handleSignUp = async () => {
+    history.push('/sign-in')
     let response = await fetch('http://localhost:8001/user/student_signup',
       {
         method: 'POST',
@@ -194,14 +195,13 @@ const SignUp = props => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username : formState.values.email,
+          username: formState.values.email,
           first_name: formState.values.firstName,
-          last_name : formState.values.lastName,
+          last_name: formState.values.lastName,
           password: formState.values.password
         })
       })
-      console.log(response.json())
-    history.push('/sign-in');
+    console.log(response)
   };
 
   const hasError = field =>
@@ -370,6 +370,7 @@ const SignUp = props => {
                 >
                   Sign up now
                 </Button>
+
                 <Typography
                   color="textSecondary"
                   variant="body1"

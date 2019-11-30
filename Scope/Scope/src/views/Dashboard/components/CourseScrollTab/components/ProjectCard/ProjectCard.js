@@ -27,11 +27,19 @@ const useStyles = makeStyles({
 });
 
 
+
+
 const ProjectCard = (props) => {
     const classes = useStyles();
 
+    const directDetail = () => {
+        props.history.push('/project-detail', {
+            project_id: props.project.project_id,
+        })
+    }
+
     return (
-        <Card className={classes.card} onClick={()=>{
+        <Card className={classes.card} onClick={() => {
             props.onChangeProject(props.project.project_id)
         }}>
             <CardActionArea>
@@ -45,12 +53,12 @@ const ProjectCard = (props) => {
                         {props.project.project_name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                       {props.project.project_description}
+                        {props.project.project_description}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={directDetail}>
                     More
         </Button>
                 <Button size="small" color="primary" variant="contained">

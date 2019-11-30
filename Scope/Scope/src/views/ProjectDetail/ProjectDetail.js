@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import React from 'react';
+import { ProjectCard } from '../ProjectDetail/components'
 
 
 const styles = {
-
+    cardStyle:
+    {
+        margin: 20,
+    }
 }
 
 class ProjectDetail extends React.Component {
@@ -15,8 +18,10 @@ class ProjectDetail extends React.Component {
     }
     render() {
         return (
-            <div>
-                <label>Hello World</label>
+            <div className="container">
+                <div className="project_display" style={styles.cardStyle}>
+                    <ProjectCard project_id={this.props.location.state.project_id} team_number={this.props.location.state.team_number} />
+                </div>
             </div>
         );
     }
