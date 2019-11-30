@@ -101,19 +101,19 @@ const ScrollableTabsButtonAuto = props => {
                 >
                     {/** Construct list of Team tab */}
                     {props.team_list.map((team, index) => {
-                        return <Tab label={team.team_name} value={index} {...a11yProps(index)} />
+                        return <Tab label={team.team_name} value={index} key ={index} {...a11yProps(index)} />
                     })}
                 </Tabs>
             </AppBar>
             {/** Construct list of project TabPanel */}
             {props.team_list.map((team, index) => {
-                return <TabPanel value={value} index={index}>
+                return <TabPanel value={value} key ={index} index={index}>
                     <div style={styles.content}>
                         <Grid
                             container
                             spacing={3}
                         >
-                            <TeamCard team={team} />
+                            <TeamCard team={team} history={props.history} project_id ={props.project_id}/>
                         </Grid>
                     </div>
                 </TabPanel>

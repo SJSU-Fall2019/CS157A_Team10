@@ -77,7 +77,7 @@ class UserList extends React.Component {
           }}
           value={this.state.search}
         />
-        <div clasName="user_table" style={styles.content}>
+        <div className="user_table" style={styles.content}>
           <UsersTable userList={this.state.userList} />
         </div>
       </div>

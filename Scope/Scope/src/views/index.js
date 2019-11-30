@@ -7,3 +7,5 @@ export { default as SignUp } from './SignUp';
 export { default as UserList } from './UserList';
 export { default as ProjectCreation} from './ProjectCreation';
 export { default as Milestone} from './Milestone';
+export { default as ProjectDetail} from './ProjectDetail';
+export { default as Testing} from './Testing';

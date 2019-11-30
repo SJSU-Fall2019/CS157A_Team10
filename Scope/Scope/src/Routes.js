@@ -12,7 +12,9 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView,
   ProjectCreation as ProjectCreationView,
+  ProjectDetail as ProjectDetailView,
   Milestone as MilestoneView,
+  Testing as TestingView,
 } from './views';
 
 const Routes = () => {
@@ -65,11 +67,23 @@ const Routes = () => {
         layout={MainLayout}
         path="/create-project"
       />
-            <RouteWithLayout
+      <RouteWithLayout
         component={MilestoneView}
         exact
         layout={MainLayout}
         path="/milestone"
+      />
+      <RouteWithLayout
+        component={ProjectDetailView}
+        exact
+        layout={MainLayout}
+        path="/project-detail"
+      />
+      <RouteWithLayout
+        component={TestingView}
+        exact
+        layout={MainLayout}
+        path="/testing"
       />
       <RouteWithLayout
         component={NotFoundView}

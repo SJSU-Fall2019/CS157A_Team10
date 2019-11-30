@@ -45,7 +45,7 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     let course_result = await CourseRequest.fetchStudentCourseList()
-    if (course_result.length!=0) {
+    if (course_result.length != 0) {
       this.setState(
         {
           course_list: course_result,
@@ -54,7 +54,7 @@ class Dashboard extends Component {
         })
     }
     let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
-    if (project_result.length!=0) {
+    if (project_result.length != 0) {
       this.setState(
         {
           project_list: project_result,
@@ -63,7 +63,7 @@ class Dashboard extends Component {
         })
     }
     let team_result = await TeamRequest.fetchTeam(this.state.selected_project)
-    if (team_result.length!=0) {
+    if (team_result.length != 0) {
       this.setState(
         {
           team_list: team_result || null
@@ -103,28 +103,9 @@ class Dashboard extends Component {
       <div className="Dashboard">
         <div>  <CourseScrollTab course_list={this.state.course_list}
           project_list={this.state.project_list}
+          history={this.props.history}
           onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject} /></div>
-        <div>  <TeamScrollTab team_list={this.state.team_list} /></div>
-        <div style={{ flexDirection: 'row', display: 'flex' }}>
-          <div className="Course_data">
-            <a>Course List Data</a>
-            {this.state.course_list.map((item) =>
-              <li>{item.course_name}</li>
-            )}s
-          </div>
-          <div className='Project_data'>
-            <a>Project List data</a>
-            {this.state.project_list.map((item) =>
-              <li>{item.project_name}</li>
-            )}
-          </div>
-          <div className='Team_data'>
-            <a>Team List data</a>
-            {this.state.team_list.map((item) =>
-              <li>{item.team_name} Number of Members: {item.Team_Member}</li>
-            )}
-          </div>
-        </div>
+        <div>  <TeamScrollTab team_list={this.state.team_list} history={this.props.history} project_id={this.state.selected_project} /></div>
       </div>//
 
 

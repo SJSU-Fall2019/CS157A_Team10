@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
   const project_id = req.body.project_id
   const team_number = req.body.team_number
   if (!project_id || !team_number) {
-    res.status(401).send("Project ID or Team Number is invalid")
+    return res.status(401).send("Project ID or Team Number is invalid")
   }
   var sql = 'SELECT * FROM Reviews JOIN TeamHasReviews USING (review_id) WHERE project_id =? AND team_number = ?;'
   var variable = [project_id, team_number]

@@ -11,12 +11,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import PeopleIcon from '@material-ui/icons/People';
 import Typography from '@material-ui/core/Typography';
-import { borderRight, borderLeft } from '@material-ui/system';
-
-
-// import { ProductsToolbar, ProductCard } from './components';
-// import mockData from './data';
-
 
 const useStyles = makeStyles({
     card: {
@@ -34,6 +28,13 @@ const useStyles = makeStyles({
 
 const TeamCard = (props) => {
     const classes = useStyles();
+
+    const directMilestone = () => {
+        props.history.push('/milestone', {
+            project_id: props.project_id,
+            team_number: props.team.team_number
+        })
+    }
 
     return (
         <Card className={classes.card}>
@@ -68,7 +69,7 @@ const TeamCard = (props) => {
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>
-                <Button size="small" color="primary" >
+                <Button size="small" color="primary" onClick={directMilestone}>
                     More
                 </Button>
             </CardActions>
