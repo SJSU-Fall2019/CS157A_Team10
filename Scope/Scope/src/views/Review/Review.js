@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { ReviewCard } from './components/index'
 
 
 const styles = {
-
+    cardStyle:
+    {
+        margin: 20,
+    }
 }
 
 /**
@@ -18,14 +16,17 @@ class Review extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            project_id: 1,
+            milestones: [],
         }
     }
 
     render() {
         return (
-            <div>
-               Hello World
+            <div className="container">
+                <div className="project_display" style={styles.cardStyle}>
+                    <ReviewCard  />
+                </div>
             </div>
         );
     }
