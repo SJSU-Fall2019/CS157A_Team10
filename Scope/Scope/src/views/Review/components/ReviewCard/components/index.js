@@ -1,2 +1,2 @@
 export { default as ExpansionPanel } from './ExpansionPanel';
-export { default as ReviewFitTabs } from './ReviewFixTabs';
+export { default as ReviewFixTabs  } from './ReviewFixTabs';

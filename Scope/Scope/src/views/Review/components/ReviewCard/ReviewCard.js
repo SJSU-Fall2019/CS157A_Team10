@@ -21,7 +21,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MilestoneRequest from '../../../../API/Milestone/index'
 import { fontSize } from '@material-ui/system';
 import { ExpansionPanel } from './components'
-import { ReviewFitTabs } from './components'
+import { ReviewFixTabs } from './components'
 import Button from '@material-ui/core/Button';
 
 
@@ -163,8 +163,8 @@ export default function ReviewCard(props) {
                 </Typography>
             </CardContent> */}
 
-            <ReviewFitTabs />
-            <CardActions disableSpacing>
+            <ReviewFixTabs />
+            {/* <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
@@ -186,7 +186,7 @@ export default function ReviewCard(props) {
                 <CardContent>
                         <ExpansionPanel/>
                 </CardContent>
-            </Collapse>
+            </Collapse> */}
         </Card>
     );
 }

@@ -1,1 +1,1 @@
-export { default } from './ReviewFixTabs';
+export { default} from './ReviewFixTabs';
