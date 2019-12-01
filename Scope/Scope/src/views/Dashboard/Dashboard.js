@@ -2,7 +2,7 @@ import React, { useState, Component, } from 'react';
 import CourseRequest from '../../API/Course/index';
 import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
-import { CourseScrollTab, TeamScrollTab } from './components'
+import { CourseScrollTab, TeamScrollTab } from './components';
 // Remove react-window, ScrollMenu, HorizontalScroll library later
 
 // Core Matrial UI
@@ -113,7 +113,8 @@ class Dashboard extends Component {
           project_list={this.state.project_list}
           history={this.props.history}
           onDeleteProject = {this.onDeleteProject}
-          onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject} /></div>
+          onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject} />
+          </div>
         <div>  <TeamScrollTab team_list={this.state.team_list} history={this.props.history} project_id={this.state.selected_project} /></div>
       </div>//
 

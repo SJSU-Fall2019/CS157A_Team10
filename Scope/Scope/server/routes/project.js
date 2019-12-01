@@ -50,8 +50,29 @@ router.post('/delete', function (req, res) {
   var sql = "DELETE FROM Project WHERE project_id = ?;"
   connection.query(sql, project_id, function (err, result) {
     if (err) throw err
+  })
+  sql = "DELETE FROM CourseHasProjects WHERE project_id = ?"
+  connection.query(sql, project_id, function (err, result) {
+    if (err) throw err
+  })
+  sql = "DELETE FROM ProjectHasMilestones WHERE project_id = ?"
+  connection.query(sql, project_id, function (err, result) {
+    if (err) throw err
+  })
+  sql = "DELETE FROM StudentHasProjects WHERE project_id = ?"
+  connection.query(sql, project_id, function (err, result) {
+    if (err) throw err
+  })
+  sql = "DELETE FROM Team WHERE project_id = ?"
+  connection.query(sql, project_id, function (err, result) {
+    if (err) throw err
+  })
+  sql = "DELETE FROM TeamHasReviews WHERE project_id = ?"
+  connection.query(sql, project_id, function (err, result) {
+    if (err) throw err
     res.send(result)
   })
+
 
 })
 module.exports = router;
