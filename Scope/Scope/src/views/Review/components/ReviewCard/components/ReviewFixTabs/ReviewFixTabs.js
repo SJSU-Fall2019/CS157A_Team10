@@ -7,6 +7,15 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
+
+import Avatar from '@material-ui/core/Avatar';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+
+
 import { ExpansionPanel } from './components/index';
 import TeamRequest from '../../../../../../API/Team/index';
 import ReviewRequest from '../../../../../../API/Review/index';
@@ -48,6 +57,10 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         width: '100%',
     },
+    subTitle: {
+        padding: 10,
+        fontWeight: 300,
+    }
 }));
 
 export default function FullWidthTabs(props) {
@@ -77,7 +90,7 @@ export default function FullWidthTabs(props) {
             result = await TeamRequest.fetchTeamMember(props.project_id, props.team_number)
             setTeamMembers(result)
         }
-        if (myReview == null || otherReview == null) {
+        if (myReview == null) {
             getReviewInfo()
         }
     });
@@ -106,8 +119,20 @@ export default function FullWidthTabs(props) {
                 <TabPanel value={value} index={0} dir={theme.direction}>
                     {team_members != null ? team_members.map((t) => {
                         return <div key={t.student_id}>
-                            <div>{t.student_firstname}</div>
-                            <ExpansionPanel key={t.student_id} project_id ={props.project_id} team_number ={props.team_number} myReview={myReview} />
+                            <Typography className={classes.subTitle} variant="h4" component="h4">
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <AccountCircle />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    {/* <ListItemText primary="Course Name" /> */}
+                                    Reviewer - {t.student_firstname} {t.student_lastname}
+                                </ListItem>
+                            </Typography>
+                            <Divider />
+                            <ExpansionPanel key={t.student_id} reviewer_id = {t.student_id} project_id={props.project_id} team_number={props.team_number} myReview={myReview} />
+                            <Divider />
                         </div>
                     }) : null}
                     {/* Item One */}

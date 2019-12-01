@@ -28,6 +28,24 @@ router.post('/info', function (req, res, next) {
 });
 
 /**GET Review listing based on Project ID and Team number */
+router.post('/specific', function (req, res, next) {
+  const project_id = req.body.project_id
+  const team_number = req.body.team_number
+  const reviewer_id = req.body.reviewer_id
+  const reviewee_id = jwt.decode(req.headers.auth_token, key)._id
+  const milestone_number = req.body.milestone_number
+  if (!project_id || !student_id) {
+    return res.status(401).send("Project ID or Team Number is invalid")
+  }
+  var sql = 'SELECT * FROM Reviews JOIN TeamHasReviews USING (review_id) WHERE project_id = ? AND team_number = ? AND reviewer =? AND reviewee =? AND milestone_number = ?;'
+  var variable = [project_id, team_number, reviewer_id, reviewee_id, milestone_number]
+  connection.query(sql, variable, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+});
+
+/**GET Review listing based on Project ID and Team number */
 router.post('/', function (req, res, next) {
   const project_id = req.body.project_id
   const team_number = req.body.team_number

@@ -52,6 +52,26 @@ class ReviewRequest {
         let responseJson = await response.json();
         return responseJson
     }
+
+    static async fetchSpecificReview(project_id, team_number, reviewer_id, milestone_number) {
+        let response = await fetch('http://localhost:8001/review/specific',
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    auth_token: window.sessionStorage.getItem('auth_token')
+                },
+                body: JSON.stringify({
+                    project_id: project_id,
+                    team_number: team_number,
+                    reviewer_id : reviewer_id,
+                    milestone_number: milestone_number
+                })
+            })
+        let responseJson = await response.json();
+        return responseJson
+    }
 }
 
 export default ReviewRequest
