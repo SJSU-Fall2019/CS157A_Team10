@@ -147,7 +147,6 @@ export default function ReviewCard(props) {
             }}>REVIEW</Button> */}
             {/* <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {/* {getCourseName} */}
                 </Typography>
             </CardContent> */}
 
