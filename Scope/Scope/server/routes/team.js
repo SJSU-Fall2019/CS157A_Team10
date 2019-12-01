@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql')
+var mysql = require('mysql');
+const key = require('../key');
+var jwt = require('jsonwebtoken');
 var connection = mysql.createConnection(
   {
     host: 'localhost',
@@ -29,6 +31,33 @@ router.post('/project-team', function (req, res) {
   })
 })
 
+/**
+ * GET Team Number from Student_id and project_id
+ * Project
+ */
+router.post('/myProject', function (req, res) {
+  var course_id = req.body.course_id;
+  var token = req.headers.auth_token;
+  if (!token) {
+    res.status(401).send("Access Denied")
+  }
+  try {
+    var student_id = jwt.decode(req.headers.auth_token, key)._id
+  } catch (err) {
+    throw err
+  }
+  if (!student_id) {
+    res.status(401).send("Missing Project ID")
+  }
+  var varibale = [student_id, course_id]
+  // Update the SQL Table 
+  var sql = "SELECT * FROM CourseHasProjects JOIN StudentHasTeams USING (project_id) JOIN Team USING (project_id , team_number) WHERE student_id = ? AND course_id = ?;"
+  connection.query(sql, varibale, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
+
 
 /**
  * GET Team Members info
@@ -39,7 +68,7 @@ router.post('/member', function (req, res) {
   var team_number = req.body.team_number;
   if (!project_id || !team_number) {
     res.status(401).send("Missing Information")
-  } 
+  }
   var sql = "SELECT student_id, project_id, team_number, student_username, student_firstname, student_lastname, student_email FROM StudentHasTeams JOIN Student USING(student_id) WHERE project_Id=? AND team_number=? ; "
   var varibale = [project_id, team_number]
   connection.query(sql, varibale, function (err, result) {

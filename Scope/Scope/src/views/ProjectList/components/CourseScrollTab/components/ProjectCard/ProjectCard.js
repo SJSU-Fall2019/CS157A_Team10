@@ -20,11 +20,25 @@ const useStyles = makeStyles({
     media: {
         height: 140,
     },
+    subTitle: {
+        padding: 20,
+        fontWeight: 300,
+    }
 });
+
+
 
 
 const ProjectCard = (props) => {
     const classes = useStyles();
+
+    const directMilestone = () => {
+        props.history.push('/milestone', {
+            project_id: props.project.project_id,
+            team_number: props.project.team_number
+        })
+    }
+    console.log(props.project)
 
     return (
         <Card className={classes.card}>
@@ -35,21 +49,24 @@ const ProjectCard = (props) => {
                     title="Project Title"
                 />
                 <CardContent>
+                    <Typography className={classes.subTitle} align="right" gutterBottom variant="h5" component="h2">
+                        {/* {props.project.project_name} */}
+                        Team # {props.project.team_number}
+                    </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {props.project.project_name}
-          </Typography>
+                        {/* {props.project.project_name} */}
+                        Project Name {props.project.teamProject_name}
+                    </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                       {props.project.project_description}
-          </Typography>
+                        {/* {props.project.project_description} */}
+                        Project Description : {props.project.teamProject_description}
+                    </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
+            <CardActions align="right">
+                <Button size="small" color="primary" onClick={directMilestone}>
                     More
-        </Button>
-                <Button size="small" color="primary" variant="contained">
-                    Delete
-        </Button>
+            </Button>
             </CardActions>
         </Card>
     );

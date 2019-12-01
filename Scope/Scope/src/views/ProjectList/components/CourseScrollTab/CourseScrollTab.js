@@ -111,8 +111,7 @@ const ScrollableTabsButtonAuto = (props) => {
                                     md={6}
                                     xs={12}
                                 >
-                                    <ProjectCard project={p} onChangeProject={props.onChangeProject} 
-                                    onDeleteProject={props.onDeleteProject} history={props.history}/>
+                                    <ProjectCard project={p}onChangeProject={props.onChangeProject}  history={props.history}/>
                                 </Grid>
                             ))}
                         </Grid>

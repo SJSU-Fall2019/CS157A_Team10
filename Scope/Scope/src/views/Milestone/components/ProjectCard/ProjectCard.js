@@ -72,21 +72,18 @@ export default function ProjectCard(props) {
             return milestones[0].project_name
         }
     }
-
     function getCourseName() {
         if (milestones != null) {
             return milestones[0].course_name
         }
     }
-
     function getMilestone() {
         if (milestones != null) {
             return <div><ExpansionPanel milestones={milestones} /></div>
         }
     }
-
     const directReview = () => {
-        props.history.push('/testing', {
+        props.history.push('/review', {
             project_id: props.project_id,
             team_number: props.team_number
         })

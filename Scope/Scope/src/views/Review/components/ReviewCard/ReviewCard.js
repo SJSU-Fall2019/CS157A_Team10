@@ -18,13 +18,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import MilestoneRequest from '../../../../API/Milestone/index'
 import { fontSize } from '@material-ui/system';
 import { ExpansionPanel } from './components'
 import { ReviewFixTabs } from './components'
 import Button from '@material-ui/core/Button';
-
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -34,6 +31,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import Divider from '@material-ui/core/Divider';
+import ReviewRequest from '../../../../API/Review';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -68,53 +66,43 @@ const useStyles = makeStyles(theme => ({
 export default function ReviewCard(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(true);
-    const [milestones, setMilestones] = React.useState(null);
+    const [reviewCard, setReviewCard] = React.useState(null);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
     useEffect(() => {
-        async function getMilestone() {
+        async function getReviewInfo() {
             // GET project_id from props.location.state.project_id passed from the ProjectCard Component
-            const result = await MilestoneRequest.fetchMilestone(props.project_id)
-            setMilestones(result)
+            const result = await ReviewRequest.fetchReviewInfo(props.project_id, props.team_number)
+            setReviewCard(result)
+            console.log(result)
         }
-        if (milestones == null) {
-            getMilestone()
+        if (reviewCard == null) {
+            getReviewInfo()
         }
     });
 
-    function getDescription() {
-        if (milestones != null) {
-            return milestones[0].project_description
-        }
-    }
-
-    function getProjectTitle() {
-        if (milestones != null) {
-            return milestones[0].project_name
-        }
-    }
+    // function getProjectTitle() {
+    //     if (milestones != null) {
+    //         return milestones[0].project_name
+    //     }
+    // }
 
     function getCourseName() {
-        if (milestones != null) {
-            return milestones[0].course_name
+        if (reviewCard != null) {
+            return reviewCard[0].course_name 
         }
     }
 
-    function getMilestone() {
-        if (milestones != null) {
-            return <div><ExpansionPanel milestones={milestones} /></div>
+    function getStudentName() {
+        if (reviewCard != null) {
+            return reviewCard[0].student_firstname + " " + reviewCard[0].student_lastname
         }
     }
 
-    const directReview = () => {
-        props.history.push('/testing', {
-            project_id: props.project_id,
-            team_number: props.team_number
-        })
-    }
+
     return (
         <Card className={classes.card}>
             <Typography className={classes.subTitle} variant="h3" component="h3">
@@ -128,7 +116,7 @@ export default function ReviewCard(props) {
                             <AccountCircle />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Student Name" />
+                    <ListItemText primary={getStudentName()} />
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem>
@@ -137,7 +125,7 @@ export default function ReviewCard(props) {
                             <LibraryBooks />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Course Name" />
+                    <ListItemText primary={getCourseName()} />
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem>
@@ -146,7 +134,7 @@ export default function ReviewCard(props) {
                             <Group />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Team Number"/>
+                    <ListItemText primary={"Team #"+ props.team_number} />
                 </ListItem>
                 <Divider variant="inset" component="li" />
             </List>
@@ -159,7 +147,7 @@ export default function ReviewCard(props) {
             }}>REVIEW</Button> */}
             {/* <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    Course Name
+                    {/* {getCourseName} */}
                 </Typography>
             </CardContent> */}
 
@@ -184,7 +172,7 @@ export default function ReviewCard(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                        <ExpansionPanel/>
+                    <ExpansionPanel />
                 </CardContent>
             </Collapse> */}
         </Card>
