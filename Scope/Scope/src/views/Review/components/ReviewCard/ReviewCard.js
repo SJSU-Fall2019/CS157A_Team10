@@ -8,6 +8,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Group from '@material-ui/icons/Group';
+import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
@@ -18,6 +21,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MilestoneRequest from '../../../../API/Milestone/index'
 import { fontSize } from '@material-ui/system';
 import { ExpansionPanel } from './components'
+import { ReviewFixTabs } from './components'
 import Button from '@material-ui/core/Button';
 
 
@@ -121,7 +125,7 @@ export default function ReviewCard(props) {
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar>
-                            <ImageIcon />
+                            <AccountCircle />
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary="Student Name" />
@@ -130,7 +134,7 @@ export default function ReviewCard(props) {
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar>
-                            <WorkIcon />
+                            <LibraryBooks />
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary="Course Name" />
@@ -139,28 +143,28 @@ export default function ReviewCard(props) {
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar>
-                            <BeachAccessIcon />
+                            <Group />
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary="Team Number"/>
                 </ListItem>
                 <Divider variant="inset" component="li" />
             </List>
-
-
-            <CardHeader
+            {/* <CardHeader
                 title= 'Rivew '
                 subheader="Subheader"
-            />
+            /> */}
             {/* <Button variant="contained" style={{ marginLeft: 1000, marginTop: -80 }} onClick={() => {
                 directReview()
             }}>REVIEW</Button> */}
-            <CardContent>
+            {/* <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
                     Course Name
                 </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
+            </CardContent> */}
+
+            <ReviewFixTabs />
+            {/* <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
@@ -182,7 +186,7 @@ export default function ReviewCard(props) {
                 <CardContent>
                         <ExpansionPanel/>
                 </CardContent>
-            </Collapse>
+            </Collapse> */}
         </Card>
     );
 }

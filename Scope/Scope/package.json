@@ -22,6 +22,7 @@
     "react-perfect-scrollbar": "^1.5.3",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "react-swipeable-views": "^0.13.3",
     "tabs": "^0.2.0",
     "uuid": "^3.3.3",
     "validate-js": "^2.0.1",
@@ -34,7 +35,7 @@
     "eject": "react-scripts eject",
     "server": "cd server && node app.js",
     "client": "npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\"" 
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
     "extends": "react-app"
