@@ -13,6 +13,21 @@ var connection = mysql.createConnection(
 )
 
 /**GET Review listing based on Project ID and Team number */
+router.post('/info', function (req, res, next) {
+  const project_id = req.body.project_id
+  const student_id = jwt.decode(req.headers.auth_token, key)._id
+  if (!project_id || !student_id) {
+    return res.status(401).send("Project ID or Team Number is invalid")
+  }
+  var sql = 'SELECT course_name, student_firstname, student_lastname FROM CourseHasProjects JOIN Course USING(course_id), Student WHERE project_id = ? AND student_id = ?'
+  var variable = [project_id, student_id]
+  connection.query(sql, variable, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+});
+
+/**GET Review listing based on Project ID and Team number */
 router.post('/', function (req, res, next) {
   const project_id = req.body.project_id
   const team_number = req.body.team_number
