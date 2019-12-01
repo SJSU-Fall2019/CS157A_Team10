@@ -5,6 +5,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Avatar from '@material-ui/core/Avatar';
+import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,12 +14,13 @@ const useStyles = makeStyles(theme => ({
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
-        flexBasis: '33.33%',
+        flexBasis: '16%',
         flexShrink: 0,
     },
     secondaryHeading: {
         fontSize: theme.typography.pxToRem(15),
         color: theme.palette.text.secondary,
+        flexBasis: '40%',
     },
 }));
 
@@ -37,8 +40,13 @@ export default function ControlledExpansionPanels() {
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography className={classes.heading}>General settings</Typography>
-                    <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
+                    <Typography className={classes.heading}>Milestone 1</Typography>
+                    <Typography className={classes.secondaryHeading}>Milestone Title goes Here</Typography>
+                    <Typography className={classes.secondaryHeading}>Meet Expectations</Typography>
+                    {/* <Avatar>
+                        <CheckCircleOutline />
+                    </Avatar> */}
+                    <CheckCircleOutline />
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
@@ -53,10 +61,10 @@ export default function ControlledExpansionPanels() {
                     aria-controls="panel2bh-content"
                     id="panel2bh-header"
                 >
-                    <Typography className={classes.heading}>Users</Typography>
-                    <Typography className={classes.secondaryHeading}>
-                        You are currently not an owner
-          </Typography>
+                    <Typography className={classes.heading}>Milestone 2</Typography>
+                    <Typography className={classes.secondaryHeading}>Milestone Title goes Here</Typography>
+                    <Typography className={classes.secondaryHeading}>Excel Expectations</Typography>
+                    <CheckCircleOutline />
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
@@ -71,10 +79,10 @@ export default function ControlledExpansionPanels() {
                     aria-controls="panel3bh-content"
                     id="panel3bh-header"
                 >
-                    <Typography className={classes.heading}>Advanced settings</Typography>
-                    <Typography className={classes.secondaryHeading}>
-                        Filtering has been entirely disabled for whole web server
-          </Typography>
+                    <Typography className={classes.heading}>Milestone 3</Typography>
+                    <Typography className={classes.secondaryHeading}>Milestone Title goes Here</Typography>
+                    <Typography className={classes.secondaryHeading}>Excel Expectations</Typography>
+                    <CheckCircleOutline />
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
@@ -83,21 +91,21 @@ export default function ControlledExpansionPanels() {
           </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <ExpansionPanel expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+            {/* <ExpansionPanel expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel4bh-content"
                     id="panel4bh-header"
                 >
-                    <Typography className={classes.heading}>Personal data</Typography>
+                    <Typography className={classes.heading}>Milestone 4</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
                         Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
                         vitae egestas augue. Duis vel est augue.
-          </Typography>
+                </Typography>
                 </ExpansionPanelDetails>
-            </ExpansionPanel>
+            </ExpansionPanel> */}
         </div>
     );
 }

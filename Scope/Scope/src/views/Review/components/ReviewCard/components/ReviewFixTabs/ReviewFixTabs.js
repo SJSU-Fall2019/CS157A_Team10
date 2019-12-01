@@ -7,6 +7,14 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
+
+import Avatar from '@material-ui/core/Avatar';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+
 
 import { ExpansionPanel } from './components/index';
 
@@ -46,6 +54,10 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         width: '100%',
     },
+    subTitle: {
+        padding: 10,
+        fontWeight: 300,
+    }
 }));
 
 export default function FullWidthTabs() {
@@ -82,8 +94,32 @@ export default function FullWidthTabs() {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={value} index={0} dir={theme.direction}>
+                    <Typography className={classes.subTitle} variant="h4" component="h4">
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <AccountCircle />
+                                </Avatar>
+                            </ListItemAvatar>
+                            {/* <ListItemText primary="Course Name" /> */}
+                            Reviewer - Student Name
+                        </ListItem>
+                    </Typography>
+                    <Divider />
                     <ExpansionPanel />
+                    <Divider />
 
+                    <Typography className={classes.subTitle} variant="h4" component="h4">
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <AccountCircle />
+                                </Avatar>
+                            </ListItemAvatar>
+                            {/* <ListItemText primary="Course Name" /> */}
+                            Reviewer - Student Name
+                        </ListItem>
+                    </Typography>
                     <ExpansionPanel />
                     {/* Item One */}
                 </TabPanel>
