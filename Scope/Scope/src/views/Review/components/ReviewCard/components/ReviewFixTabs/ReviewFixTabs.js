@@ -124,10 +124,34 @@ export default function FullWidthTabs() {
                     {/* Item One */}
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
+                    <Typography className={classes.subTitle} variant="h4" component="h4">
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <AccountCircle />
+                                </Avatar>
+                            </ListItemAvatar>
+                            {/* <ListItemText primary="Course Name" /> */}
+                            Review - Student Name
+                        </ListItem>
+                    </Typography>
+                    <Divider />
                     <ExpansionPanel />
+                    <Divider />
 
+                    <Typography className={classes.subTitle} variant="h4" component="h4">
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <AccountCircle />
+                                </Avatar>
+                            </ListItemAvatar>
+                            {/* <ListItemText primary="Course Name" /> */}
+                            Review - Student Name
+                        </ListItem>
+                    </Typography>
                     <ExpansionPanel />
-                    {/* Item Two */}
+                    {/* Item One */}
                 </TabPanel>
             </SwipeableViews>
         </div>
