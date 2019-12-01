@@ -7,7 +7,7 @@ import { SearchInput } from '../../components';
 import CourseRequest from '../../API/Course/index';
 import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
-import { CourseScrollTab, TeamScrollTab } from './components'
+import { CourseScrollTab} from './components'
 
 // import { ProductsToolbar, ProductCard } from './components';
 import { ProjectToolbar, ProjectCard, CourseTab } from './components';
