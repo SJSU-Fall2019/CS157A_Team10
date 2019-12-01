@@ -1,10 +1,11 @@
-import React from 'react';
+import React , {useEffect }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MilestoneRequest from '../../../../../../../../API/Milestone/index'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -21,14 +22,42 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function ControlledExpansionPanels() {
+export default function ControlledExpansionPanels(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    const [milestone, setMilestone] = React.useState(null);
 
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    useEffect(() => {
+        async function getMilestone() {
+            // GET project_id from props.location.state.project_id passed from the ProjectCard Component
+            const result = await MilestoneRequest.fetchMilestone(props.project_id)
+            setMilestone(result)
+            console.log(result)
+        }
+        if (milestone == null) {
+            getMilestone()
+        }
+    });
+
+    function getMilestone(index)
+    {
+        if(milestone !=null)
+        {
+            return milestone[0].milestone_number
+        }
+    }
+
+    function getMilestoneTitle(index)
+    {
+        if(milestone !=null)
+        {
+            return milestone[0].milestone_title
+        }
+    }
     return (
         <div className={classes.root}>
             <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -37,8 +66,8 @@ export default function ControlledExpansionPanels() {
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography className={classes.heading}>General settings</Typography>
-                    <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
+<Typography className={classes.heading}>{"Milestone # " +  getMilestone(0)}</Typography>
+    <Typography className={classes.secondaryHeading}>{getMilestoneTitle(0)}</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>

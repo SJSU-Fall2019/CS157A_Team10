@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -7,8 +7,10 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
 import { ExpansionPanel } from './components/index';
+import TeamRequest from '../../../../../../API/Team/index';
+import ReviewRequest from '../../../../../../API/Review/index';
+import MilestoneRequest from '../../../../../../API/Milestone/index';
 
 
 function TabPanel(props) {
@@ -48,10 +50,14 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function FullWidthTabs() {
+export default function FullWidthTabs(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const [myReview, setMyReview] = React.useState(null);
+    const [otherReview, setOtherReview] = React.useState(null);
+    const [team_members, setTeamMembers] = React.useState(null);
+    const [milestone, setMilestone] = React.useState(null);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -60,6 +66,22 @@ export default function FullWidthTabs() {
     const handleChangeIndex = index => {
         setValue(index);
     };
+
+    useEffect(() => {
+        async function getReviewInfo() {
+            // GET project_id from props.location.state.project_id passed from the ProjectCard Component
+            var result = await ReviewRequest.fetchMyReview(props.project_id, props.team_number)
+            setMyReview(result)
+            result = await ReviewRequest.fetchOtherReview(props.project_id, props.team_number)
+            setOtherReview(result)
+            result = await TeamRequest.fetchTeamMember(props.project_id, props.team_number)
+            setTeamMembers(result)
+        }
+        if (myReview == null || otherReview == null) {
+            getReviewInfo()
+        }
+    });
+
 
     return (
         <div className={classes.root}>
@@ -82,15 +104,18 @@ export default function FullWidthTabs() {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                    <ExpansionPanel />
-
-                    <ExpansionPanel />
+                    {team_members != null ? team_members.map((t) => {
+                        return <div key={t.student_id}>
+                            <div>{t.student_firstname}</div>
+                            <ExpansionPanel key={t.student_id} project_id ={props.project_id} team_number ={props.team_number} myReview={myReview} />
+                        </div>
+                    }) : null}
                     {/* Item One */}
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    <ExpansionPanel />
-
-                    <ExpansionPanel />
+                    {/* {team_members != null ? team_members.map((t) => {
+                        return <ExpansionPanel key={t.student_id} />
+                    }) : null} */}
                     {/* Item Two */}
                 </TabPanel>
             </SwipeableViews>
