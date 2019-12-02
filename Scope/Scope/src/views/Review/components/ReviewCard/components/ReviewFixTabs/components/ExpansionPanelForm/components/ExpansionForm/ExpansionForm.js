@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -11,6 +12,11 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
         width: 1000,
+    },
+    saveReviewBtn:{
+        backgroundColor: '#2196f3',
+        padding: 10,
+        marginLeft:900,
     },
 }));
 
@@ -24,88 +30,7 @@ export default function ExpansionForm() {
 
     return (
         <form className={classes.container} noValidate autoComplete="off">
-            {/* <div>
-                <TextField
-                    id="standard-multiline-flexible"
-                    label="Multiline"
-                    multiline
-                    rowsMax="4"
-                    value={value}
-                    onChange={handleChange}
-                    className={classes.textField}
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-textarea"
-                    label="Multiline Placeholder"
-                    placeholder="Placeholder"
-                    multiline
-                    className={classes.textField}
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-multiline-static"
-                    label="Multiline"
-                    multiline
-                    rows="4"
-                    defaultValue="Default Value"
-                    className={classes.textField}
-                    margin="normal"
-                />
-            </div>
             <div>
-                <TextField
-                    id="filled-multiline-flexible"
-                    label="Multiline"
-                    multiline
-                    rowsMax="4"
-                    value={value}
-                    onChange={handleChange}
-                    className={classes.textField}
-                    margin="normal"
-                    variant="filled"
-                />
-                <TextField
-                    id="filled-textarea"
-                    label="Multiline Placeholder"
-                    placeholder="Placeholder"
-                    multiline
-                    className={classes.textField}
-                    margin="normal"
-                    variant="filled"
-                />
-                <TextField
-                    id="filled-multiline-static"
-                    label="Multiline"
-                    multiline
-                    rows="4"
-                    defaultValue="Default Value"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="filled"
-                />
-            </div> */}
-            <div>
-                {/* <TextField
-                    id="outlined-multiline-flexible"
-                    label="Multiline"
-                    multiline
-                    rowsMax="4"
-                    value={value}
-                    onChange={handleChange}
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <TextField
-                    id="outlined-textarea"
-                    label="Multiline Placeholder"
-                    placeholder="Placeholder"
-                    multiline
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                /> */}
                 <TextField
                     id="outlined-multiline-static"
                     label="Enter Your Review Here"
@@ -116,6 +41,11 @@ export default function ExpansionForm() {
                     margin="normal"
                     variant="outlined"
                 />
+                <div >
+                    <Button className={classes.saveReviewBtn} variant="contained" color="primary">
+                        Save Review
+                    </Button>
+                </div>
             </div>
         </form>
     );
