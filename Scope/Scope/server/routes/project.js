@@ -40,6 +40,27 @@ router.post('/course-project', function (req, res) {
 })
 
 
+
+/** POST Request Add Project */
+/** Create Project Page */
+router.post('/add-project', function (req, res) {
+  var project_title = req.body.project_title;
+  var project_description = req.body.project_description;
+
+  if (!project_title || !project_description) {
+    return res.status(401).send("Missing Information")
+  }
+
+  var sql = "INSERT INTO Project (project_name, project_description) VALUES (?, ?)"
+  var projectTable = [project_title, project_description]
+  connection.query(sql, projectTable, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+
+})
+
+
 /** POST Request Delete Project */
 /** ProjectList Page */
 router.post('/delete', function (req, res) {
@@ -72,7 +93,6 @@ router.post('/delete', function (req, res) {
     if (err) throw err
     res.send(result)
   })
-
 
 })
 module.exports = router;

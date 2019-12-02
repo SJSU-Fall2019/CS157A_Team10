@@ -11,6 +11,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import PeopleIcon from '@material-ui/icons/People';
 import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TeamRequest from '../../../../../../API/Team/index';
 
 const useStyles = makeStyles({
     card: {
@@ -28,13 +34,25 @@ const useStyles = makeStyles({
 
 const TeamCard = (props) => {
     const classes = useStyles();
-
     const directMilestone = () => {
         props.history.push('/milestone', {
             project_id: props.project_id,
             team_number: props.team.team_number
         })
     }
+    /** JOIN TEAM API Request */
+    const joinTeam = () => {
+        TeamRequest.JoinTeam(props.project_id, props.team.team_number)
+        return true;
+    }
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+        joinTeam();
+    };
 
     return (
         <Card className={classes.card}>
@@ -51,11 +69,11 @@ const TeamCard = (props) => {
                     </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
                         {/* {props.project.project_name} */}
-                        Project Name {props.team.teamProject_name}
+                        {props.team.teamProject_name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {/* {props.project.project_description} */}
-                        Project Description : {props.team.teamProject_description}
+                        Project Description : {props.team.teamProject_description.slice(0,50) + " ..."}
                     </Typography>
                 </CardContent>
             </CardActionArea>
@@ -63,7 +81,7 @@ const TeamCard = (props) => {
                 {/* <Button size="small" color="primary">
                     Team Members
                 </Button> */}
-                <IconButton aria-label="add to favorites">
+                <IconButton aria-label="add to favorites" onClick={handleClickOpen}>
                     <PeopleIcon />
                 </IconButton>
                 <IconButton aria-label="share">
@@ -73,6 +91,27 @@ const TeamCard = (props) => {
                     More
                 </Button>
             </CardActions>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title" style={{ alignSelf: 'center' }}>{"JOIN TEAM #" + props.team.team_number}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Later
+          </Button>
+                    <Button onClick={handleClose} color="primary" autoFocus>
+                        Yes
+          </Button>
+                </DialogActions>
+            </Dialog>
         </Card>
     );
 }

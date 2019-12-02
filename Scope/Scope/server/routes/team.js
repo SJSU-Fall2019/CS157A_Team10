@@ -60,6 +60,35 @@ router.post('/myProject', function (req, res) {
 
 
 /**
+ * GET Team Number from Student_id and project_id
+ * Project
+ */
+router.post('/join', function (req, res) {
+  var project_id = req.body.project_id;
+  var team_number = req.body.team_number;
+  var token = req.headers.auth_token;
+  
+  if (!token) {
+    res.status(401).send("Access Denied")
+  }
+  try {
+    var student_id = jwt.decode(req.headers.auth_token, key)._id
+  } catch (err) {
+    throw err
+  }
+  if (!student_id) {
+    res.status(401).send("Missing Project ID")
+  }
+  var varibale = [project_id, team_number, student_id]
+  // Update the SQL Table 
+  var sql = "INSERT INTO StudentHasTeams (project_id, team_number, student_id) VALUES (?, ?, ?);"
+  connection.query(sql, varibale, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
+
+/**
  * GET Team Members info
  * Review
  */
@@ -77,4 +106,26 @@ router.post('/member', function (req, res) {
   })
 })
 
+
+/**
+ * GET Team Members info
+ * Review
+ */
+router.post('/add-team', function (req, res) {
+  var project_id = req.body.project_id;
+  var team_number = req.body.team_number;
+  var team_name = req.body.team_name;
+  var team_ProjectName = req.body.team_ProjectName;
+  var team_ProjectDescription = req.body.team_ProjectDescription;
+
+  if (!project_id || !team_number) {
+    res.status(401).send("Missing Information")
+  }
+  var sql = "INSERT INTO Team (project_id, team_number, team_name, team_ProjectName, team_ProjectDescription) VALUES (?,?,?,?,?)"
+  var varibale = [project_id, team_number, team_name, team_ProjectName, team_ProjectDescription];
+  connection.query(sql, varibale, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
 module.exports = router;

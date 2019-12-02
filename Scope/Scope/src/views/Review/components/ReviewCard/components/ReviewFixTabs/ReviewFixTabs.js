@@ -16,7 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 
-import { ExpansionPanel } from './components/index';
+import { ExpansionPanel, OtherExpansionPanel } from './components/index';
 import TeamRequest from '../../../../../../API/Team/index';
 import ReviewRequest from '../../../../../../API/Review/index';
 import MilestoneRequest from '../../../../../../API/Milestone/index';
@@ -131,17 +131,31 @@ export default function FullWidthTabs(props) {
                                 </ListItem>
                             </Typography>
                             <Divider />
-                            <ExpansionPanel key={t.student_id} reviewer_id = {t.student_id} project_id={props.project_id} team_number={props.team_number} myReview={myReview} />
+                            <ExpansionPanel key={t.student_id} reviewer_id={t.student_id} project_id={props.project_id} team_number={props.team_number} myReview={myReview} />
                             <Divider />
                         </div>
                     }) : null}
                     {/* Item One */}
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    {/* {team_members != null ? team_members.map((t) => {
-                        return <ExpansionPanel key={t.student_id} />
-                    }) : null} */}
-                    {/* Item Two */}
+                    {team_members != null ? team_members.map((t) => {
+                        return <div key={t.student_id}>
+                            <Typography className={classes.subTitle} variant="h4" component="h4">
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <AccountCircle />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    {/* <ListItemText primary="Course Name" /> */}
+                                    Reviewee - {t.student_firstname} {t.student_lastname}
+                                </ListItem>
+                            </Typography>
+                            <Divider />
+                            <OtherExpansionPanel  key={t.student_id} reviewee_id={t.student_id} project_id={props.project_id} team_number={props.team_number} otherReview={otherReview} />
+                            <Divider />
+                        </div>
+                    }) : null}
                 </TabPanel>
             </SwipeableViews>
         </div>
