@@ -16,7 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 
-import { ExpansionPanel } from './components/index';
+import { ExpansionPanel, ExpansionPanelForm } from './components/index';
 
 
 function TabPanel(props) {
@@ -136,7 +136,7 @@ export default function FullWidthTabs() {
                         </ListItem>
                     </Typography>
                     <Divider />
-                    <ExpansionPanel />
+                    <ExpansionPanelForm/>
                     <Divider />
 
                     <Typography className={classes.subTitle} variant="h4" component="h4">
@@ -150,7 +150,7 @@ export default function FullWidthTabs() {
                             Review - Student Name
                         </ListItem>
                     </Typography>
-                    <ExpansionPanel />
+                    <ExpansionPanelForm />
                     {/* Item One */}
                 </TabPanel>
             </SwipeableViews>
