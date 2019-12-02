@@ -38,9 +38,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProjectCreation = () => {
+const ProjectCreation = (props) => {
   const classes = useStyles();
-
+console.log(props.location.state)
   return (
     <div className={classes.root}>
       <Grid
@@ -54,7 +54,7 @@ const ProjectCreation = () => {
           xl={8}
           xs={12}
         >
-          <NewProject/>
+          <NewProject history={props.history} course_id ={props.location.state.course_id}/>
         </Grid>
       </Grid>
     </div>

@@ -70,7 +70,6 @@ class ProjectList extends React.Component {
                 })
         }
         let project_result = await TeamRequest.fetchMyProject(this.state.selected_course)
-        console.log(project_result)
         if (project_result.length != 0) {
             this.setState(
                 {

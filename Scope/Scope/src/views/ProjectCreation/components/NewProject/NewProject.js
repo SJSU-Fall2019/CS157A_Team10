@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import ProjectRequest from '../../../../API/Project/index';
+import UserRequest from '../../../../API/User/index';
+import CourseRequest from '../../../../API/Course/index';
 import {
   Card,
   CardHeader,
@@ -33,6 +36,14 @@ const NewProject = props => {
       [event.target.name]: event.target.value
     });
   };
+  console.log(props.course_id)
+  const createProject = async () => {
+    var result = await ProjectRequest.createProject(values.projectName, values.projectDescription)
+    const project_id = result.insertId;
+    result = await UserRequest.updateStudentHasProjects(project_id);
+    result = await CourseRequest.updateCourseHasProjects(props.course_id, project_id)
+    props.history.push("/dashboard")
+  }
 
   return (
     <Card
@@ -44,15 +55,31 @@ const NewProject = props => {
         noValidate
       >
         <CardHeader
-          subheader="The information can be edited"
+          // subheader="The information can be edited"
           title="Project"
         />
         <CardContent>
           <Grid
+            item
+            md={6}
+            xs={12}
+          >
+            <TextField
+              fullWidth
+              label="Project Name"
+              margin="dense"
+              name="projectName"
+              onChange={handleChange}
+              required
+              value={values.lastName}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid
             container
             spacing={3}
           >
-            <Grid
+            {/* <Grid
               item
               md={6}
               xs={12}
@@ -67,23 +94,8 @@ const NewProject = props => {
                 value={values.firstName}
                 variant="outlined"
               />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Project Name"
-                margin="dense"
-                name="projectName"
-                onChange={handleChange}
-                required
-                value={values.lastName}
-                variant="outlined"
-              />
-            </Grid>
+            </Grid> */}
+
             <Grid
               item
               md={6}
@@ -96,6 +108,7 @@ const NewProject = props => {
                 name="projectDescription"
                 multiline
                 rows='4'
+                style={{ width: 600 }}
                 onChange={handleChange}
                 required
                 value={values.email}
@@ -108,6 +121,7 @@ const NewProject = props => {
           <Button
             color="primary"
             variant="contained"
+            onClick={createProject}
           >
             Save details
           </Button>

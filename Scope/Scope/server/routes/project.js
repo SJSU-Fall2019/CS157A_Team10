@@ -44,17 +44,21 @@ router.post('/course-project', function (req, res) {
 /** POST Request Add Project */
 /** Create Project Page */
 router.post('/add-project', function (req, res) {
-  var project_title = req.body.project_title;
+  var project_name = req.body.project_name;
   var project_description = req.body.project_description;
 
-  if (!project_title || !project_description) {
+  if (!project_name || !project_description) {
     return res.status(401).send("Missing Information")
   }
 
+  console.log(project_name, project_description)
+
   var sql = "INSERT INTO Project (project_name, project_description) VALUES (?, ?)"
-  var projectTable = [project_title, project_description]
+  var projectTable = [project_name, project_description]
   connection.query(sql, projectTable, function (err, result) {
-    if (err) throw err
+    if (err) {
+      print(err)
+    }
     res.send(result)
   })
 
