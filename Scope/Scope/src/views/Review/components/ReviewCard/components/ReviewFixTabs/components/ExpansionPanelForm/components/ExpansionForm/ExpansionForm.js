@@ -3,6 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+// Materiel UI Simple Select
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
@@ -13,24 +20,66 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(1),
         width: 1000,
     },
+    selectList: {
+        // padding: 10,
+        marginLeft: 780,
+    },
     saveReviewBtn:{
-        backgroundColor: '#2196f3',
+        backgroundColor: '#0055A2',
         padding: 10,
         marginLeft:900,
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 220,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
     },
 }));
 
 export default function ExpansionForm() {
     const classes = useStyles();
     const [value, setValue] = React.useState('Controlled');
+    const [age, setAge] = React.useState('');
+    const inputLabel = React.useRef(null);
+    const [labelWidth, setLabelWidth] = React.useState(0);
+
+    React.useEffect(() => {
+        setLabelWidth(inputLabel.current.offsetWidth);
+    }, []);
 
     const handleChange = event => {
         setValue(event.target.value);
+        setAge(event.target.value);
     };
 
     return (
         <form className={classes.container} noValidate autoComplete="off">
             <div>
+                <div className={classes.selectList}>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
+                           Select Overall Rating
+                        </InputLabel>
+                        <Select
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            value={age}
+                            onChange={handleChange}
+                            labelWidth={labelWidth}
+                        >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Need Improvement</MenuItem>
+                            <MenuItem value={20}>Meet Expectations</MenuItem>
+                            <MenuItem value={30}>Exceed Expectations</MenuItem>
+                            <MenuItem value={30}>Super Exceed Expectations</MenuItem>
+                        </Select>
+                        <FormHelperText>Required</FormHelperText>
+                    </FormControl>
+                </div>
                 <TextField
                     id="outlined-multiline-static"
                     label="Enter Your Review Here"
@@ -41,6 +90,7 @@ export default function ExpansionForm() {
                     margin="normal"
                     variant="outlined"
                 />
+                <FormHelperText>Required</FormHelperText>
                 <div >
                     <Button className={classes.saveReviewBtn} variant="contained" color="primary">
                         Save Review
