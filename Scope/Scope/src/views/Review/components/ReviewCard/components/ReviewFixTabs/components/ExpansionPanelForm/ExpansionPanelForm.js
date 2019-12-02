@@ -74,6 +74,12 @@ export default function ControlledExpansionPanels(props) {
             return milestone[index].milestone_title
         }
     }
+
+    function callback()
+    {
+        props.callback()
+        setExpanded(false);
+    }
     return (
         <div className={classes.root}>
             {milestone != null ? milestone.map((milestone, index) => {
@@ -87,13 +93,10 @@ export default function ControlledExpansionPanels(props) {
                         <Typography className={classes.heading}>{"Milestone # " + getMilestone(index)}</Typography>
                         <Typography className={classes.secondaryHeading}>{getMilestoneTitle(index)}</Typography>
                         <Typography className={classes.secondaryHeading}>{getReview(index + 1) != null ? rating[getReview(index + 1).rating - 1] : "NOT YET REVIEWED"}</Typography>
-                        {/* <Avatar>
-                        <CheckCircleOutline />
-                    </Avatar> */}
-                        {getReview(index + 1) != null ? <CheckCircleOutline /> : null}
+                        {getReview(index + 1)!= null && getReview(index+1).review_description !=null ? <CheckCircleOutline /> : null}
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <ExpansionForm review_description= {getReview(index + 1) != null ? getReview(index + 1).review_description : null}/>
+                        <ExpansionForm updateForm={callback} review_id = {getReview(index + 1) != null ? getReview(index + 1).review_id : null}reviewee_id= {props.reviewee_id}review_description= {getReview(index + 1) != null ? getReview(index + 1).review_description : null} milestone_number={getMilestone(index)}/>
                         <Typography>
                         </Typography>
                         {/* {getReview(index + 1) != null ? <Rating name="read-only" style={{ marginTop: 30, marginLeft: 600 }} max={4} value={getReview(index + 1).rating} readOnly /> : null} */}

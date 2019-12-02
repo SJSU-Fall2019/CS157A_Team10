@@ -95,13 +95,32 @@ router.post('/otherReview', function (req, res, next) {
 
 /** Add a Review */
 router.post('/add_review', function (req, res) {
-  const reviewer = req.body.reviewer
+  const reviewer = jwt.decode(req.headers.auth_token, key)._id
   const reviewee = req.body.reviewee
   const rating = req.body.rating
   const review_description = req.body.review_description
+  if(!reviewer || !reviewee || !rating || !review_description)
+  {
+    return res.send("Missing Information")
+  }
   var sql = 'INSERT INTO Reviews (reviewer, reviewee, rating, review_description) VALUES (? , ? , ? , ?);'
   var variable = [reviewer, reviewee, rating, review_description]
   connection.query(sql, variable, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+});
+
+/** Update a Review */
+router.post('/update_review', function (req, res) {
+  const reviewer = jwt.decode(req.headers.auth_token, key)._id
+  const reviewee = req.body.reviewee
+  const rating = req.body.rating
+  const review_description = req.body.review_description
+  const milestone_number = req.body.milestone_number
+  const review_id = req.body.review_id
+  var sql = 'UPDATE Reviews SET milestone_number = ?, reviewer =?, reviewee =?, rating = ?, review_description=? WHERE review_id = ?'
+  connection.query(sql, [milestone_number, reviewer, reviewee, rating, review_description, review_id], function (err, result) {
     if (err) throw err
     res.send(result)
   })

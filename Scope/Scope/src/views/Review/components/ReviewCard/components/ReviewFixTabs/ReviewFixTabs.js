@@ -93,7 +93,10 @@ export default function FullWidthTabs(props) {
         }
     });
 
-
+    async function callback() {
+        const  result = await ReviewRequest.fetchOtherReview(props.project_id, props.team_number)
+        setOtherReview(result)
+    }
     return (
         <div className={classes.root}>
             <AppBar position="static" color="default">
@@ -150,7 +153,7 @@ export default function FullWidthTabs(props) {
                                 </ListItem>
                             </Typography>
                             <Divider />
-                            <ExpansionPanelForm key={t.student_id} reviewee_id={t.student_id} project_id={props.project_id} team_number={props.team_number} otherReview={otherReview} />
+                            <ExpansionPanelForm callback={callback} key={t.student_id} reviewee_id={t.student_id} project_id={props.project_id} team_number={props.team_number} otherReview={otherReview} />
                             <Divider />
                         </div>
                     }) : null}
