@@ -1,2 +1,2 @@
 export { default as ExpansionPanel } from './ExpansionPanel';
-export { default as OtherExpansionPanel } from './OtherExpansionPanel';
+export { default as ExpansionPanelForm } from './ExpansionPanelForm';

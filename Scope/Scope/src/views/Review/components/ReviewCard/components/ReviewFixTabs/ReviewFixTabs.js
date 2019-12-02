@@ -14,9 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-
-
-import { ExpansionPanel, OtherExpansionPanel } from './components/index';
+import { ExpansionPanel, ExpansionPanelForm } from './components/index';
 import TeamRequest from '../../../../../../API/Team/index';
 import ReviewRequest from '../../../../../../API/Review/index';
 import MilestoneRequest from '../../../../../../API/Milestone/index';
@@ -152,7 +150,7 @@ export default function FullWidthTabs(props) {
                                 </ListItem>
                             </Typography>
                             <Divider />
-                            <OtherExpansionPanel  key={t.student_id} reviewee_id={t.student_id} project_id={props.project_id} team_number={props.team_number} otherReview={otherReview} />
+                            <ExpansionPanelForm key={t.student_id} reviewee_id={t.student_id} project_id={props.project_id} team_number={props.team_number} otherReview={otherReview} />
                             <Divider />
                         </div>
                     }) : null}
