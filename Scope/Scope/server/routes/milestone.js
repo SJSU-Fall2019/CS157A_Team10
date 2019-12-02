@@ -31,4 +31,15 @@ router.post('/', function (req, res) {
     res.send(result)
   })
 })
+
+
+router.post('/add-milestone', function (req, res) {
+  var milestone = req.body.milestone;
+  var sql = "INSERT INTO Milestones (milestone_title, milestone_description) VALUES (?,?)"
+  var table = [milestone.milestone_title, milestone.milestone_description]
+  connection.query(sql, table, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
 module.exports = router;

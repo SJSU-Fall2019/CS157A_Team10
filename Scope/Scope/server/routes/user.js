@@ -86,6 +86,25 @@ router.post('/student_info', function (req, res) {
   })
 });
 
+router.post('/updateStudentHasProjects', function (req, res) {
+  var token = req.headers.auth_token;
+  if (!token) {
+    res.status(401).send("Access Denied")
+  }
+  try {
+    var student_id = jwt.decode(req.headers.auth_token, key)._id
+  } catch (err) {
+    throw err
+  }
+  const project_id = req.body.project_id;
+  var sql = 'INSERT INTO StudentHasProjects (student_id, project_id) VALUES (?, ?)'
+  var variable = [student_id, project_id]
+  connection.query(sql, variable, function (err, result) {
+    if (err) throw err
+    res.send(result);
+  })
+})
+
 
 /**
  * Handles Student Login request

@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import { Grid, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { ProjectCard, TeamCard } from './components';
+import Button from '@material-ui/core/Button';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -78,7 +79,13 @@ const ScrollableTabsButtonAuto = (props) => {
         <div className={classes.root}>
             <Typography className={classes.subTitle} variant="h3" component="h3">
                 Courses
-            </Typography>
+                </Typography>
+            <Button variant="contained" color="primary" style={{ marginLeft: 1000, marginTop: -90 }} className={classes.button}
+                onClick={() => {
+                    props.history.push('/create-project')
+                }}>
+                Add Project
+                </Button>
             <AppBar position="static" color="default">
                 <Tabs
                     value={value}
@@ -91,7 +98,7 @@ const ScrollableTabsButtonAuto = (props) => {
                 >
                     {/** Construct list of course Tab */}
                     {props.course_list.map((course, index) => {
-                        return <Tab label={course.course_name} value={index} key ={index} {...a11yProps(index)} />
+                        return <Tab label={course.course_name} value={index} key={index} {...a11yProps(index)} />
                     })}
                 </Tabs>
             </AppBar>
@@ -103,7 +110,7 @@ const ScrollableTabsButtonAuto = (props) => {
                             container
                             spacing={3}
                         >
-                            {props.project_list.map((p,index) => (
+                            {props.project_list.map((p, index) => (
                                 <Grid
                                     item
                                     key={index}
@@ -111,8 +118,8 @@ const ScrollableTabsButtonAuto = (props) => {
                                     md={6}
                                     xs={12}
                                 >
-                                    <ProjectCard project={p} onChangeProject={props.onChangeProject} 
-                                    onDeleteProject={props.onDeleteProject} history={props.history}/>
+                                    <ProjectCard project={p} onChangeProject={props.onChangeProject}
+                                        onDeleteProject={props.onDeleteProject} history={props.history} />
                                 </Grid>
                             ))}
                         </Grid>

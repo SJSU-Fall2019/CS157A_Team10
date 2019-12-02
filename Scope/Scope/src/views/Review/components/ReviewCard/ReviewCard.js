@@ -92,7 +92,7 @@ export default function ReviewCard(props) {
 
     function getCourseName() {
         if (reviewCard != null) {
-            return reviewCard[0].course_name 
+            return reviewCard[0].course_name
         }
     }
 
@@ -134,7 +134,7 @@ export default function ReviewCard(props) {
                             <Group />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={"Team #"+ props.team_number} />
+                    <ListItemText primary={"Team #" + props.team_number} />
                 </ListItem>
                 <Divider variant="inset" component="li" />
             </List>
@@ -150,7 +150,7 @@ export default function ReviewCard(props) {
                 </Typography>
             </CardContent> */}
 
-            <ReviewFixTabs />
+            <ReviewFixTabs project_id={props.project_id} team_number={props.team_number} />
             {/* <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />

@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MilestoneRequest from '../../../../../../../../API/Milestone/index';
+import ReviewRequest from '../../../../../../../../API/Review/index';
 import Avatar from '@material-ui/core/Avatar';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
+import Rating from '@material-ui/lab/Rating';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,88 +27,74 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function ControlledExpansionPanels() {
+const rating = ["Unsatisfactory", "Improvement needed", "Meets expectations", "Exceeds expectations"]
+
+export default function ControlledExpansionPanels(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    const [milestone, setMilestone] = React.useState(null);
 
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    useEffect(() => {
+        async function getMilestone() {
+            // GET project_id from props.location.state.project_id passed from the ProjectCard Component
+            var result = await MilestoneRequest.fetchMilestone(props.project_id)
+            setMilestone(result)
+        }
+        if (milestone == null) {
+            getMilestone()
+        }
+    });
+
+
+    function getMilestone(index) {
+        if (milestone != null) {
+            return milestone[index].milestone_number
+        }
+    }
+    function getReview(milestone_number) {
+        var review = null;
+        props.myReview.map((r) => {
+            if (r.reviewer == props.reviewer_id && r.milestone_number == milestone_number) {
+                review = r;
+            }
+        })
+        return review;
+    }
+    function getMilestoneTitle(index) {
+        if (milestone != null) {
+            return milestone[index].milestone_title
+        }
+    }
     return (
         <div className={classes.root}>
-            <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
-                >
-                    <Typography className={classes.heading}>Milestone 1</Typography>
-                    <Typography className={classes.secondaryHeading}>Milestone Title goes Here</Typography>
-                    <Typography className={classes.secondaryHeading}>Meet Expectations</Typography>
-                    {/* <Avatar>
+            {milestone != null ? milestone.map((milestone, index) => {
+                const panelName = "panel" + index + 1
+                return <ExpansionPanel expanded={expanded === panelName} key={index} onChange={handleChange(panelName)}>
+                    <ExpansionPanelSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography className={classes.heading}>{"Milestone # " + getMilestone(index)}</Typography>
+                        <Typography className={classes.secondaryHeading}>{getMilestoneTitle(index)}</Typography>
+                        <Typography className={classes.secondaryHeading}>{getReview(index + 1) != null ? rating[getReview(index + 1).rating - 1] : "NOT YET REVIEWED"}</Typography>
+                        {/* <Avatar>
                         <CheckCircleOutline />
                     </Avatar> */}
-                    <CheckCircleOutline />
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                        Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-                        maximus est, id dignissim quam.
-          </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel2bh-content"
-                    id="panel2bh-header"
-                >
-                    <Typography className={classes.heading}>Milestone 2</Typography>
-                    <Typography className={classes.secondaryHeading}>Milestone Title goes Here</Typography>
-                    <Typography className={classes.secondaryHeading}>Excel Expectations</Typography>
-                    <CheckCircleOutline />
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                        Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-                        diam eros in elit. Pellentesque convallis laoreet laoreet.
-          </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel3bh-content"
-                    id="panel3bh-header"
-                >
-                    <Typography className={classes.heading}>Milestone 3</Typography>
-                    <Typography className={classes.secondaryHeading}>Milestone Title goes Here</Typography>
-                    <Typography className={classes.secondaryHeading}>Excel Expectations</Typography>
-                    <CheckCircleOutline />
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                        Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-                        vitae egestas augue. Duis vel est augue.
-          </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            {/* <ExpansionPanel expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel4bh-content"
-                    id="panel4bh-header"
-                >
-                    <Typography className={classes.heading}>Milestone 4</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                        Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-                        vitae egestas augue. Duis vel est augue.
-                </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel> */}
+                        {getReview(index + 1) != null && getReview(index + 1).review_description != null ? <CheckCircleOutline /> : null}
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <Typography>
+                            {getReview(index + 1) != null ? getReview(index + 1).review_description : null}
+                        </Typography>
+                        {getReview(index + 1) != null ? <Rating name="read-only" style={{ marginTop: 30, marginLeft: 600 }} max={4} value={getReview(index + 1).rating} readOnly /> : null}
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+            }) : null}
         </div>
     );
 }

@@ -60,6 +60,21 @@ router.post('/student', function (req, res) {
 });
 
 
+/* GET list of courses by student id */
+router.post('/updateCourseHasProjects', function (req, res) {
+    var course_id = req.body.course_id;
+    var project_id = req.body.project_id;
+    if (!course_id || !project_id) {
+        res.status(401).send("Access Denied")
+    }
+    var sql = 'INSERT INTO CourseHasProjects (course_id, project_id) VALUES(?, ?) ';
+    var variable = [course_id, project_id]
+    connection.query(sql, variable, function (err, result) {
+        if (err) throw err
+        res.send(result);
+    })
+});
+
 
 
 

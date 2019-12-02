@@ -55,11 +55,11 @@ const ProjectCard = (props) => {
                     </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
                         {/* {props.project.project_name} */}
-                        Project Name {props.project.teamProject_name}
+                        {props.project.teamProject_name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {/* {props.project.project_description} */}
-                        Project Description : {props.project.teamProject_description}
+                        Project Description : {props.project.teamProject_description.slice(0,50) + " ..."}
                     </Typography>
                 </CardContent>
             </CardActionArea>

@@ -329,10 +329,13 @@ const SignIn = props => {
                   value={formState.values.password || ''}
                   variant="outlined"
                 />
-                <Link to={{
-                  pathname: '/dashboard',
-                  state: [{ isAuth: true }]
-                }} >
+                <Link
+                  //component={RouterLink}
+                  to={{
+                    pathname: "/dashboard",
+                  }}
+                  variant="h6"
+                >
                   <Button
                     className={classes.signInButton}
                     color="primary"
@@ -341,6 +344,7 @@ const SignIn = props => {
                     size="large"
                     type="submit"
                     variant="contained"
+                    onClick={handleSignIn}
                   >
                     Sign in
                 </Button>

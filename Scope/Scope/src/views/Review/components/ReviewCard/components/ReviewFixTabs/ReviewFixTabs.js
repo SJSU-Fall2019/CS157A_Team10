@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -14,9 +14,10 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-
-
 import { ExpansionPanel, ExpansionPanelForm } from './components/index';
+import TeamRequest from '../../../../../../API/Team/index';
+import ReviewRequest from '../../../../../../API/Review/index';
+import MilestoneRequest from '../../../../../../API/Milestone/index';
 
 
 function TabPanel(props) {
@@ -60,10 +61,14 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function FullWidthTabs() {
+export default function FullWidthTabs(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const [myReview, setMyReview] = React.useState(null);
+    const [otherReview, setOtherReview] = React.useState(null);
+    const [team_members, setTeamMembers] = React.useState(null);
+    const [milestone, setMilestone] = React.useState(null);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -73,6 +78,25 @@ export default function FullWidthTabs() {
         setValue(index);
     };
 
+    useEffect(() => {
+        async function getReviewInfo() {
+            // GET project_id from props.location.state.project_id passed from the ProjectCard Component
+            var result = await ReviewRequest.fetchMyReview(props.project_id, props.team_number)
+            setMyReview(result)
+            result = await ReviewRequest.fetchOtherReview(props.project_id, props.team_number)
+            setOtherReview(result)
+            result = await TeamRequest.fetchTeamMember(props.project_id, props.team_number)
+            setTeamMembers(result)
+        }
+        if (myReview == null) {
+            getReviewInfo()
+        }
+    });
+
+    async function callback() {
+        const  result = await ReviewRequest.fetchOtherReview(props.project_id, props.team_number)
+        setOtherReview(result)
+    }
     return (
         <div className={classes.root}>
             <AppBar position="static" color="default">
@@ -94,64 +118,45 @@ export default function FullWidthTabs() {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                    <Typography className={classes.subTitle} variant="h4" component="h4">
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <AccountCircle />
-                                </Avatar>
-                            </ListItemAvatar>
-                            {/* <ListItemText primary="Course Name" /> */}
-                            Reviewer - Student Name
-                        </ListItem>
-                    </Typography>
-                    <Divider />
-                    <ExpansionPanel />
-                    <Divider />
-
-                    <Typography className={classes.subTitle} variant="h4" component="h4">
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <AccountCircle />
-                                </Avatar>
-                            </ListItemAvatar>
-                            {/* <ListItemText primary="Course Name" /> */}
-                            Reviewer - Student Name
-                        </ListItem>
-                    </Typography>
-                    <ExpansionPanel />
+                    {team_members != null ? team_members.map((t) => {
+                        return <div key={t.student_id}>
+                            <Typography className={classes.subTitle} variant="h4" component="h4">
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <AccountCircle />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    {/* <ListItemText primary="Course Name" /> */}
+                                    Reviewer - {t.student_firstname} {t.student_lastname}
+                                </ListItem>
+                            </Typography>
+                            <Divider />
+                            <ExpansionPanel key={t.student_id} reviewer_id={t.student_id} project_id={props.project_id} team_number={props.team_number} myReview={myReview} />
+                            <Divider />
+                        </div>
+                    }) : null}
                     {/* Item One */}
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    <Typography className={classes.subTitle} variant="h4" component="h4">
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <AccountCircle />
-                                </Avatar>
-                            </ListItemAvatar>
-                            {/* <ListItemText primary="Course Name" /> */}
-                            Review - Student Name
-                        </ListItem>
-                    </Typography>
-                    <Divider />
-                    <ExpansionPanelForm/>
-                    <Divider />
-
-                    <Typography className={classes.subTitle} variant="h4" component="h4">
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <AccountCircle />
-                                </Avatar>
-                            </ListItemAvatar>
-                            {/* <ListItemText primary="Course Name" /> */}
-                            Review - Student Name
-                        </ListItem>
-                    </Typography>
-                    <ExpansionPanelForm />
-                    {/* Item One */}
+                    {team_members != null ? team_members.map((t) => {
+                        return <div key={t.student_id}>
+                            <Typography className={classes.subTitle} variant="h4" component="h4">
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <AccountCircle />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    {/* <ListItemText primary="Course Name" /> */}
+                                    Reviewee - {t.student_firstname} {t.student_lastname}
+                                </ListItem>
+                            </Typography>
+                            <Divider />
+                            <ExpansionPanelForm callback={callback} key={t.student_id} reviewee_id={t.student_id} project_id={props.project_id} team_number={props.team_number} otherReview={otherReview} />
+                            <Divider />
+                        </div>
+                    }) : null}
                 </TabPanel>
             </SwipeableViews>
         </div>

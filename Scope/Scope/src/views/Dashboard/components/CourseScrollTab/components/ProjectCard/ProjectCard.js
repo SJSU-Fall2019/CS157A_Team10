@@ -58,7 +58,7 @@ const ProjectCard = (props) => {
                         {props.project.project_name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {props.project.project_description}
+                        {props.project.project_description.slice(0,70) + ' ...'}
                     </Typography>
                 </CardContent>
             </CardActionArea>
