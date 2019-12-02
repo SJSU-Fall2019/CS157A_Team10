@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Grid, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { ProjectCard, TeamCard } from './components';
+import {ProjectCard} from './components';
 import Button from '@material-ui/core/Button';
 
 function TabPanel(props) {
