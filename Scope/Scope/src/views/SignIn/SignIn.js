@@ -170,7 +170,6 @@ const SignIn = props => {
   };
 
   const handleSignIn = async event => {
-    history.push('/dashboard')
     await fetch('http://localhost:8001/user/student_login',
       {
         method: 'POST',
@@ -329,10 +328,13 @@ const SignIn = props => {
                   value={formState.values.password || ''}
                   variant="outlined"
                 />
-                <Link to={{
-                  pathname: '/dashboard',
-                  state: [{ isAuth: true }]
-                }} >
+                <Link
+                  //component={RouterLink}
+                  to={{
+                    pathname: "/dashboard",
+                  }}
+                  variant="h6"
+                >
                   <Button
                     className={classes.signInButton}
                     color="primary"
@@ -341,6 +343,7 @@ const SignIn = props => {
                     size="large"
                     type="submit"
                     variant="contained"
+                    onClick={handleSignIn}
                   >
                     Sign in
                 </Button>
