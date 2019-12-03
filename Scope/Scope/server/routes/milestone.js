@@ -33,6 +33,20 @@ router.post('/', function (req, res) {
 })
 
 
+/**GET List of Milestone, project name, course name from the given project id */
+router.post('/create', function (req, res) {
+  const milestone_title = req.body.milestone_title
+  const milestone_description = req.body.milestone_description
+  if (!milestone_title || !milestone_description) {
+    res.status(401).send("Missing Information")
+  }
+  const sql = "INSERT INTO Milestones (milestone_title, milestone_description) VALUES (?, ?)"
+  connection.query(sql, [milestone_title, milestone_description], function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
+
 router.post('/add-milestone', function (req, res) {
   var milestone = req.body.milestone;
   var sql = "INSERT INTO Milestones (milestone_title, milestone_description) VALUES (?,?)"

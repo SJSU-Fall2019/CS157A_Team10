@@ -40,7 +40,6 @@ const useStyles = makeStyles(theme => ({
 
 const ProjectCreation = (props) => {
   const classes = useStyles();
-console.log(props.location.state)
   return (
     <div className={classes.root}>
       <Grid

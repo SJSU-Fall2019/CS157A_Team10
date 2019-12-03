@@ -19,7 +19,9 @@ const useStyles = makeStyles(theme => ({
         fontSize: theme.typography.pxToRem(15),
         color: theme.palette.text.secondary,
     },
+    
 }));
+
 
 export default function ControlledExpansionPanels(props) {
     const classes = useStyles();
@@ -28,6 +30,7 @@ export default function ControlledExpansionPanels(props) {
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
+    console.log(props.milestones)
 
     return (
         <div className={classes.root}>

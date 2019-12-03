@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import ProjectRequest from '../../../../API/Project/index';
 import UserRequest from '../../../../API/User/index';
 import CourseRequest from '../../../../API/Course/index';
+import { ExpansionPanel } from './components/index';
 import {
   Card,
   CardHeader,
@@ -26,23 +27,44 @@ const NewProject = props => {
 
   const [values, setValues] = useState({
     project_id: '',
-    projectName: '',
-    projectDescription: ''
+    projectName: window.sessionStorage.getItem('projectName'),
+    projectDescription: window.sessionStorage.getItem('projectDescription'),
+    event : '',
   });
-
+  console.log(window.sessionStorage.getItem('projectName'))
+  const [milestones, setMilstones] = useState([])
+  const [milestone_id, setMilstone_id] = useState([])
   const handleChange = event => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
     });
+    window.sessionStorage.setItem(event.target.name, event.target.value)
+
   };
-  console.log(props.course_id)
   const createProject = async () => {
     var result = await ProjectRequest.createProject(values.projectName, values.projectDescription)
     const project_id = result.insertId;
     result = await UserRequest.updateStudentHasProjects(project_id);
     result = await CourseRequest.updateCourseHasProjects(props.course_id, project_id)
+    milestone_id.map(async (i)=>
+    {
+        await ProjectRequest.updateProjectHasMilestones(project_id, i)
+    })
     props.history.push("/dashboard")
+  }
+
+  const addMilestone = async ()=>
+  {
+     var copy = milestones
+     const milestone = {milestone_title: '', milestone_description: ''};
+     copy.push(milestone)
+     setMilstones(copy)
+     setValues(
+       {
+          event: null,   
+       }
+     )
   }
 
   return (
@@ -71,7 +93,7 @@ const NewProject = props => {
               name="projectName"
               onChange={handleChange}
               required
-              value={values.lastName}
+              value={values.projectName}
               variant="outlined"
             />
           </Grid>
@@ -111,10 +133,25 @@ const NewProject = props => {
                 style={{ width: 600 }}
                 onChange={handleChange}
                 required
-                value={values.email}
+                value={values.projectDescription}
                 variant="outlined"
               />
             </Grid>
+          </Grid>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick = {addMilestone}
+            style={{marginBottom: 10, marginLeft: 570}}
+          >
+            Add Milestone
+          </Button>
+          <Grid
+            item
+            md={6}
+            xs={12}
+          >
+            <ExpansionPanel setMilestone_id = {setMilstone_id} milestones={milestones} updateMilestones={setMilstones}/>
           </Grid>
         </CardContent>
         <CardActions>
@@ -122,6 +159,7 @@ const NewProject = props => {
             color="primary"
             variant="contained"
             onClick={createProject}
+            style={{marginLeft: 600}}
           >
             Save details
           </Button>
