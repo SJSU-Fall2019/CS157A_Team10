@@ -71,7 +71,7 @@ class ProjectList extends Component {
                 })
         }
         let project_result = await TeamRequest.fetchMyProject(this.state.selected_course)
-        // console.log(project_result)
+        console.log(project_result)
         if (project_result.length != 0) {
             this.setState(
                 {
@@ -81,45 +81,24 @@ class ProjectList extends Component {
                 })
         }
     }
-    onDeleteProject = async () => {
-        let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
-        if (project_result.length != 0) {
-          this.setState(
-            {
-              project_list: project_result,
-            })
-        }
-      }
+   
     /** CallBack function pass down to the component CourseScrollTab */
     onChangeSelectedCourse = async (selected_course) => {
         await this.setState(
             {
                 selected_course: selected_course
             })
-        //let project_result = await ProjectRequest.fetchMyProject(this.state.selected_course)
-        let project_result = await TeamRequest.fetchMyProject(this.state.selected_course)
+        let project_result = await ProjectRequest.fetchMyProject(this.state.selected_course)
         this.setState(
             {
                 project_list: project_result,
             })
     }
-    /** CallBack function pass down to the component ProjectCard inside CourseScrollTab */
-    onChangeSelectedProject = async (selected_project) => {
-        await this.setState(
-        {
-            selected_project: selected_project
-        })
-        // let team_result = await TeamRequest.fetchTeam(this.state.selected_project)
-        // this.setState(
-        // {
-        //     team_list: team_result
-        // })
-    }
 
     render() {
         return (
 
-            <div className="ProjectList">
+            <div className="Dashboard">
                 <div>  <CourseScrollTab course_list={this.state.course_list}
                     project_list={this.state.project_list}
                     history={this.props.history}

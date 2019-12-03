@@ -38,7 +38,7 @@ const ProjectCard = (props) => {
             team_number: props.project.team_number
         })
     }
-    // console.log(props.project)
+    console.log(props.project)
 
     return (
         <Card className={classes.card}>
