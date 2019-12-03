@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Component, } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -46,7 +46,7 @@ const styles = {
 /*
 * Represent a Project List component
 */
-class ProjectList extends React.Component {
+class ProjectList extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -54,7 +54,8 @@ class ProjectList extends React.Component {
             // Selected_course stores the selected course_id
             selected_course: null,
             project_list: [],
-        }
+            selected_project: null
+        }   
     }
 
     
@@ -79,20 +80,19 @@ class ProjectList extends React.Component {
                 })
         }
     }
-
+   
     /** CallBack function pass down to the component CourseScrollTab */
     onChangeSelectedCourse = async (selected_course) => {
         await this.setState(
             {
                 selected_course: selected_course
             })
-        let project_result = await TeamRequest.fetchMyProject(this.state.selected_course)
+        let project_result = await ProjectRequest.fetchMyProject(this.state.selected_course)
         this.setState(
             {
                 project_list: project_result,
             })
     }
-
 
     render() {
         return (
@@ -101,8 +101,11 @@ class ProjectList extends React.Component {
                 <div>  <CourseScrollTab course_list={this.state.course_list}
                     project_list={this.state.project_list}
                     history={this.props.history}
-                    onChangeCourse={this.onChangeSelectedCourse}/></div>
-            </div>//
+                    onDeleteProject = {this.onDeleteProject}
+                    //onChangeCourse={this.onChangeSelectedCourse}/></div>
+                    onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject} />
+                </div>
+            </div>
 
 
         );// end return

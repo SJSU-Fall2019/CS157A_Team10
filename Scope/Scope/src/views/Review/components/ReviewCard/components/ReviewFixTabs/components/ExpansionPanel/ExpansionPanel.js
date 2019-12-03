@@ -9,7 +9,7 @@ import MilestoneRequest from '../../../../../../../../API/Milestone/index';
 import ReviewRequest from '../../../../../../../../API/Review/index';
 import Avatar from '@material-ui/core/Avatar';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
-import Rating from '@material-ui/lab/Rating';
+// import Rating from '@material-ui/lab/Rating';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -81,7 +81,7 @@ export default function ControlledExpansionPanels(props) {
                     >
                         <Typography className={classes.heading}>{"Milestone # " + getMilestone(index)}</Typography>
                         <Typography className={classes.secondaryHeading}>{getMilestoneTitle(index)}</Typography>
-                        <Typography className={classes.secondaryHeading}>{getReview(index + 1) != null ? rating[getReview(index + 1).rating - 1] : "NOT YET REVIEWED"}</Typography>
+                        {/* <Typography className={classes.secondaryHeading}>{getReview(index + 1) != null ? rating[getReview(index + 1).rating - 1] : "NOT YET REVIEWED"}</Typography> */}
                         {/* <Avatar>
                         <CheckCircleOutline />
                     </Avatar> */}
@@ -91,7 +91,7 @@ export default function ControlledExpansionPanels(props) {
                         <Typography>
                             {getReview(index + 1) != null ? getReview(index + 1).review_description : null}
                         </Typography>
-                        {getReview(index + 1) != null ? <Rating name="read-only" style={{ marginTop: 30, marginLeft: 600 }} max={4} value={getReview(index + 1).rating} readOnly /> : null}
+                        {/* {getReview(index + 1) != null ? <Rating name="read-only" style={{ marginTop: 30, marginLeft: 600 }} max={4} value={getReview(index + 1).rating} readOnly /> : null} */}
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
             }) : null}

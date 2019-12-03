@@ -9,7 +9,7 @@ import MilestoneRequest from '../../../../../../../../API/Milestone/index';
 import ReviewRequest from '../../../../../../../../API/Review/index';
 import Avatar from '@material-ui/core/Avatar';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
-import Rating from '@material-ui/lab/Rating';
+// import Rating from '@material-ui/lab/Rating';
 import UserRequest from '../../../../../../../../API/User/index';
 import { ExpansionForm } from './components/index';
 
@@ -92,7 +92,7 @@ export default function ControlledExpansionPanels(props) {
                     >
                         <Typography className={classes.heading}>{"Milestone # " + getMilestone(index)}</Typography>
                         <Typography className={classes.secondaryHeading}>{getMilestoneTitle(index)}</Typography>
-                        <Typography className={classes.secondaryHeading}>{getReview(index + 1) != null ? rating[getReview(index + 1).rating - 1] : "NOT YET REVIEWED"}</Typography>
+                        {/* <Typography className={classes.secondaryHeading}>{getReview(index + 1) != null ? rating[getReview(index + 1).rating - 1] : "NOT YET REVIEWED"}</Typography> */}
                         {getReview(index + 1)!= null && getReview(index+1).review_description !=null ? <CheckCircleOutline /> : null}
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
