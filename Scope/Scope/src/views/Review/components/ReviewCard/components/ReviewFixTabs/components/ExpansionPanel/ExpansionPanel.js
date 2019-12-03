@@ -89,7 +89,7 @@ export default function ControlledExpansionPanels(props) {
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <Typography>
-                            {getReview(index + 1) != null ? getReview(index + 1).review_description : null}
+                            {getReview(index + 1) != null ? getReview(index + 1).review_description!=null ?  getReview(index + 1).review_description!=null: null: null}
                         </Typography>
                         {getReview(index + 1) != null ? <Rating name="read-only" style={{ marginTop: 30, marginLeft: 600 }} max={4} value={getReview(index + 1).rating} readOnly /> : null}
                     </ExpansionPanelDetails>
