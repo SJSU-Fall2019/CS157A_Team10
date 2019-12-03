@@ -30,7 +30,6 @@ export default function ControlledExpansionPanels(props) {
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
-    console.log(props.milestones)
 
     return (
         <div className={classes.root}>

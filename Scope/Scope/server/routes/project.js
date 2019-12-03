@@ -78,7 +78,7 @@ router.post('/updateProjectHasMilestones', function (req, res) {
   var project_id = req.body.project_id;
   var milestone_number = req.body.milestone_number;
 
-  if (!project_id || !milestone_id) {
+  if (!project_id || !milestone_number) {
     return res.status(401).send("Missing Information")
   }
   var sql = "INSERT INTO ProjectHasMilestones (project_id, milestone_number) VALUES (?, ?)"

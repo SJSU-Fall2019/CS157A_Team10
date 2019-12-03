@@ -65,21 +65,27 @@ export default function ProjectCard(props) {
     });
 
     function getDescription() {
-        if (project!=null) {
+        if (project != null) {
             return project.project_description
         }
     }
 
     function getProjectTitle() {
-        if (project!=null) {
+        if (project != null) {
             return project.project_name
         }
     }
 
     function getMilestone() {
         if (milestones != null) {
-            return <div><ExpansionPanel milestones = {milestones}/></div>
+            return <div><ExpansionPanel milestones={milestones} /></div>
         }
+    }
+
+    const directUpdate = () => {
+        // props.history.push('/project-update', {
+        //     project_id: props.project_id,
+        // })
     }
 
     return (
@@ -96,7 +102,7 @@ export default function ProjectCard(props) {
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
+                <IconButton aria-label="share" onClick={directUpdate}>
                     <ShareIcon />
                 </IconButton>
                 <IconButton
