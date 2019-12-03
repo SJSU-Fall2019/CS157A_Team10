@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Grid, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { ProjectCard, TeamCard } from './components';
+import { ProjectCard } from './components';
 import Button from '@material-ui/core/Button';
 
 function TabPanel(props) {
@@ -82,7 +82,10 @@ const ScrollableTabsButtonAuto = (props) => {
             </Typography>
             <Button variant="contained" color="primary" style={{ marginLeft: 1000, marginTop: -90 }} className={classes.button}
                 onClick={() => {
-                    props.history.push('/create-project')
+                    props.history.push({
+                        pathname: '/create-project',
+                        state: { course_id: props.course_list[value].course_id }
+                    })
                 }}>
                 Add Project
                 </Button>
