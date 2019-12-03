@@ -75,7 +75,6 @@ router.post('/add-project', function (req, res) {
 router.post('/updateProjectHasMilestones', function (req, res) {
   var project_id = req.body.project_id;
   var milestone_number = req.body.milestone_number;
-
   if (!project_id || !milestone_number) {
     return res.status(401).send("Missing Information")
   }

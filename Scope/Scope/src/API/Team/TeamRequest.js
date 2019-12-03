@@ -66,6 +66,27 @@ class TeamRequest {
         let responseJson = await response.json();
         return responseJson
     }
+
+    static async addTeam(project_id, team_number, team_name, team_ProjectName, team_ProjectDescription) {
+        let response = await fetch('http://localhost:8001/team/add-team',
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    auth_token: window.sessionStorage.getItem('auth_token')
+                },
+                body: JSON.stringify({
+                    project_id :project_id,
+                    team_number : team_number,
+                    team_name : team_name,
+                    team_ProjectName : team_ProjectName,
+                    team_ProjectDescription : team_ProjectDescription
+                })
+            })
+        let responseJson = await response.json();
+        return responseJson
+    }
 }
 
 export default TeamRequest

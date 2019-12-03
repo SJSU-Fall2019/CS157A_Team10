@@ -170,7 +170,6 @@ const SignIn = props => {
   };
 
   const handleSignIn = async event => {
-    history.push('./dashboard')
     await fetch('http://localhost:8001/user/student_login',
       {
         method: 'POST',
