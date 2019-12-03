@@ -47,7 +47,7 @@ const NewProject = props => {
     var result = await ProjectRequest.createProject(window.sessionStorage.getItem('projectName'), window.sessionStorage.getItem('projectDescription'))
     const project_id = result.insertId;
     result = await UserRequest.updateStudentHasProjects(project_id);
-    result = await CourseRequest.updateCourseHasProjects(props.course_id, project_id)
+    result = await CourseRequest.updateCourseHasProjects(props.course_id, project_id);
     if (milestone_id.length !=0) {
       milestone_id.map(async (i) => {
         await ProjectRequest.updateProjectHasMilestones(project_id, i)

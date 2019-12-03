@@ -8,17 +8,13 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
-
 import Avatar from '@material-ui/core/Avatar';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import { ExpansionPanel, ExpansionPanelForm } from './components/index';
 import TeamRequest from '../../../../../../API/Team/index';
 import ReviewRequest from '../../../../../../API/Review/index';
-import MilestoneRequest from '../../../../../../API/Milestone/index';
-
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -68,7 +64,7 @@ export default function FullWidthTabs(props) {
     const [myReview, setMyReview] = React.useState(null);
     const [otherReview, setOtherReview] = React.useState(null);
     const [team_members, setTeamMembers] = React.useState(null);
-    const [milestone, setMilestone] = React.useState(null);
+    //const [milestone, setMilestone] = React.useState(null);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

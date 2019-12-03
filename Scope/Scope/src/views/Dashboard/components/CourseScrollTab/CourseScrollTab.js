@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Grid, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { ProjectCard, TeamCard } from './components';
+import { ProjectCard } from './components';
 import Button from '@material-ui/core/Button';
 
 function TabPanel(props) {
@@ -87,7 +87,7 @@ const ScrollableTabsButtonAuto = (props) => {
                         state: { course_id: props.course_list[value].course_id }
                     })
                 }}>
-                Add Project
+                Add Project 
                 </Button>
             <AppBar position="static" color="default">
                 <Tabs

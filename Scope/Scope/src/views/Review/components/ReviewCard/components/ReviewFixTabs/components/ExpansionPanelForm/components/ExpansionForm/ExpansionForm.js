@@ -9,7 +9,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { OutlinedInput } from '@material-ui/core';
 import ReviewRequest from '../../../../../../../../../../API/Review/index';
 
 const useStyles = makeStyles(theme => ({
@@ -23,7 +22,6 @@ const useStyles = makeStyles(theme => ({
         width: 1000,
     },
     selectList: {
-        // padding: 10,
         marginLeft: 780,
     },
     saveReviewBtn:{
@@ -42,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ExpansionForm(props) {
     const classes = useStyles();
-    const [value, setValue] = React.useState('Controlled');
+    const [setValue] = React.useState('Controlled');
     const [inputValue, setInputValue] = React.useState(props.review_description);
     const [age, setAge] = React.useState(4);
     const inputLabel = React.useRef(null);

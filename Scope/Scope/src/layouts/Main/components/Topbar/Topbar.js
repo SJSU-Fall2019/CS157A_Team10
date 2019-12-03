@@ -11,7 +11,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography  from '@material-ui/core/Typography';
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     boxShadow: 'none',
@@ -25,13 +24,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
 const Topbar = props => {
   const { className, onSidebarOpen, ...rest } = props;
 
   const classes = useStyles();
-  const { history } = props;
-
   const [notifications] = useState([]);
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -41,7 +37,6 @@ const Topbar = props => {
   const SignOut = () =>{
     window.sessionStorage.removeItem("auth_token");
   }
-
 
   return (
     
@@ -60,7 +55,6 @@ const Topbar = props => {
             {/* Scope */}
           </Typography> 
           
-          
         </RouterLink>
         <Tabs
           value={value}
@@ -70,8 +64,8 @@ const Topbar = props => {
           id = "isClicked"
         >
           <Tab label="Home" />
-          <Tab label="About" />
-          <Tab label="Team" />
+          <Tab label="About" href= "/about"/>
+          {/* <Tab label="Team" /> */}
         </Tabs>
 
         <div className={classes.flexGrow} />
@@ -82,18 +76,15 @@ const Topbar = props => {
               color="primary"
               variant="dot"
             >
-              <NotificationsIcon />
+            <NotificationsIcon />
             </Badge>
           </IconButton>
-          {/* <Link to={{
-            pathname: '/sign-in'
-          }}> */}
           <IconButton href= "/sign-in"
             className={classes.signOutButton}
             color="inherit"
             onClick={SignOut}
           >
-            <InputIcon />
+          <InputIcon />
           </IconButton>
           {/* </Link> */}
         </Hidden>

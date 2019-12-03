@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,7 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-
 
 const styles = {
   root: {
@@ -44,7 +43,6 @@ const profile_pic = ["/images/avatars/avatar_1.png", "/images/avatars/avatar_2.p
 class UsersTable extends React.Component {
   constructor(props) {
     super(props)
-
   }
 
   componentDidMount() {

@@ -1,32 +1,23 @@
-import React, { useState, Component, } from 'react';
+import React, { Component, } from 'react';
 import CourseRequest from '../../API/Course/index';
 import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
 import { CourseScrollTab, TeamScrollTab } from './components';
 // Remove react-window, ScrollMenu, HorizontalScroll library later
-
 // Core Matrial UI
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 
-
-const styles = {
-  projectListStyle:
-  {
-    display: 'flex',
-    flexWrap: 'wrap',
-    overflowX: 'auto',
-  },
-  projectStyle:
-  {
-    minWidth: 600,
-  },
-}
+// const styles = {
+//   projectListStyle:
+//   {
+//     display: 'flex',
+//     flexWrap: 'wrap',
+//     overflowX: 'auto',
+//   },
+//   projectStyle:
+//   {
+//     minWidth: 600,
+//   },
+// }
 
 class Dashboard extends Component {
 

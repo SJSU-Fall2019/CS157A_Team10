@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import PeopleIcon from '@material-ui/icons/People';
 import Typography from '@material-ui/core/Typography';
@@ -30,7 +29,6 @@ const useStyles = makeStyles({
         fontWeight: 300,
     }
 });
-
 
 const TeamCard = (props) => {
     const classes = useStyles();

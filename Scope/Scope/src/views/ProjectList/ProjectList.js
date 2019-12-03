@@ -1,47 +1,8 @@
-import React, { useState, Component, } from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { IconButton, Grid, Typography } from '@material-ui/core';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { SearchInput } from '../../components';
+import React, { Component, } from 'react';
 import CourseRequest from '../../API/Course/index';
 import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
 import { CourseScrollTab} from './components'
-
-// import { ProductsToolbar, ProductCard } from './components';
-import { ProjectToolbar, ProjectCard, CourseTab } from './components';
-
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: theme.spacing(3)
-    },
-    content: {
-        marginTop: theme.spacing(2)
-    },
-    pagination: {
-        marginTop: theme.spacing(3),
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end'
-    }
-}));
-
-const styles = {
-    root: {
-        padding: 10,
-    },
-    content: {
-        marginTop: 20,
-    },
-    pagination: {
-        marginTop: 10,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end'
-    }
-}
 
 /*
 * Represent a Project List component
@@ -57,8 +18,6 @@ class ProjectList extends Component {
             selected_project: null
         }   
     }
-
-    
 
     async componentDidMount() {
         let course_result = await CourseRequest.fetchStudentCourseList()
