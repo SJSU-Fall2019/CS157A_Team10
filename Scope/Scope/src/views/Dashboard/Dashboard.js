@@ -71,13 +71,7 @@ class Dashboard extends Component {
     }
   }
   onDeleteProject = async () => {
-    let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
-    if (project_result.length != 0) {
-      this.setState(
-        {
-          project_list: project_result,
-        })
-    }
+    this.componentDidMount()
   }
   /** CallBack function pass down to the component CourseScrollTab */
   onChangeSelectedCourse = async (selected_course) => {
@@ -112,9 +106,9 @@ class Dashboard extends Component {
         <div>  <CourseScrollTab course_list={this.state.course_list}
           project_list={this.state.project_list}
           history={this.props.history}
-          onDeleteProject = {this.onDeleteProject}
+          onDeleteProject={this.onDeleteProject}
           onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject} />
-          </div>
+        </div>
         <div>  <TeamScrollTab team_list={this.state.team_list} history={this.props.history} project_id={this.state.selected_project} /></div>
       </div>//
 

@@ -19,7 +19,9 @@ const useStyles = makeStyles(theme => ({
         fontSize: theme.typography.pxToRem(15),
         color: theme.palette.text.secondary,
     },
+    
 }));
+
 
 export default function ControlledExpansionPanels(props) {
     const classes = useStyles();

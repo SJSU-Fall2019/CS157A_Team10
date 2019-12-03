@@ -15,6 +15,23 @@ class ProjectRequest {
         return responseJson
     }
 
+    static async ProjectInfo(project_id) {
+        let response = await fetch('http://localhost:8001/project/info',
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    auth_token: sessionStorage.getItem('auth_token'),
+                },
+                body: JSON.stringify({
+                    project_id: project_id
+                })
+            })
+        let responseJson = await response.json();
+        return responseJson
+    }
+
     static async deleteProject(project_id) {
         let response = await fetch('http://localhost:8001/project/delete',
             {
@@ -24,9 +41,47 @@ class ProjectRequest {
                     'Content-Type': 'application/json',
                     project_id: project_id
                 },
+                
             })
+            
         let responseJson = await response.json();
         return responseJson
+    }
+
+    static async createProject(project_name, project_description)
+    {
+        let response = await fetch('http://localhost:8001/project/add-project',
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                project_name: project_name,
+                project_description: project_description,
+            })
+        })
+    let responseJson = await response.json();
+    return responseJson
+    }
+
+    static async updateProjectHasMilestones (project_id, milestone_number)
+    {
+        let response = await fetch('http://localhost:8001/project/updateProjectHasMilestones',
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                project_id : project_id,
+                milestone_number: milestone_number
+            })
+        })
+    let responseJson = await response.json();
+    return responseJson
     }
 }
 
