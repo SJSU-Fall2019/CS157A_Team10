@@ -24,7 +24,8 @@ router.post('/project-team', function (req, res) {
   }
 
   // Update the SQL Table 
-  var sql = "SELECT team_name , team_number, teamProject_name, teamProject_description, COUNT(student_id) AS Team_Member FROM TEAM JOIN StudentHasTeams USING (project_id, team_number) JOIN Project USING (project_id) GROUP BY project_id, team_number, project_name HAVING project_id = ?"
+  // var sql = "SELECT team_name , team_number, teamProject_name, teamProject_description, COUNT(student_id) AS Team_Member FROM TEAM JOIN StudentHasTeams USING (project_id, team_number) JOIN Project USING (project_id) GROUP BY project_id, team_number, project_name HAVING project_id = ?"
+  var sql = "SELECT team_name , team_number, teamProject_name, teamProject_description FROM TEAM WHERE project_id = ?"
   connection.query(sql, project_id, function (err, result) {
     if (err) throw err
     res.send(result)
@@ -108,7 +109,7 @@ router.post('/member', function (req, res) {
 
 
 /**
- * GET Team Members info
+ * Add one Team to the database Team Table
  * Review
  */
 router.post('/add-team', function (req, res) {
@@ -121,7 +122,7 @@ router.post('/add-team', function (req, res) {
   if (!project_id || !team_number) {
     res.status(401).send("Missing Information")
   }
-  var sql = "INSERT INTO Team (project_id, team_number, team_name, team_ProjectName, team_ProjectDescription) VALUES (?,?,?,?,?)"
+  var sql = "INSERT INTO Team (project_id, team_number, team_name, teamProject_name, teamProject_description) VALUES (?,?,?,?,?)"
   var varibale = [project_id, team_number, team_name, team_ProjectName, team_ProjectDescription];
   connection.query(sql, varibale, function (err, result) {
     if (err) throw err
