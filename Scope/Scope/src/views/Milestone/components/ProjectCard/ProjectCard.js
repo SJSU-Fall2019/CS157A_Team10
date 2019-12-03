@@ -11,7 +11,10 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MilestoneRequest from '../../../../API/Milestone/index'
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MilestoneRequest from '../../../../API/Milestone/index';
+import ProjectRequest from '../../../../API/Project/index'
+import { fontSize } from '@material-ui/system';
 import { ExpansionPanel } from './components'
 import Button from '@material-ui/core/Button';
 
@@ -40,6 +43,7 @@ export default function ProjectCard(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(true);
     const [milestones, setMilestones] = React.useState(null);
+    const [project, setProject] = React.useState(null);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -50,6 +54,8 @@ export default function ProjectCard(props) {
             // GET project_id from props.location.state.project_id passed from the ProjectCard Component
             const result = await MilestoneRequest.fetchMilestone(props.project_id)
             setMilestones(result)
+            const project = await ProjectRequest.ProjectInfo(props.project_id)
+            setProject(project[0])
         }
         if (milestones == null) {
             getMilestone()
@@ -57,23 +63,18 @@ export default function ProjectCard(props) {
     });
 
     function getDescription() {
-        if (milestones != null) {
-            return milestones[0].project_description
+        if (project != null) {
+            return project.project_description
         }
     }
 
     function getProjectTitle() {
-        if (milestones != null) {
-            return milestones[0].project_name
-        }
-    }
-    function getCourseName() {
-        if (milestones != null) {
-            return milestones[0].course_name
+        if (project != null) {
+            return project.project_name
         }
     }
     function getMilestone() {
-        if (milestones != null) {
+        if (milestones != null && milestones.length!=0) {
             return <div><ExpansionPanel milestones={milestones} /></div>
         }
     }

@@ -42,7 +42,7 @@ export default function ControlledExpansionPanels(props) {
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                     >
-                        <Typography className={classes.heading}>Milestone #{milestone.milestone_number}</Typography>
+                        <Typography className={classes.heading}>Milestone #{index+1}</Typography>
                         <Typography className={classes.secondaryHeading}>{milestone.milestone_title}</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>

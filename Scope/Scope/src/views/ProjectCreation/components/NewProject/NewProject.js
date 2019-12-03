@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import ProjectRequest from '../../../../API/Project/index';
 import UserRequest from '../../../../API/User/index';
 import CourseRequest from '../../../../API/Course/index';
+import TeamRequest from '../../../../API/Team/index';
 import { ExpansionPanel } from './components/index';
 import {
   Card,
@@ -28,9 +29,10 @@ const NewProject = props => {
 
   const [values, setValues] = useState({
     project_id: '',
-    projectName: window.sessionStorage.getItem('projectName') !=null ? window.sessionStorage.getItem('projectName'): null,
-    projectDescription: window.sessionStorage.getItem('projectDescription') !=null ? window.sessionStorage.getItem('projectDescription'): null,
+    projectName: window.sessionStorage.getItem('projectName') != null ? window.sessionStorage.getItem('projectName') : null,
+    projectDescription: window.sessionStorage.getItem('projectDescription') != null ? window.sessionStorage.getItem('projectDescription') : null,
     event: '',
+    numberOfTeam: 0,
   });
 
   const [milestones, setMilstones] = useState([])
@@ -53,6 +55,16 @@ const NewProject = props => {
         await ProjectRequest.updateProjectHasMilestones(project_id, i)
       })
     }
+    console.log(values.numberOfTeam)
+    if(values.numberOfTeam !=0)
+    { 
+       for(var i=1; i<=values.numberOfTeam; i++)
+       {
+         var teamName = "Team # " + i 
+        await TeamRequest.addTeam(project_id, i, teamName, window.sessionStorage.getItem('projectName'), window.sessionStorage.getItem('projectDescription'))
+       }
+    }
+    // Add Team
     props.history.push("/dashboard")
   }
 
@@ -82,7 +94,7 @@ const NewProject = props => {
           title="Project"
         />
         <CardContent>
-        <Typography>Project Name</Typography>
+          <Typography>Project Name</Typography>
           <Grid
             item
             md={6}
@@ -154,8 +166,19 @@ const NewProject = props => {
             md={6}
             xs={12}
           >
-            <ExpansionPanel setMilestone_id={setMilestone_id}milestones={milestones}/>
+            <ExpansionPanel setMilestone_id={setMilestone_id} milestones={milestones} />
           </Grid>
+          <TextField
+            id="standard-number"
+            label="Number of Team"
+            type="number"
+            name="numberOfTeam"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+            onChange={handleChange}
+          />
         </CardContent>
         <CardActions>
           <Button

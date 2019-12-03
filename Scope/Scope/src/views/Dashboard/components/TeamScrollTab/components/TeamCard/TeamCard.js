@@ -20,6 +20,7 @@ import TeamRequest from '../../../../../../API/Team/index';
 const useStyles = makeStyles({
     card: {
         maxWidth: 345,
+        width: 345,
     },
     media: {
         height: 140,
