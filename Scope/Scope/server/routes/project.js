@@ -59,7 +59,6 @@ router.post('/add-project', function (req, res) {
   if (!project_name || !project_description) {
     return res.status(401).send("Missing Information")
   }
-
   var sql = "INSERT INTO Project (project_name, project_description) VALUES (?, ?)"
   var projectTable = [project_name, project_description]
   connection.query(sql, projectTable, function (err, result) {
@@ -68,7 +67,6 @@ router.post('/add-project', function (req, res) {
     }
     res.send(result)
   })
-
 })
 
 
