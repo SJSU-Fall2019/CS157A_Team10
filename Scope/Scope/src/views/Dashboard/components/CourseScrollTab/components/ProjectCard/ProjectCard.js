@@ -45,7 +45,7 @@ const ProjectCard = (props) => {
     }
     return (
         <Card className={classes.card} onClick={() => {
-            props.onChangeProject(props.project.project_id)
+            // props.onChangeProject(props.project.project_id)
         }}>
             <CardActionArea>
                 <CardMedia

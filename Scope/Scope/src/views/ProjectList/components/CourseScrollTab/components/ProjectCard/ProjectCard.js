@@ -38,7 +38,7 @@ const ProjectCard = (props) => {
             team_number: props.project.team_number
         })
     }
-    console.log(props.project)
+    // console.log(props.project)
 
     return (
         <Card className={classes.card}>
@@ -66,10 +66,11 @@ const ProjectCard = (props) => {
             <CardActions align="right">
                 <Button size="small" color="primary" onClick={directMilestone}>
                     More
-            </Button>
+                </Button>
+                
             </CardActions>
         </Card>
     );
-}
+} 
 
 export default ProjectCard;

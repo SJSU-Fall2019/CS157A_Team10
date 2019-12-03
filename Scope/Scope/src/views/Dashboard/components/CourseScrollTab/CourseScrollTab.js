@@ -79,7 +79,7 @@ const ScrollableTabsButtonAuto = (props) => {
         <div className={classes.root}>
             <Typography className={classes.subTitle} variant="h3" component="h3">
                 Courses
-                </Typography>
+            </Typography>
             <Button variant="contained" color="primary" style={{ marginLeft: 1000, marginTop: -90 }} className={classes.button}
                 onClick={() => {
                     props.history.push('/create-project')
@@ -127,7 +127,7 @@ const ScrollableTabsButtonAuto = (props) => {
                 </TabPanel>
             })}
         </div>
-    );
+    ); 
 }
 
 export default ScrollableTabsButtonAuto;

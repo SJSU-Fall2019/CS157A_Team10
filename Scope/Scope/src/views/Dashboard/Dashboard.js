@@ -114,7 +114,7 @@ class Dashboard extends Component {
           history={this.props.history}
           onDeleteProject = {this.onDeleteProject}
           onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject} />
-          </div>
+        </div>
         <div>  <TeamScrollTab team_list={this.state.team_list} history={this.props.history} project_id={this.state.selected_project} /></div>
       </div>//
 

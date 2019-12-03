@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Component, } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -46,7 +46,7 @@ const styles = {
 /*
 * Represent a Project List component
 */
-class ProjectList extends React.Component {
+class ProjectList extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -54,7 +54,8 @@ class ProjectList extends React.Component {
             // Selected_course stores the selected course_id
             selected_course: null,
             project_list: [],
-        }
+            selected_project: null
+        }   
     }
 
     
@@ -70,7 +71,7 @@ class ProjectList extends React.Component {
                 })
         }
         let project_result = await TeamRequest.fetchMyProject(this.state.selected_course)
-        console.log(project_result)
+        // console.log(project_result)
         if (project_result.length != 0) {
             this.setState(
                 {
@@ -80,30 +81,53 @@ class ProjectList extends React.Component {
                 })
         }
     }
-
+    onDeleteProject = async () => {
+        let project_result = await ProjectRequest.fetchCourseProject(this.state.selected_course)
+        if (project_result.length != 0) {
+          this.setState(
+            {
+              project_list: project_result,
+            })
+        }
+      }
     /** CallBack function pass down to the component CourseScrollTab */
     onChangeSelectedCourse = async (selected_course) => {
         await this.setState(
             {
                 selected_course: selected_course
             })
+        //let project_result = await ProjectRequest.fetchMyProject(this.state.selected_course)
         let project_result = await TeamRequest.fetchMyProject(this.state.selected_course)
         this.setState(
             {
                 project_list: project_result,
             })
     }
-
+    /** CallBack function pass down to the component ProjectCard inside CourseScrollTab */
+    onChangeSelectedProject = async (selected_project) => {
+        await this.setState(
+        {
+            selected_project: selected_project
+        })
+        // let team_result = await TeamRequest.fetchTeam(this.state.selected_project)
+        // this.setState(
+        // {
+        //     team_list: team_result
+        // })
+    }
 
     render() {
         return (
 
-            <div className="Dashboard">
+            <div className="ProjectList">
                 <div>  <CourseScrollTab course_list={this.state.course_list}
                     project_list={this.state.project_list}
                     history={this.props.history}
-                    onChangeCourse={this.onChangeSelectedCourse}/></div>
-            </div>//
+                    onDeleteProject = {this.onDeleteProject}
+                    //onChangeCourse={this.onChangeSelectedCourse}/></div>
+                    onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject} />
+                </div>
+            </div>
 
 
         );// end return
