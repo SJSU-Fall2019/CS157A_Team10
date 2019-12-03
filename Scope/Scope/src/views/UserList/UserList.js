@@ -1,14 +1,5 @@
-import React, { useState } from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
-
-import { UsersToolbar, UsersTable } from './components';
+import React from 'react';
+import { UsersTable } from './components';
 import { SearchInput } from '../../components';;
 
 const styles = {
@@ -17,9 +8,8 @@ const styles = {
   },
   content: {
     marginTop: 20
-  }}
-
-
+  }
+}
 
 /** A User Table contains list of user and their information */
 class UserList extends React.Component {

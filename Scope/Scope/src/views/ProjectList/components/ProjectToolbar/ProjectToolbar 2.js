@@ -43,7 +43,7 @@ const ProjectToolbar = props => {
                     color="primary"
                     variant="contained"
                 >
-                    Add Project
+                     Add Project
                 </Button>
                 
             </div>

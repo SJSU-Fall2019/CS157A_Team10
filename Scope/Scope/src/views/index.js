@@ -9,4 +9,5 @@ export { default as ProjectCreation} from './ProjectCreation';
 export { default as Milestone} from './Milestone';
 export { default as ProjectDetail} from './ProjectDetail';
 export { default as ProjectUpdate} from './ProjectUpdate';
-export { default as Review } from './Review'
+export { default as Review } from './Review';
+export { default as About } from './About'
