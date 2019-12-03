@@ -22,14 +22,7 @@ const Footer = props => {
     >
       <Typography variant="body1">
         &copy;{' '}
-        <Link
-          component="a"
-          href="https://devias.io/"
-          target="_blank"
-        >
-          Scope
-        </Link>
-        . 2019
+        Scope. 2019
       </Typography>
       <Typography variant="caption">
         San Jose State Universtity / Fall 2019 / CS 157A / DBMS Project
