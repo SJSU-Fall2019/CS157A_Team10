@@ -63,7 +63,7 @@ router.post('/updateTeam', function (req, res) {
     return res.status(401).send("Missing Project ID")
   }
 
-  var sql = "UPDATE Team SET team_ProjectName =? ,team_ProjectDescription = ? WHERE project_id = ? AND team_number = ?"
+  var sql = "UPDATE Team SET teamProject_Name =? ,teamProject_Description = ? WHERE project_id = ? AND team_number = ?"
   connection.query(sql, [team_ProjectName, team_ProjectDescription, project_id, team_number], function (err, result) {
     if (err) throw err
     res.send(result)
