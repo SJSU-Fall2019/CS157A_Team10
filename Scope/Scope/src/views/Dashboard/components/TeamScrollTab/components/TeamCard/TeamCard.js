@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {}from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import PeopleIcon from '@material-ui/icons/People';
 import Typography from '@material-ui/core/Typography';
@@ -17,7 +16,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TeamRequest from '../../../../../../API/Team/index';
-import { async } from 'q';
 
 const useStyles = makeStyles({
     card: {
@@ -42,7 +40,6 @@ const TeamCard = (props) => {
             team_number: props.team.team_number
         })
     }
-    const [team_member, setTeamMember] = React.useState(null);
     /** JOIN TEAM API Request */
     const joinTeam = () => {
         TeamRequest.JoinTeam(props.project_id, props.team.team_number)

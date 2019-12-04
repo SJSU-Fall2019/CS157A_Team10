@@ -7,10 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MilestoneRequest from '../../../../../../API/Milestone/index';
 import {
-    Card,
-    CardHeader,
-    CardContent,
-    CardActions,
     Grid,
     Button,
     TextField

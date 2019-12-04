@@ -9,7 +9,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { OutlinedInput } from '@material-ui/core';
 import ReviewRequest from '../../../../../../../../../../API/Review/index';
 
 const useStyles = makeStyles(theme => ({
@@ -60,7 +59,7 @@ export default function ExpansionForm(props) {
     {
         // Create Review in the review table
         var review_description =  props.review_description
-        if(inputValue != null && props.review_description !=inputValue)
+        if(inputValue !== null && props.review_description !=inputValue)
         {
             review_description = inputValue
         }

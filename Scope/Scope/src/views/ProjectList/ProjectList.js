@@ -1,17 +1,8 @@
-import React, { useState } from 'react';
+import React, {} from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { IconButton, Grid, Typography } from '@material-ui/core';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { SearchInput } from '../../components';
 import CourseRequest from '../../API/Course/index';
-import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
-import { CourseScrollTab} from './components'
-
-// import { ProductsToolbar, ProductCard } from './components';
-import { ProjectToolbar, ProjectCard, CourseTab } from './components';
-
+import { CourseScrollTab} from './components';
 
 const useStyles = makeStyles(theme => ({
     root: {

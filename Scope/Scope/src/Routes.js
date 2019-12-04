@@ -7,7 +7,6 @@ import {
   Dashboard as DashboardView,
   ProjectList as ProjectListView,
   UserList as UserListView,
-  Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
   NotFound as NotFoundView,
@@ -43,12 +42,6 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/projects"
-      />
-      <RouteWithLayout
-        component={SettingsView}
-        exact
-        layout={MainLayout}
-        path="/settings"
       />
       <RouteWithLayout
         component={SignUpView}

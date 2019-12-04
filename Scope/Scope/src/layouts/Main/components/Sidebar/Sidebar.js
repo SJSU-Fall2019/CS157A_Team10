@@ -60,11 +60,6 @@ const Sidebar = props => {
       href: '/sign-in',
       icon: <LockOpenIcon />
     },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />
-    }
   ];
 
   return (
@@ -85,7 +80,6 @@ const Sidebar = props => {
           className={classes.nav}
           pages={pages}
         />
-        {/* <UpgradePlan /> */}
       </div>
     </Drawer>
   );
