@@ -33,6 +33,46 @@ router.post('/project-team', function (req, res) {
 })
 
 /**
+ * GET Info of a specific team based on the project id and team number
+ * Dashboard
+ */
+router.post('/info', function (req, res) {
+  var project_id = req.body.project_id;
+  var team_number = req.body.team_number;
+  if (!project_id || !team_number) {
+    return res.status(401).send("Missing Project ID")
+  }
+
+  var sql = "SELECT * FROM Team WHERE project_id = ? AND team_number = ?"
+  connection.query(sql, [project_id, team_number], function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
+
+/**
+ * GET Info of a specific team based on the project id and team number
+ * Dashboard
+ */
+router.post('/updateTeam', function (req, res) {
+  var project_id = req.body.project_id;
+  var team_number = req.body.team_number;
+  var team_ProjectName = req.body.team_ProjectName;
+  var team_ProjectDescription = req.body.team_ProjectDescription;
+  if (!project_id || !team_number || !team_ProjectName || !team_ProjectDescription) {
+    return res.status(401).send("Missing Project ID")
+  }
+
+  var sql = "UPDATE Team SET team_ProjectName =? ,team_ProjectDescription = ? WHERE project_id = ? AND team_number = ?"
+  connection.query(sql, [team_ProjectName, team_ProjectDescription, project_id, team_number], function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
+
+
+
+/**
  * GET Team Number from Student_id and project_id
  * Project
  */

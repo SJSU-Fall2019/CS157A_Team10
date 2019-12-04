@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -17,6 +17,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TeamRequest from '../../../../../../API/Team/index';
+import { async } from 'q';
 
 const useStyles = makeStyles({
     card: {
@@ -41,6 +42,7 @@ const TeamCard = (props) => {
             team_number: props.team.team_number
         })
     }
+    const [team_member, setTeamMember] = React.useState(null);
     /** JOIN TEAM API Request */
     const joinTeam = () => {
         TeamRequest.JoinTeam(props.project_id, props.team.team_number)
@@ -54,6 +56,7 @@ const TeamCard = (props) => {
         setOpen(false);
         joinTeam();
     };
+
 
     return (
         <Card className={classes.card}>
@@ -74,14 +77,17 @@ const TeamCard = (props) => {
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {/* {props.project.project_description} */}
-                        Project Description : {props.team.teamProject_description.slice(0,50) + " ..."}
+                        Project Description : {props.team.teamProject_description.slice(0, 50) + " ..."}
                     </Typography>
+                    {/* {team_member!=null && team_member.length!=0 ? team_member.map((m)=>
+                    {
+                        return  <Typography>
+                            {m.student_firstname}
+                        </Typography>
+                    }):null} */}
                 </CardContent>
             </CardActionArea>
             <CardActions align="right">
-                {/* <Button size="small" color="primary">
-                    Team Members
-                </Button> */}
                 <IconButton aria-label="add to favorites" onClick={handleClickOpen}>
                     <PeopleIcon />
                 </IconButton>
