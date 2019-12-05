@@ -79,7 +79,7 @@ export default function ControlledExpansionPanels(props) {
                     >
                         <Typography className={classes.heading}>{"Milestone # " + getMilestone(index)}</Typography>
                         <Typography className={classes.secondaryHeading}>{getMilestoneTitle(index)}</Typography>
-                        {/* <Typography className={classes.secondaryHeading}>{getReview(index + 1) != null ? rating[getReview(index + 1).rating - 1] : "NOT YET REVIEWED"}</Typography> */}
+                        <Typography className={classes.secondaryHeading}>{getReview(index + 1) != null ? rating[getReview(index + 1).rating - 1] : "NOT YET REVIEWED"}</Typography>
                         {/* <Avatar>
                         <CheckCircleOutline />
                     </Avatar> */}
@@ -87,7 +87,7 @@ export default function ControlledExpansionPanels(props) {
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <Typography>
-                            {getReview(index + 1) != null ? getReview(index + 1).review_description!=null ?  getReview(index + 1).review_description!=null: null: null}
+                            {getReview(index + 1) != null ? getReview(index + 1).review_description: null}
                         </Typography>
                         {/* {getReview(index + 1) != null ? <Rating name="read-only" style={{ marginTop: 30, marginLeft: 600 }} max={4} value={getReview(index + 1).rating} readOnly /> : null} */}
                     </ExpansionPanelDetails>

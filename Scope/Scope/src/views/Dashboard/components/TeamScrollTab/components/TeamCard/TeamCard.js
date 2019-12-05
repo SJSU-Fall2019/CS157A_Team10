@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {}from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -53,6 +53,7 @@ const TeamCard = (props) => {
         joinTeam();
     };
 
+
     return (
         <Card className={classes.card}>
             <CardActionArea>
@@ -72,14 +73,17 @@ const TeamCard = (props) => {
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {/* {props.project.project_description} */}
-                        Project Description : {props.team.teamProject_description.slice(0,50) + " ..."}
+                        Project Description : {props.team.teamProject_description.slice(0, 50) + " ..."}
                     </Typography>
+                    {/* {team_member!=null && team_member.length!=0 ? team_member.map((m)=>
+                    {
+                        return  <Typography>
+                            {m.student_firstname}
+                        </Typography>
+                    }):null} */}
                 </CardContent>
             </CardActionArea>
             <CardActions align="right">
-                {/* <Button size="small" color="primary">
-                    Team Members
-                </Button> */}
                 <IconButton aria-label="add to favorites" onClick={handleClickOpen}>
                     <PeopleIcon />
                 </IconButton>

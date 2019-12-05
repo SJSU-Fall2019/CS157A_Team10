@@ -52,11 +52,6 @@ const Sidebar = props => {
       href: '/projects',
       icon: <CropRotate />
     },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />
-    }
   ];
 
   return (

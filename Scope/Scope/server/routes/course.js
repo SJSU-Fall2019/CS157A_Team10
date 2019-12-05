@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql')
-var auth = require('../function/authorization')
 var jwt = require('jsonwebtoken')
 const key = require('../key');
 
@@ -14,9 +13,12 @@ var connection = mysql.createConnection(
         database: 'Scope'
     })
 
-/************************************ Instructor ******************************/
 
-/* GET list of courses by instructor id */
+/**
+ * {Post} Get all course info that instructor teaches
+ * @param {string} auth_token The auth_token of the user
+ * @return {MySQL result} A collection of course and each contains course id and course name
+ */
 router.post('/instructor', function (req, res) {
     var token = req.headers.auth_token;
     if (!token) {
@@ -35,12 +37,11 @@ router.post('/instructor', function (req, res) {
     })
 });
 
-
-
-/************************************ Student *********************************/
-
-
-/* GET list of courses by student id */
+/**
+ * {Post} Get all course info that Student Has
+ * @param {string} auth_token The auth_token of the student user
+ * @return {MySQL result} A collection of course and each contains course id and course name
+ */
 router.post('/student', function (req, res) {
     var token = req.headers.auth_token;
     if (!token) {
@@ -51,7 +52,7 @@ router.post('/student', function (req, res) {
     } catch (err) {
         throw err
     }
-    // Query a list of course teach by instructor
+    // Query a list of course 
     var sql = 'SELECT course_id, course_name FROM Student JOIN StudentHasCourses USING (student_id) JOIN Course USING (course_id) WHERE student_id = ? '
     connection.query(sql, student_id, function (err, result) {
         if (err) throw err
@@ -59,8 +60,12 @@ router.post('/student', function (req, res) {
     })
 });
 
-
-/* GET list of courses by student id */
+/**
+ * {Post} Update COurseHasProjects table
+ * @param {string} course_id The id of the course
+ * @param {string} project_id The id of the project
+ * @return {MySQL result} MySQL successful / unsuccessful update message
+ */
 router.post('/updateCourseHasProjects', function (req, res) {
     var course_id = req.body.course_id;
     var project_id = req.body.project_id;
@@ -74,13 +79,6 @@ router.post('/updateCourseHasProjects', function (req, res) {
         res.send(result);
     })
 });
-
-
-
-
-
-
-
 
 
 module.exports = router;

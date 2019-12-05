@@ -14,13 +14,21 @@ var connection = mysql.createConnection(
   }
 )
 
-/* GET Project listing. */
+
+/**
+ * {GET} Default project route
+ * @return {String} An message that indicates user is on project route
+ */
 router.get('/', function (req, res, next) {
   res.send('You are on project route');
 });
 
 
-/** GET Project Info */
+/**
+ * {POST} Get project information
+ * @param {string} project_id The id of the project
+ * @return {MySQL result} All information of the specific project in the Scope database
+ */
 router.post('/info', function (req, res) {
   var project_id = req.body.project_id
   if (!project_id) {
@@ -33,8 +41,11 @@ router.post('/info', function (req, res) {
   })
 })
 
-/** POST Request Get List of Projects base on course id */
-/** Dashboard Page */
+/**
+ * {POST} Get all project information from one course1
+ * @param {string} course_id The id of the course
+ * @return {MySQL result} A collection of the project in the course; each contains the id of the project, project name and project description
+ */
 router.post('/course-project', function (req, res) {
   var course_id = req.headers.course_id;
   if (!course_id) {
@@ -49,13 +60,15 @@ router.post('/course-project', function (req, res) {
 
 
 
-/** POST Request Add Project */
-/** Create Project Page */
+/**
+ * {POST} Add project to the Scope atabase
+ * @param {string} project_name The name of the project
+ * @param {string} project_description The description of the project
+ * @return {MySQL result} MySQL successful / unsuccessful insertion message
+ */
 router.post('/add-project', function (req, res) {
   var project_name = req.body.project_name;
   var project_description = req.body.project_description;
-  console.log(project_name)
-  console.log(project_description)
   if (!project_name || !project_description) {
     return res.status(401).send("Missing Information")
   }
@@ -70,8 +83,12 @@ router.post('/add-project', function (req, res) {
 })
 
 
-/** POST Request Add Project */
-/** Create Project Page */
+/**
+ * {POST} Insert a new instsance into ProjectHasMilestones table
+ * @param {string} project_id The id of the project
+ * @param {string} milestone_number The id of milestone that a project contains
+ * @return {MySQL result} MySQL successful / unsuccessful insertion message
+ */
 router.post('/updateProjectHasMilestones', function (req, res) {
   var project_id = req.body.project_id;
   var milestone_number = req.body.milestone_number;
@@ -89,8 +106,11 @@ router.post('/updateProjectHasMilestones', function (req, res) {
 })
 
 
-/** POST Request Delete Project */
-/** ProjectList Page */
+/**
+ * {POST} Delete a project in the Scope Database
+ * @param {string} project_id The id of the project
+ * @return {MySQL result} MySQL successful / unsuccessful insertion message
+ */
 router.post('/delete', function (req, res) {
   var project_id = req.headers.project_id;
   if (!project_id) {

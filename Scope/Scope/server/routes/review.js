@@ -12,7 +12,12 @@ var connection = mysql.createConnection(
   }
 )
 
-/**GET Review listing based on Project ID and Team number */
+/**
+ * {POST} Get information about the project and user from given course
+ * @param {string} project_id The id of the project
+ * @param {string} student_id The id of the student
+ * @return {MySQL result} Information contains all course name, student's firstname and lastname from given project 
+ */
 router.post('/info', function (req, res, next) {
   const project_id = req.body.project_id
   const student_id = jwt.decode(req.headers.auth_token, key)._id
@@ -27,7 +32,14 @@ router.post('/info', function (req, res, next) {
   })
 });
 
-/**GET Review listing based on Project ID and Team number */
+/**
+ * {POST} Get all review information from specific reviewee and reviewer
+ * @param {string} project_id The id of the project
+ * @param {string} team_number The number of the team
+ * @param {string} reviewer_id The id the reviewer 
+ * @param {string} reviewee_id The id the reviewee 
+ * @return {MySQL result} List of review belongs to the reviewee and reviewer
+ */
 router.post('/specific', function (req, res, next) {
   const project_id = req.body.project_id
   const team_number = req.body.team_number
@@ -45,7 +57,12 @@ router.post('/specific', function (req, res, next) {
   })
 });
 
-/**GET Review listing based on Project ID and Team number */
+/**
+ * {POST} Get all review information from specific Team
+ * @param {string} project_id The id of the project
+ * @param {string} team_number The number of the team
+ * @return {MySQL result} List of review belongs to the team
+ */
 router.post('/', function (req, res, next) {
   const project_id = req.body.project_id
   const team_number = req.body.team_number
@@ -60,7 +77,13 @@ router.post('/', function (req, res, next) {
   })
 });
 
-/**GET Review listing based on Project ID and Team number */
+/**
+ * {POST} Get all review information from specific team and reviewee
+ * @param {string} project_id The id of the project
+ * @param {string} team_number The number of the team
+ * @param {string} reviewee The id the reviewee 
+ * @return {MySQL result} List of review belongs to the reviewee
+ */
 router.post('/myReview', function (req, res, next) {
   const project_id = req.body.project_id
   const team_number = req.body.team_number
@@ -76,7 +99,13 @@ router.post('/myReview', function (req, res, next) {
   })
 });
 
-/**GET Review listing based on Project ID and Team number */
+/**
+ * {POST} Get all review information from specific team that does not belong the request user
+ * @param {string} project_id The id of the project
+ * @param {string} team_number The number of the team
+ * @param {string} auth_token The session key of the user 
+ * @return {MySQL result} List of review belongs to team members of the user
+ */
 router.post('/otherReview', function (req, res, next) {
   const project_id = req.body.project_id
   const team_number = req.body.team_number
@@ -93,7 +122,14 @@ router.post('/otherReview', function (req, res, next) {
 });
 
 
-/** Add a Review */
+/**
+ * {POST} Insert a review
+ * @param {string} reviewer The id the reviewer 
+ * @param {string} reviewee The id the reviewee 
+ * @param {string} rating The rating of the review from number range 1-4
+ * @param {string} review_description MySQL successful / unsuccessful insertion message
+ * @return {MySQL result} 
+ */
 router.post('/add_review', function (req, res) {
   const reviewer = jwt.decode(req.headers.auth_token, key)._id
   const reviewee = req.body.reviewee
@@ -111,7 +147,16 @@ router.post('/add_review', function (req, res) {
   })
 });
 
-/** Update a Review */
+/**
+ * {POST} Update information of specific review
+ * @param {string} reviewer The id the reviewer 
+ * @param {string} reviewee The id the reviewee 
+ * @param {string} rating The rating of the review from number range 1-4
+ * @param {string} review_description MySQL successful / unsuccessful insertion message
+ * @param {string} milestone_number The milestone number that specific review belongs 
+ * @param {string} review_id The id of the review
+ * @return {MySQL result} MySQL successful / unsuccessful update message
+ */
 router.post('/update_review', function (req, res) {
   const reviewer = jwt.decode(req.headers.auth_token, key)._id
   const reviewee = req.body.reviewee
@@ -126,6 +171,13 @@ router.post('/update_review', function (req, res) {
   })
 });
 
+/**
+ * {POST} Insert an instance into TeamHasReviews table to establish an relationship with Team and review
+ * @param {string} project_id The id the project that this review belongs to
+ * @param {string} team_number The number of the team that this review belongs to
+ * @param {string} review_id the id of the review
+ * @return {MySQL result} MySQL successful / unsuccessful insertion message
+ */
 router.post('/add_teamHasReview', function (req, res) {
   const project_id = req.body.project_id
   const team_number = req.body.team_number

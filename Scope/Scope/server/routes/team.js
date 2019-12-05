@@ -14,15 +14,16 @@ var connection = mysql.createConnection(
 
 
 /**
- * GET Team list and number of members in the project
- * Dashboard
+ * {POST} Get all team information from specific project
+ * @param {string} project_id The id of the project
+ * @return {MySQL result} A list of team contains information and each contains team name, team number, 
+ * team's project name, team's project description
  */
 router.post('/project-team', function (req, res) {
   var project_id = req.headers.project_id;
   if (!project_id) {
     res.status(401).send("Missing Project ID")
   }
-
   // Update the SQL Table 
   // var sql = "SELECT team_name , team_number, teamProject_name, teamProject_description, COUNT(student_id) AS Team_Member FROM TEAM JOIN StudentHasTeams USING (project_id, team_number) JOIN Project USING (project_id) GROUP BY project_id, team_number, project_name HAVING project_id = ?"
   var sql = "SELECT team_name , team_number, teamProject_name, teamProject_description FROM TEAM WHERE project_id = ?"
@@ -33,8 +34,55 @@ router.post('/project-team', function (req, res) {
 })
 
 /**
- * GET Team Number from Student_id and project_id
- * Project
+ * {POST} Get a team's information
+ * @param {string} project_id The id of the project
+ * @param {string} team_number The team's number in a project
+ * @return {MySQL result} All information about specific team
+ */
+router.post('/info', function (req, res) {
+  var project_id = req.body.project_id;
+  var team_number = req.body.team_number;
+  if (!project_id || !team_number) {
+    return res.status(401).send("Missing Project ID")
+  }
+  var sql = "SELECT * FROM Team WHERE project_id = ? AND team_number = ?"
+  connection.query(sql, [project_id, team_number], function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
+
+/**
+ * {POST} Update a team's information
+ * @param {string} project_id The id of the project
+ * @param {string} team_number The team's number in a project
+ * @param {string} team_ProjectName  The team's name 
+ * @param {string} team_ProjectDescription Team's own project description
+ * @return {MySQL result} MySQL successful / unsuccessful update message
+ */
+router.post('/updateTeam', function (req, res) {
+  var project_id = req.body.project_id;
+  var team_number = req.body.team_number;
+  var team_ProjectName = req.body.team_ProjectName;
+  var team_ProjectDescription = req.body.team_ProjectDescription;
+  if (!project_id || !team_number || !team_ProjectName || !team_ProjectDescription) {
+    return res.status(401).send("Missing Project ID")
+  }
+
+  var sql = "UPDATE Team SET teamProject_Name =? ,teamProject_Description = ? WHERE project_id = ? AND team_number = ?"
+  connection.query(sql, [team_ProjectName, team_ProjectDescription, project_id, team_number], function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
+
+
+
+/**
+ * {POST} Get all of the team belongs to the user in a specific course
+ * @param {string} course_id The id of the course
+ * @param {string} auth_token The session key of the user for identify student_id
+ * @return {MySQL result} A list of the team and each contains team name, team's project description and team's project title
  */
 router.post('/myProject', function (req, res) {
   var course_id = req.body.course_id;
@@ -61,8 +109,11 @@ router.post('/myProject', function (req, res) {
 
 
 /**
- * GET Team Number from Student_id and project_id
- * Project
+ * {POST} Insert a user to the specific team
+ * @param {string} project_id The id of the project
+ * @param {string} team_number The team's number 
+ * @param {string} auth_token The session key of the user for identify student_id
+ * @return {MySQL result} MySQL successful / unsuccessful insertion message
  */
 router.post('/join', function (req, res) {
   var project_id = req.body.project_id;
@@ -90,8 +141,11 @@ router.post('/join', function (req, res) {
 })
 
 /**
- * GET Team Members info
- * Review
+ * {POST} Get all team's member information
+ * @param {string} project_id The id of the project
+ * @param {string} team_number The team's number 
+ * @return {MySQL result} A list of team member and each contains student's name, student's lastname, 
+ * student's email, student's id, project id and team number
  */
 router.post('/member', function (req, res) {
   var project_id = req.body.project_id;
@@ -109,8 +163,13 @@ router.post('/member', function (req, res) {
 
 
 /**
- * Add one Team to the database Team Table
- * Review
+ * {POST} Insert a team 
+ * @param {string} project_id The id of the project
+ * @param {string} team_number The team's number 
+ * @param {string} team_name The name of the team
+ * @param {string} team_ProjectName The team's own project name
+ * @param {string} team_ProjectDescription The team's own project description
+ * @return {MySQL result} MySQL successful / unsuccessful insertion message
  */
 router.post('/add-team', function (req, res) {
   var project_id = req.body.project_id;

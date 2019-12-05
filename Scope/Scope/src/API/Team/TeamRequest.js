@@ -15,6 +15,45 @@ class TeamRequest {
         return responseJson
     }
 
+    static async updateTeam(project_id, team_number, team_ProjectName, team_ProjectDescription) {
+        let response = await fetch('http://localhost:8001/team/updateTeam',
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    auth_token: sessionStorage.getItem('auth_token'),
+                },
+                body: JSON.stringify({
+                    project_id: project_id,
+                    team_number: team_number,
+                    team_ProjectName: team_ProjectName,
+                    team_ProjectDescription: team_ProjectDescription,
+                })
+            })
+        let responseJson = await response.json();
+        return responseJson
+    }
+
+    static async fetchInfo(project_id, team_number) {
+        let response = await fetch('http://localhost:8001/team/info',
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    auth_token: sessionStorage.getItem('auth_token'),
+                },
+                body: JSON.stringify({
+                    project_id: project_id,
+                    team_number: team_number,
+                })
+            })
+        let responseJson = await response.json();
+        return responseJson
+    }
+
+
     static async JoinTeam(project_id, team_number) {
         let response = await fetch('http://localhost:8001/team/join',
             {

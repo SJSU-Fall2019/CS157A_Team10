@@ -82,12 +82,14 @@ const ScrollableTabsButtonAuto = (props) => {
             </Typography>
             <Button variant="contained" color="primary" style={{ marginLeft: 1000, marginTop: -90 }} className={classes.button}
                 onClick={() => {
-                    props.history.push({
-                        pathname: '/create-project',
-                        state: { course_id: props.course_list[value].course_id }
-                    })
+                    if (props.course_list != null && props.course_list.length!=0) {
+                        props.history.push({
+                            pathname: '/create-project',
+                            state: { course_id: props.course_list[value].course_id }
+                        })
+                    }
                 }}>
-                Add Project 
+                Add Project
                 </Button>
             <AppBar position="static" color="default">
                 <Tabs
@@ -130,7 +132,7 @@ const ScrollableTabsButtonAuto = (props) => {
                 </TabPanel>
             })}
         </div>
-    ); 
+    );
 }
 
 export default ScrollableTabsButtonAuto;

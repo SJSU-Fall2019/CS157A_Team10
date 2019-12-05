@@ -14,6 +14,11 @@ var connection = mysql.createConnection(
   }
 )
 
+/**
+ * Verify User's token
+ * @param {string} auth_token The User'session key 
+ * @return Success if the token is valid or Access Denied
+ */
 function verify(req, res) {
   var token = req.headers.auth_token;
   if (!token) {
@@ -31,27 +36,20 @@ function verify(req, res) {
   }
 }
 
-/* GET users listing. */
+/**
+ * {GET} Default User route
+ * @return {String} An message that indicates user is on User route
+ **/
 router.get('/', function (req, res, next) {
   res.send('You are on users route');
 });
 
 
 /**
- * Handles User sign up
+ * {Post} Get all student user information in our database
+ * @return {MySQL result} A list of student information each contains student's firstname,
+ * student's lastname and student's email
  */
-
-router.post('/signup', function (req, res) {
-
-})
-
-//************************************ General *********************************************/
-
-/**
- * Fetch Student List
- * Student Page
- */
-
 router.post('/all', function (req, res) {
   verify(req, res)
   // Query all User info 
@@ -63,11 +61,11 @@ router.post('/all', function (req, res) {
 })
 
 
-//************************************ Student *********************************************/
-
 /**
- * GET Student name by auth_token
- * Profile page
+ * {Post} Get a student's information
+ * @param {string} auth_token The session key from the User
+ * @return {MySQL result} Student's information contains Student's id, student's firstname
+ * and student's lastname
  */
 router.post('/student_info', function (req, res) {
   var token = req.headers.auth_token;
@@ -86,6 +84,13 @@ router.post('/student_info', function (req, res) {
   })
 });
 
+
+/**
+ * {Post} Add a relationship between student and project
+ * @param {string} project_id The id of the project
+ * @param {string} auth_token The session key from User to identity User's id
+ * @return {MySQL result} MySQL successful / unsuccessful insertion message
+ */
 router.post('/updateStudentHasProjects', function (req, res) {
   var token = req.headers.auth_token;
   if (!token) {
@@ -107,8 +112,10 @@ router.post('/updateStudentHasProjects', function (req, res) {
 
 
 /**
- * Handles Student Login request
- * Log in page
+ * {Post} Handles Student Sign in
+ * @param {string} username The username of the student account
+ * @param {string} password The password of the student account
+ * @return {MySQL result} A JWT token if login success else a error message
  */
 router.post('/student_login', function (req, res) {
   var sql = 'SELECT student_password, student_id FROM Student WHERE student_email= ?';
@@ -135,8 +142,12 @@ router.post('/student_login', function (req, res) {
 });
 
 /**
- * Handles Student Sign Up request
- * Sign Up page
+ * {Post} Handles Student Sign Up
+ * @param {string} username The username of the student account
+ * @param {string} first_name The first name of the student
+ * @param {string} last_name The last name of the student
+ * @param {string} password The password of the student account
+ * @return {MySQL result} MySQL successful / unsuccessful update message
  */
 router.post('/student_signup', function (req, res) {
   var username = req.body.username
@@ -147,7 +158,6 @@ router.post('/student_signup', function (req, res) {
   if (!username || !first_name || !last_name || !password) {
     return res.status(401).send("Missing Sign Up information")
   }
-  console.log(username, first_name, last_name, user_id, password)
   var sql = 'INSERT INTO Student VALUES (?, ?, ?, ? , ? ,? )';
   var variables = [user_id, username, password, first_name, last_name, username];
   connection.query(sql, variables, function (err, result) {
@@ -157,12 +167,13 @@ router.post('/student_signup', function (req, res) {
 });
 
 
-//************************************ Instrucotor *********************************************/
 
 
 /**
- * Handles Instructor Login request
- * Log in page
+ * {Post} Handles Instructor Sign in
+ * @param {string} username The username of the instructor account
+ * @param {string} password The password of the instructor account
+ * @return {MySQL result} A JWT token if login success else a error message
  */
 router.post('/instructor_login', function (req, res) {
   var sql = 'SELECT inst_password, instructor_id FROM Instructor WHERE inst_email= ?';
@@ -189,8 +200,10 @@ router.post('/instructor_login', function (req, res) {
 });
 
 /**
- * GET Instructor name by auth_token
- * Profile page
+ * {Post} Get a instructor's information
+ * @param {string} auth_token The session key from the User
+ * @return {MySQL result} Instructor's information contains instructor's id, instructor's firstname
+ * and instructor's lastname
  */
 router.post('/instructor_info', function (req, res) {
   var token = req.headers.auth_token;
@@ -211,8 +224,12 @@ router.post('/instructor_info', function (req, res) {
 
 
 /**
- * Handles Instructor Sign Up request
- * Sign Up page
+ * {Post} Handles Instructor Sign Up
+ * @param {string} username The username of the instructor account
+ * @param {string} first_name The first name of the instructor
+ * @param {string} last_name The last name of the instructor
+ * @param {string} password The password of the instructor account
+ * @return {MySQL result} MySQL successful / unsuccessful update message
  */
 router.post('/instructor_signup', function (req, res) {
   var username = req.body.username

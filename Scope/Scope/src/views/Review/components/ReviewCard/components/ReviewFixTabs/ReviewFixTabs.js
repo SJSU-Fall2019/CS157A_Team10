@@ -64,7 +64,6 @@ export default function FullWidthTabs(props) {
     const [myReview, setMyReview] = React.useState(null);
     const [otherReview, setOtherReview] = React.useState(null);
     const [team_members, setTeamMembers] = React.useState(null);
-    //const [milestone, setMilestone] = React.useState(null);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

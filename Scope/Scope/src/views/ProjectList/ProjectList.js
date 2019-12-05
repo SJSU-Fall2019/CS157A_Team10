@@ -1,8 +1,24 @@
 import React, { Component, } from 'react';
 import CourseRequest from '../../API/Course/index';
-import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
-import { CourseScrollTab} from './components'
+import ProjectRequest from '../../API/Project/index';
+import { CourseScrollTab} from './components';
+
+
+const styles = {
+    root: {
+        padding: 10,
+    },
+    content: {
+        marginTop: 20,
+    },
+    pagination: {
+        marginTop: 10,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    }
+}
 
 /*
 * Represent a Project List component
@@ -46,7 +62,7 @@ class ProjectList extends Component {
             {
                 selected_course: selected_course
             })
-        let project_result = await ProjectRequest.fetchMyProject(this.state.selected_course)
+        let project_result = await TeamRequest.fetchMyProject(this.state.selected_course)
         this.setState(
             {
                 project_list: project_result,
