@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { OutlinedInput } from '@material-ui/core';
 import ReviewRequest from '../../../../../../../../../../API/Review/index';
 
 const useStyles = makeStyles(theme => ({
@@ -25,10 +26,10 @@ const useStyles = makeStyles(theme => ({
         // padding: 10,
         marginLeft: 780,
     },
-    saveReviewBtn:{
+    saveReviewBtn: {
         backgroundColor: '#0055A2',
         padding: 10,
-        marginLeft:900,
+        marginLeft: 900,
     },
     formControl: {
         margin: theme.spacing(1),
@@ -55,12 +56,10 @@ export default function ExpansionForm(props) {
         setValue(event.target.value);
         setAge(event.target.value);
     };
-    const submitReview = async ()=>
-    {
+    const submitReview = async () => {
         // Create Review in the review table
-        var review_description =  props.review_description
-        if(inputValue !== null && props.review_description !=inputValue)
-        {
+        var review_description = props.review_description
+        if (inputValue != null && props.review_description != inputValue) {
             review_description = inputValue
         }
         const result = await ReviewRequest.updateReview(props.milestone_number, props.reviewee_id, age, review_description, props.review_id)
@@ -74,7 +73,7 @@ export default function ExpansionForm(props) {
                 <div className={classes.selectList}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
-                           Select Overall Rating
+                            Select Overall Rating
                         </InputLabel>
                         <Select
                             labelId="demo-simple-select-outlined-label"
@@ -106,8 +105,8 @@ export default function ExpansionForm(props) {
                     onChange={event => {
                         const { value } = event.target;
                         setInputValue(value)
-                      }}
-                    value ={inputValue !=null ? inputValue : props.review_description}
+                    }}
+                    value={inputValue != null ? inputValue : props.review_description}
                 />
                 <FormHelperText>Required</FormHelperText>
                 <div >

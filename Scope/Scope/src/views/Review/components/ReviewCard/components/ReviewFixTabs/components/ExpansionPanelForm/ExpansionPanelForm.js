@@ -6,10 +6,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MilestoneRequest from '../../../../../../../../API/Milestone/index';
-import ReviewRequest from '../../../../../../../../API/Review/index';
-import Avatar from '@material-ui/core/Avatar';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
-import Rating from '@material-ui/lab/Rating';
+// import Rating from '@material-ui/lab/Rating';
 import UserRequest from '../../../../../../../../API/User/index';
 import { ExpansionForm } from './components/index';
 

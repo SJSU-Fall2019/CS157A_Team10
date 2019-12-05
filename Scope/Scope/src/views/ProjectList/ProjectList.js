@@ -1,23 +1,9 @@
-import React, {} from 'react';
-import { makeStyles } from '@material-ui/styles';
+import React, { Component, } from 'react';
 import CourseRequest from '../../API/Course/index';
 import TeamRequest from '../../API/Team/index';
+import ProjectRequest from '../../API/Project/index';
 import { CourseScrollTab} from './components';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: theme.spacing(3)
-    },
-    content: {
-        marginTop: theme.spacing(2)
-    },
-    pagination: {
-        marginTop: theme.spacing(3),
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end'
-    }
-}));
 
 const styles = {
     root: {
@@ -37,7 +23,7 @@ const styles = {
 /*
 * Represent a Project List component
 */
-class ProjectList extends React.Component {
+class ProjectList extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -45,10 +31,9 @@ class ProjectList extends React.Component {
             // Selected_course stores the selected course_id
             selected_course: null,
             project_list: [],
-        }
+            selected_project: null
+        }   
     }
-
-    
 
     async componentDidMount() {
         let course_result = await CourseRequest.fetchStudentCourseList()
@@ -70,7 +55,7 @@ class ProjectList extends React.Component {
                 })
         }
     }
-
+   
     /** CallBack function pass down to the component CourseScrollTab */
     onChangeSelectedCourse = async (selected_course) => {
         await this.setState(
@@ -84,7 +69,6 @@ class ProjectList extends React.Component {
             })
     }
 
-
     render() {
         return (
 
@@ -92,8 +76,11 @@ class ProjectList extends React.Component {
                 <div>  <CourseScrollTab course_list={this.state.course_list}
                     project_list={this.state.project_list}
                     history={this.props.history}
-                    onChangeCourse={this.onChangeSelectedCourse}/></div>
-            </div>//
+                    onDeleteProject = {this.onDeleteProject}
+                    //onChangeCourse={this.onChangeSelectedCourse}/></div>
+                    onChangeCourse={this.onChangeSelectedCourse} onChangeProject={this.onChangeSelectedProject} />
+                </div>
+            </div>
 
 
         );// end return

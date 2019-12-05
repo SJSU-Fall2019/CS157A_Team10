@@ -11,7 +11,7 @@ var connection = mysql.createConnection(
   }
 )
 /**
- * {GET} Default milestone page
+ * {GET} Default milestone route
  * @return {String} An message that indicates user is on milestone route
  */
 router.get('/', function (req, res, next) {

@@ -31,7 +31,6 @@ const useStyles = makeStyles({
     }
 });
 
-
 const TeamCard = (props) => {
     const classes = useStyles();
     const directMilestone = () => {

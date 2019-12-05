@@ -44,6 +44,8 @@ class Testing extends Component {
 
     updateTeam = async () => {
         await TeamRequest.updateTeam(this.props.location.state.project_id, this.props.location.state.team_number, this.state.team_name, this.state.team_description)
+        this.props.history.push('/dashboard', {
+        })
     }
 
     render() {

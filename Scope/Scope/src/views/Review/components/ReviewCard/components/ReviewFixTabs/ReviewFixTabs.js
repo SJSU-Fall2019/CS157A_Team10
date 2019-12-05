@@ -8,7 +8,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
-
 import Avatar from '@material-ui/core/Avatar';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,7 +15,6 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import { ExpansionPanel, ExpansionPanelForm } from './components/index';
 import TeamRequest from '../../../../../../API/Team/index';
 import ReviewRequest from '../../../../../../API/Review/index';
-
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

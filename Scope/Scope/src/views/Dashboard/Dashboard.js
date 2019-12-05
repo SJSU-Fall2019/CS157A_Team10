@@ -4,6 +4,20 @@ import ProjectRequest from '../../API/Project/index';
 import TeamRequest from '../../API/Team/index';
 import { CourseScrollTab, TeamScrollTab } from './components';
 // Remove react-window, ScrollMenu, HorizontalScroll library later
+// Core Matrial UI
+
+// const styles = {
+//   projectListStyle:
+//   {
+//     display: 'flex',
+//     flexWrap: 'wrap',
+//     overflowX: 'auto',
+//   },
+//   projectStyle:
+//   {
+//     minWidth: 600,
+//   },
+// }
 
 class Dashboard extends Component {
 

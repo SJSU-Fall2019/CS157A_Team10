@@ -6,10 +6,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MilestoneRequest from '../../../../../../../../API/Milestone/index';
-import ReviewRequest from '../../../../../../../../API/Review/index';
-import Avatar from '@material-ui/core/Avatar';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
-import Rating from '@material-ui/lab/Rating';
+// import Rating from '@material-ui/lab/Rating';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -91,7 +89,7 @@ export default function ControlledExpansionPanels(props) {
                         <Typography>
                             {getReview(index + 1) != null ? getReview(index + 1).review_description: null}
                         </Typography>
-                        {getReview(index + 1) != null ? <Rating name="read-only" style={{ marginTop: 30, marginLeft: 600 }} max={4} value={getReview(index + 1).rating} readOnly /> : null}
+                        {/* {getReview(index + 1) != null ? <Rating name="read-only" style={{ marginTop: 30, marginLeft: 600 }} max={4} value={getReview(index + 1).rating} readOnly /> : null} */}
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
             }) : null}

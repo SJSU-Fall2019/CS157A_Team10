@@ -7,9 +7,8 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import CropRotate from '@material-ui/icons/CropRotate';
 import SettingsIcon from '@material-ui/icons/Settings';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 
-import { Profile, SidebarNav, UpgradePlan } from './components';
+import { Profile, SidebarNav} from './components';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -36,9 +35,7 @@ const useStyles = makeStyles(theme => ({
 
 const Sidebar = props => {
   const { open, variant, onClose, className, ...rest } = props;
-
   const classes = useStyles();
-
   const pages = [
     {
       title: 'Dashboard',
@@ -54,11 +51,6 @@ const Sidebar = props => {
       title: 'Projects',
       href: '/projects',
       icon: <CropRotate />
-    },
-    {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />
     },
   ];
 

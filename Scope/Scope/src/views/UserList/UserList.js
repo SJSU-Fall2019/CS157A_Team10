@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React from 'react';
 import { UsersTable } from './components';
 import { SearchInput } from '../../components';;
 
@@ -8,9 +8,8 @@ const styles = {
   },
   content: {
     marginTop: 20
-  }}
-
-
+  }
+}
 
 /** A User Table contains list of user and their information */
 class UserList extends React.Component {

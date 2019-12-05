@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ReviewCard } from './components/index'
 import TeamRequest from '../../API/Team/index';
 import ReviewRequest from '../../API/Review/index';

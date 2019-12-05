@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-
-import NewProject from './components/NewProject';
+import { AboutScope } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProjectCreation = (props) => {
+const About = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -20,16 +19,14 @@ const ProjectCreation = (props) => {
       >
         <Grid
           item
-          lg={8}
-          md={6}
-          xl={8}
+          md={12}
           xs={12}
         >
-          <NewProject history={props.history} course_id ={props.location.state.course_id}/>
+            <AboutScope/>
         </Grid>
       </Grid>
     </div>
   );
 };
 
-export default ProjectCreation;
+export default About;

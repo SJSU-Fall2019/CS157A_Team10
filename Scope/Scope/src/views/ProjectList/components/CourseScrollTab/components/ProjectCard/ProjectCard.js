@@ -60,6 +60,6 @@ const ProjectCard = (props) => {
             </Card>
         </div>
     );
-}
+} 
 
 export default ProjectCard;

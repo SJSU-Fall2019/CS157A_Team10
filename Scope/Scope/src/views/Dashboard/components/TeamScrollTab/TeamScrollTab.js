@@ -24,6 +24,7 @@ function TabPanel(props) {
         </Typography>
     );
 }
+
 const styles = {
     root: {
         padding: 10,
@@ -72,17 +73,17 @@ const ScrollableTabsButtonAuto = props => {
         setValue(newValue);
     };
 
-    const ProjectData = [
-        {
-            project_title: "Title 1"
-        },
-        {
-            project_title: "Title 2"
-        },
-        {
-            project_title: "Title 3"
-        }
-    ]
+    // const ProjectData = [
+    //     {
+    //         project_title: "Title 1"
+    //     },
+    //     {
+    //         project_title: "Title 2"
+    //     },
+    //     {
+    //         project_title: "Title 3"
+    //     }
+    // ]
 
     return (
         <div className={classes.root}>

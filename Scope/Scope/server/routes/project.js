@@ -80,7 +80,6 @@ router.post('/add-project', function (req, res) {
     }
     res.send(result)
   })
-
 })
 
 
