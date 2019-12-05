@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql')
-var auth = require('../function/authorization')
-var jwt = require('jsonwebtoken')
-const key = require('../key');
 
 var connection = mysql.createConnection(
   {
@@ -13,13 +10,21 @@ var connection = mysql.createConnection(
     database: 'Scope'
   }
 )
-/* GET Milestone listing. */
+/**
+ * {GET} Default milestone page
+ * @return {String} An message that indicates user is on milestone route
+ */
 router.get('/', function (req, res, next) {
   res.send('You are on milestone route');
 });
 
 
-/**GET List of Milestone, project name, course name from the given project id */
+/**
+ * {Post} Get project and project's milestones information 
+ * @param {string} project_id The id of the project
+ * @return {MySQL result} A collection of object; each contains the name of the projeect, project description, course name
+ * mielstone number, milestone title and milestone description
+ */
 router.post('/', function (req, res) {
   const project_id = req.body.project_id
   if (!project_id) {
@@ -32,8 +37,12 @@ router.post('/', function (req, res) {
   })
 })
 
-
-/**GET List of Milestone, project name, course name from the given project id */
+/**
+ * {Post} Insert a milestone in database 
+ * @param {string} milestone_title The title of the milestone
+ * @param {string} milestone_description The description of the milestone
+ * @return {MySQL result} MySQL successful / unsuccessful insertion message
+ */
 router.post('/create', function (req, res) {
   const milestone_title = req.body.milestone_title
   const milestone_description = req.body.milestone_description
@@ -47,13 +56,4 @@ router.post('/create', function (req, res) {
   })
 })
 
-router.post('/add-milestone', function (req, res) {
-  var milestone = req.body.milestone;
-  var sql = "INSERT INTO Milestones (milestone_title, milestone_description) VALUES (?,?)"
-  var table = [milestone.milestone_title, milestone.milestone_description]
-  connection.query(sql, table, function (err, result) {
-    if (err) throw err
-    res.send(result)
-  })
-})
 module.exports = router;
